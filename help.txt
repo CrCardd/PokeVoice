@@ -1,0 +1,119 @@
+https://www.youtube.com/watch?v=RiweaH6Qmro
+
+
+
+
+
+
+
+
+#define VK_0 0x30
+#define VK_1 0x31
+#define VK_2 0x32
+#define VK_3 0x33
+#define VK_4 0x34
+#define VK_5 0x35
+#define VK_6 0x36
+#define VK_7 0x37
+#define VK_8 0x38
+#define VK_9 0x39
+
+#define VK_A 0x41
+#define VK_B 0x42
+#define VK_C 0x43
+#define VK_D 0x44
+#define VK_E 0x45
+#define VK_F 0x46
+#define VK_G 0x47	
+#define VK_H 0x48
+#define VK_I 0x49
+#define VK_J 0x4A
+#define VK_K 0x4B
+#define VK_L 0x4C
+#define VK_M 0x4D
+#define VK_N 0x4E
+#define VK_O 0x4F
+#define VK_P 0x50
+#define VK_Q 0x51
+#define VK_R 0x52
+#define VK_S 0x53
+#define VK_T 0x54
+#define VK_U 0x55
+#define VK_V 0x56
+#define VK_W 0x57
+#define VK_X 0x58
+#define VK_Y 0x59
+#define VK_Z 0x5A
+
+http://www.winprog.org/tutorial/simple_window.html
+
+DWORD WINAPI Função(LPVOID lpParam)
+
+HANDLE Thread = CreateThread(NULL, 0, *Função*, NULL, 0, NULL);
+
+
+
+LRESULT CALLBACK WndProc(HWND hwnd, UINT Msg, WPARAM wParam, LPARAM lParam)
+{
+    switch(Msg)
+    {
+        case WM_PAINT:
+        {
+            PAINTSTRUCT PS;
+            HDC hdc = BeginPaint(hwnd, &PS);
+            EndPaint(hwnd, &PS);
+        }
+        break;
+        case WM_CLOSE:
+            DestroyWindow(hwnd);
+        break;
+        case WM_DESTROY:
+            PostQuitMessage(0);
+        break;
+        default:
+            return DefWindowProc(hwnd, Msg, wParam, lParam);
+    }
+    return 0;
+}
+
+int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
+{
+    const wchar_t WClassName[]  = L"Terraria 2";
+    MSG Msg;
+    WNDCLASS Window = {};
+    Window.lpfnWndProc = WndProc;
+    Window.hInstance = hInstance;
+    Window.lpszClassName = WClassName;
+
+    if(!RegisterClass(&Window))
+    {
+        MessageBox(NULL, L"Window Class Registration Failed", L"Error", MB_ICONERROR | MB_OK);
+        return 0;
+    }
+
+    HWND hwnd = CreateWindowEx
+    (
+        0,
+        WClassName,
+        L"Terraria 2",
+        WS_OVERLAPPEDWINDOW,
+        200, 10, 960, 720,
+        NULL, NULL, hInstance, NULL
+    );
+    if(hwnd == NULL)
+    {
+        MessageBox(NULL, L"Window Creation Failed", L"Error", MB_ICONERROR | MB_OK);
+        return 0;
+    }
+    ShowWindow(hwnd, nCmdShow);
+    UpdateWindow(hwnd);
+
+    Thread = CreateThread(NULL, 0, MainThread, &hwnd, 0, &ThreadID);
+
+    while(GetMessage(&Msg, NULL, 0, 0))
+    {
+        TranslateMessage(&Msg);
+        DispatchMessage(&Msg);
+    }
+    return 0;
+}
