@@ -1,12 +1,12 @@
 import requests
 import random
 
-url = "https://pokeapi.co/api/v2/pokemon/"
+num = random.randint(0, 150)
+
+url = "https://pokeapi.co/api/v2/pokemon/" + str(num)
 
 data = requests.get(url).json()
 
-num = random.randint(0, 20)
-
-pokemon = data['results'][num]
+pokemon = data['sprites']['front_default']
 
 print(pokemon)
