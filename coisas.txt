@@ -1,7 +1,0 @@
-apikey: o75zLBh1e8o_ADpHJvDj0p1tLeJHLBn9PkMenNQUt3gp
-
-url: https://api.au-syd.speech-to-text.watson.cloud.ibm.com/instances/2a377c10-1c4f-4f7c-939c-675d7cddf6c9
-
-region: au-syd
-
-repository: https://github.com/IBM/watson-streaming-stt.git
