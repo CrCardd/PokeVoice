@@ -26,6 +26,7 @@ try:
 
 		print(MyText)
 
+		# Print the text in a .txt 
 		with open('voice.txt', 'w') as file:
 			file.write(MyText)
 		
