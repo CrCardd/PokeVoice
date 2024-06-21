@@ -1,6 +1,9 @@
 #ifndef HEADERS_H
 #define HEADERS_H
 
+#define UNICODE
+#define _UNICODE
+
 
 #include <windows.h>
 #include <stdlib.h>

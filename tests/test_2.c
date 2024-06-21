@@ -24,7 +24,6 @@ DWORD WINAPI MainThread(LPVOID lpParam)
 
     //====================
     DrawImg(hdc, 480, 360, 100, 80, img);
-    ReleaseDC(hwnd, hdc);
     //====================
 
 
@@ -46,9 +45,11 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT Msg, WPARAM wParam, LPARAM lParam)
         {
             PAINTSTRUCT PS;
             HDC hdc = BeginPaint(hwnd, &PS);
-            FillRect(hdc, &PS.rcPaint, CreateSolidBrush(RGB(255,255,255)));
+            HBRUSH hBrush = CreateSolidBrush(RGB(255,255,255));                      // *
+            FillRect(hdc, &PS.rcPaint,hBrush);
             //DrawImg(hdc, 0, 0, 960, 720, L"imagens/BackGround.bmp");
             EndPaint(hwnd, &PS);
+            DeleteObject(hBrush);                                                    // *
         }
         break;
         case WM_CLOSE:
@@ -97,7 +98,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
         return 0;
     }
 
-    HICON hIcon = (HICON)LoadImage(NULL, L"images/icone", IMAGE_ICON, 0, 0, LR_LOADFROMFILE);
+    HICON hIcon = (HICON)LoadImage(NULL, L"images/icone", IMAGE_ICON, 32, 32, LR_LOADFROMFILE);                         // *
     
     if (hIcon != NULL) {
         // Definindo o ícone grande da janela
