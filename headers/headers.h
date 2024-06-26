@@ -7,10 +7,12 @@
 
 #include <windows.h>
 #include <stdlib.h>
+#include <stdio.h>
 #include "headers.h"
 #include "keycodes.h"
 #include "linkedList.h"
 #include "arrayList.h"
+#include "moves.h"
 #include "sort_algorithms.h"
 
 #endif
