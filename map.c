@@ -64,14 +64,16 @@ void createLine(int mode, int map[HEIGHT][LENGHT],int coord_x, int coord_y, int 
 {
     if(mode == 1)
     {
-        for (int i = coord_x; i < size; i++)
+        for (int i = coord_x; i < size+coord_x; i++)
             map[coord_y][i] = 1;
         
     }else if (mode == 2)
     {
-        printf("123123");
-        for (int i = coord_y; i < size; i++)
+        for (int i = coord_y; i < coord_y-size; i--)
+        {
             map[i][coord_x] = 1;
+            printf("%d\n",i);
+        }
     }else
     {
         map[coord_x][coord_y] = 5;
