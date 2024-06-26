@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include "linkedList.h"
 
 typedef struct Atack
 {
@@ -47,7 +48,7 @@ void initPokemon(Pokemon *poke)
         token = strtok(NULL, ",");
         poke->atk[i].dmg = atoi(token);
         token = strtok(NULL, ",");
-        poke->atk[i].uses, atoi(token);
+        poke->atk[i].uses = atoi(token);
         i++;
     }
     fclose(name);
@@ -80,7 +81,7 @@ void squirtle(Pokemon *poke)
         token = strtok(NULL, ",");
         poke->atk[i].dmg = atoi(token);
         token = strtok(NULL, ",");
-        poke->atk[i].uses, atoi(token);
+        poke->atk[i].uses = atoi(token);
         i++;
     }
     fclose(name);
@@ -113,7 +114,7 @@ void charmander(Pokemon *poke)
         token = strtok(NULL, ",");
         poke->atk[i].dmg = atoi(token);
         token = strtok(NULL, ",");
-        poke->atk[i].uses, atoi(token);
+        poke->atk[i].uses = atoi(token);
         i++;
     }
     fclose(name);
@@ -146,12 +147,33 @@ void bulbasaur(Pokemon *poke)
         token = strtok(NULL, ",");
         poke->atk[i].dmg = atoi(token);
         token = strtok(NULL, ",");
-        poke->atk[i].uses, atoi(token);
+        poke->atk[i].uses = atoi(token);
         i++;
     }
     fclose(name);
     fclose(moves);
 }
 
+void atack(Pokemon *atacker, Pokemon *atacked, int atack)
+{
+    atacker->atk[atack].uses--;
+    atacked->hp -= atacker->atk[atack].dmg;
+}
 
+// void item(Pokemon *poke, int index)
+// {
+//     Item *potion = malloc(sizeof(Item));
+
+//     strcpy(potion->name, "Potion");
+//     potion->qtd = 5;
+//     potion->type = 1;
+
+//     LinkedList *bag = LinkedListConstructor();
+
+//     addlist(bag, potion);
+
+//     Item teste = getList(bag, 0);
+
+//     printf("Nome: %s\nQuantidade: %d\nTipo: %d",teste.name, teste.qtd, teste.type);
+// }
 #endif // !"mons.h"

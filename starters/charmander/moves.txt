@@ -1,4 +1,4 @@
-flamethrower, 30, 10
+flamethrower, 30, 3
 fire spin, 20, 15
 dig, 15, 25
-fire fang, 25, 10
+fire fang, 25, 5

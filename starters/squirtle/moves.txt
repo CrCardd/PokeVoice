@@ -1,4 +1,4 @@
 water gun, 20, 20
-ice beam, 25, 10
+ice beam, 15, 10
 bite, 15, 25
-bubble, 20, 10
+bubble, 10, 10

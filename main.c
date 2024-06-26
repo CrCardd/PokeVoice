@@ -1,30 +1,48 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "mons.h"
+#include "linkedList.h"
 
 int main()
 {
-    char buffer[32];
-    Pokemon *poke = malloc(sizeof(Pokemon));
+    // Pokemon *bulba = malloc(sizeof(Pokemon));
+    // Pokemon *mander = malloc(sizeof(Pokemon));
 
-    squirtle(poke);
+    // charmander(mander);
+    // bulbasaur(bulba);
 
-    printf("\nname: %s", poke->name);
-    printf("\nhp: %d", poke->hp);
-    printf("\nmove 1: %s", poke->atk[0].name);
-    printf("\nmove 2: %s", poke->atk[1].name);
-    printf("\nmove 3: %s", poke->atk[2].name);
-    printf("\nmove 4: %s", poke->atk[3].name);
+    // printf("\nname: %s", mander->name);
+    // printf("\nhp: %d", mander->hp);
+    // printf("\nmove 1: %s, uses %d", mander->atk[0].name, mander->atk[0].uses);
+    // printf("\nmove 2: %s, uses %d", mander->atk[1].name, mander->atk[1].uses);
+    // printf("\nmove 3: %s, uses %d", mander->atk[2].name, mander->atk[2].uses);
+    // printf("\nmove 4: %s, uses %d", mander->atk[3].name, mander->atk[3].uses);
 
-    // system("voice.exe");
 
-    FILE * move;
+    // printf("\n\n");
 
-    move = fopen("voice.txt", "r");
+    // atack(mander, bulba, 0);
 
-    while (fgets(buffer, sizeof(buffer), move) != NULL)
 
-    fclose(move);
+    // printf("\nname: %s", mander->name);
+    // printf("\nhp: %d", mander->hp);
+    // printf("\nmove 1: %s, uses %d", mander->atk[0].name, mander->atk[0].uses);
+    // printf("\n\n");
+    // printf("\nname: %s", bulba->name);
+    // printf("\nhp: %d", bulba->hp);
 
-    printf("\n%s", buffer);
+
+    Item *potion = malloc(sizeof(Item));
+    strcpy(potion->name, "Potion");
+    potion->qtd = 5;
+    potion->type = 1;
+
+    LinkedList *bag = LinkedListConstructor();
+
+    addlist(bag, potion);
+
+    Item teste = getList(bag, 0);
+
+    printf("Nome: %s\nQuantidade: %d\nTipo: %d",teste.name, teste.qtd, teste.type);
+
 }
