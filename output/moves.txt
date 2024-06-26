@@ -1,0 +1,4 @@
+shock-wave ,34, 5
+max-phantasm ,31, 17
+metronome ,25, 7
+core-enforcer ,21, 14

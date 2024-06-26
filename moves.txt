@@ -1,4 +1,0 @@
-covet ,9, 19
-gravity ,20, 18
-stealth-rock ,18, 15
-hyper-fang ,11, 13

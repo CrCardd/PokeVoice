@@ -8,7 +8,7 @@ r = sr.Recognizer()
 # speak
 
 try:
-	
+	print("Ouvindo...")
 	# use the microphone as source for input.
 	with sr.Microphone() as source:
 		
