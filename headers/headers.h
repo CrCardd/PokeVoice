@@ -13,6 +13,9 @@
 #include "linkedList.h"
 #include "arrayList.h"
 #include "moves.h"
-#include "sort_algorithms.h"
+#include "sort_algorithms.h" 
+#include "render.h" 
+#include "buildMap.h"   
+#include "main.h"   
 
 #endif
