@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "mons.h"
-#include "linkedList.h"
+#include "bag.h"
 
 int main()
 {
@@ -31,18 +31,26 @@ int main()
     // printf("\nname: %s", bulba->name);
     // printf("\nhp: %d", bulba->hp);
 
+    Bag *bag = BagConstructor();
 
-    Item *potion = malloc(sizeof(Item));
-    strcpy(potion->name, "Potion");
-    potion->qtd = 5;
-    potion->type = 1;
+    for (int i = 0; i < 4; i++)
+    {
+        Item test  = getBag(bag, i);
+        printf("name: %s\t", test.name);
+        printf("qtd: %d\t", test.qtd);
+        printf("type: %d\n\n", test.type);
+    }
+    
+    printf("Usando uma potion:\n\n");
 
-    LinkedList *bag = LinkedListConstructor();
+    useItem(bag, 0);
 
-    addlist(bag, potion);
-
-    Item teste = getList(bag, 0);
-
-    printf("Nome: %s\nQuantidade: %d\nTipo: %d",teste.name, teste.qtd, teste.type);
+    for (int i = 0; i < 4; i++)
+    {
+        Item test  = getBag(bag, i);
+        printf("name: %s\t", test.name);
+        printf("qtd: %d\t", test.qtd);
+        printf("type: %d\n\n", test.type);
+    }
 
 }

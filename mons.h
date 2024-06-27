@@ -3,7 +3,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "linkedList.h"
+#include "bag.h"
 
 typedef struct Atack
 {
@@ -160,20 +160,31 @@ void atack(Pokemon *atacker, Pokemon *atacked, int atack)
     atacked->hp -= atacker->atk[atack].dmg;
 }
 
-// void item(Pokemon *poke, int index)
-// {
-//     Item *potion = malloc(sizeof(Item));
+void item(Pokemon *poke, Bag * bag)
+{
+    Item teste = useItem(bag, 0);
 
-//     strcpy(potion->name, "Potion");
-//     potion->qtd = 5;
-//     potion->type = 1;
+    printf("Nome: %s\nQuantidade: %d\nTipo: %d",teste.name, teste.qtd, teste.type);
 
-//     LinkedList *bag = LinkedListConstructor();
+    switch (teste.type)
+    {
+    case 1:
+        poke->hp += 30;
+        break;
 
-//     addlist(bag, potion);
+    case 2:
+        for (int i = 0; i < 4; i++)
+            poke->atk[i].uses += 10;
+        break;
 
-//     Item teste = getList(bag, 0);
+    case 3:
+        if (poke->hp == 0)
+            poke->hp += 30;
+        break;       
+    
+    default:
+        break;
+    }
+}
 
-//     printf("Nome: %s\nQuantidade: %d\nTipo: %d",teste.name, teste.qtd, teste.type);
-// }
 #endif // !"mons.h"
