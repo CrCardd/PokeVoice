@@ -40,7 +40,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
     Player player = playerInnit(2,2,2);
     Map game = gameInnit(LIM_Y, LIM_X, player,1);
-    game.map[game.player.pY][game.player.pX] = game.player.renderValue;
+    // game.map[game.player.pY][game.player.pX] = game.player.renderValue;
 
     buildSquare(&game, 10,10,50,50);
     
