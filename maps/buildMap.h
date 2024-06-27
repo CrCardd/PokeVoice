@@ -43,4 +43,18 @@ void buildLine(int mode,Map *map,int coordX, int coordY, int size)
     }    
 }
 
+
+void buildSquare(Map* map, int coordUpY, int coordUpX, int coordDownY, int coordDownX)
+{
+    int lenght = coordDownX - coordUpX;
+    int height = coordDownY - coordUpY;
+    int biggest = (height>lenght)?height:lenght;
+    for(float i=0; i<=biggest; i++)
+    {
+        map->map[coordUpY + (int)((i/biggest)*height)][coordUpX] = 1;
+        map->map[coordDownY - (int)((i/biggest)*height)][coordDownX] = 1;
+        map->map[coordUpY][coordUpX + (int)((i/biggest)*lenght)] = 1;
+        map->map[coordDownY][coordDownX - (int)((i/biggest)*lenght)] = 1;
+    }
+}
 #endif 
