@@ -8,8 +8,8 @@ int main(){
 
     for(int i=0; i<4; i++)
     {
-        int lin = 10 + sin(i*0.5* M_PI);
-        int col = 10 + cos(i*0.5* M_PI);
+        int lin =sin(i*0.5* M_PI);
+        int col =cos(i*0.5* M_PI);
         printf("sin: %d cos: %d\n",lin,col);    
     }
 }

@@ -12,17 +12,27 @@ gcc main.c -o Poke.exe -l gdi32 -l msimg32
 
 int main()
 {   
-    // configureTerminal();
-    // ERASE_ALL();
-    Player player = playerInnit(10,10);
-    Map game = gameInnit(LIM_Y, LIM_X, player);
+    configureTerminal();
+    ERASE_ALL();
+
+    Player player = playerInnit(2,15,15);
+    Map game = gameInnit(LIM_Y, LIM_X, player,1);
+
+    buildSquare(&game, 0,0,29,19);
     
-    game.map[30][30] = 5;
+
+
+    printf("LOADING...\n");
+
     while (1) 
     {
+
+        // printf("y %d   x %d\n",game.player.pY,game.player.pX);
         checkWalk(&game);
-        // printf("y: %d x: %d\n",game.player.pY, game.player.pX);
+        
         showMap(&game);
+
+        Sleep(75);
 
     }
 }   

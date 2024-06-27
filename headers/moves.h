@@ -6,63 +6,44 @@
 #include "main.h"
 #include <math.h>
 
-#define M_PI 3.14159265358979323846
+
+#include <stdio.h>
+
 
 void checkWalk(Map* game)
 {
+    //COLISON
+    int up    = (game->map[game->player.pY-1][game->player.pX] != game->renderWall) ? 1 : 0;
+    int down  = (game->map[game->player.pY+1][game->player.pX] != game->renderWall) ? 1 : 0;
+    int right = (game->map[game->player.pY][game->player.pX+1] != game->renderWall) ? 1 : 0;
+    int left  = (game->map[game->player.pY][game->player.pX-1] != game->renderWall) ? 1 : 0;
+
+
     //WALK
-    if(GetAsyncKeyState(VK_W) && game->player.pY)
+    game->map[game->player.pY][game->player.pX] = 0;
+
+
+    if(GetAsyncKeyState(VK_W) && game->player.pY && up)
         game->player.pY--;
-    if(GetAsyncKeyState(VK_S) && game->player.pY+1<game->rows)
+    else if(GetAsyncKeyState(VK_S) && game->player.pY+1<game->rows && down)
         game->player.pY++;
-    if(GetAsyncKeyState(VK_A) && game->player.pX)
+    else if(GetAsyncKeyState(VK_A) && game->player.pX && left)
         game->player.pX--;
-    if(GetAsyncKeyState(VK_D) && game->player.pX+1<game->collums)
+    else if(GetAsyncKeyState(VK_D) && game->player.pX+1<game->collums && right)
         game->player.pX++;
+
+    game->map[game->player.pY][game->player.pX] = game->player.renderValue;
+
+
 }
+
+
+
 
 void checkInteract(Map* game)
 {
-    if(GetAsyncKeyState(VK_R))
-    {
-        for(int i=0; i<4; i++)
-        {
-            int lin = game->player.pY + sin(i*0.5* M_PI);
-            int col = game->player.pX + cos(i*0.5* M_PI);
-            if(game->map[lin][col])
-            {
-                //sampaio trampa
-                game->map[lin][col] = 0;
-                break;
-            }
-        }
+    if(GetAsyncKeyState(VK_R)){}
 
-
-
-        // if(game->map[game->player.pY-1][game->player.pX] == 5) //em cima do player
-        //     {
-        //         game->map[game->player.pY-1][game->player.pX] = 0;
-        //         //sampaio trampa
-        //     }
-
-        // if(game->map[game->player.pY+1][game->player.pX] == 5) //embaixo do player
-        //     {
-        //         game->map[game->player.pY+1][game->player.pX] = 0;
-        //         //sampaio trampa
-        //     }
-
-        // if(game->map[game->player.pY][game->player.pX-1] == 5) //lado direito do player 
-        //     {
-        //         game->map[game->player.pY][game->player.pX-1] = 0;
-        //         //sampaio trampa
-        //     }
-
-        // if(game->map[game->player.pY][game->player.pX+1] == 5) //lado esquerdo do player
-        //     {
-        //         game->map[game->player.pY][game->player.pX+1] = 0;
-        //         //sampaio trampa
-            // }
-    }
 }
 
 
