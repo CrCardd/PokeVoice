@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include "mons.h"
 #include "bag.h"
+#include "team.h"
+#include "battle.h"
 
 int main()
 {
@@ -31,26 +33,33 @@ int main()
     // printf("\nname: %s", bulba->name);
     // printf("\nhp: %d", bulba->hp);
 
-    Bag *bag = BagConstructor();
+    // Bag *bag = BagConstructor();
 
-    for (int i = 0; i < 4; i++)
-    {
-        Item test  = getBag(bag, i);
-        printf("name: %s\t", test.name);
-        printf("qtd: %d\t", test.qtd);
-        printf("type: %d\n\n", test.type);
-    }
+    // for (int i = 0; i < 4; i++)
+    // {
+    //     Item test  = getBag(bag, i);
+    //     printf("name: %s\t", test.name);
+    //     printf("qtd: %d\t", test.qtd);
+    //     printf("type: %d\n\n", test.type);
+    // }
     
-    printf("Usando uma potion:\n\n");
+    // printf("Usando uma potion:\n\n");
 
-    useItem(bag, 0);
+    // useItem(bag, 0);
 
-    for (int i = 0; i < 4; i++)
-    {
-        Item test  = getBag(bag, i);
-        printf("name: %s\t", test.name);
-        printf("qtd: %d\t", test.qtd);
-        printf("type: %d\n\n", test.type);
-    }
+    // for (int i = 0; i < 4; i++)
+    // {
+    //     Item test  = getBag(bag, i);
+    //     printf("name: %s\t", test.name);
+    //     printf("qtd: %d\t", test.qtd);
+    //     printf("type: %d\n\n", test.type);
+    // }
+    
+    Team me = myTeamConstructor();
+
+    Team enemy = teamConstructor();
+
+    battle(&me, &enemy);
+
 
 }

@@ -1,6 +1,6 @@
-#include "mons.h"
 #ifndef bag_h
 #define bag_h
+#include "mons.h"
 
 typedef struct NodeList NodeList;
 
@@ -44,8 +44,13 @@ void addBag(Bag *list, Item *value)
     return;
 }
 
-void initBag(Bag * list)
+Bag * bagConstructor()
 {
+    Bag * new_bag = malloc(sizeof(Bag));
+
+    new_bag->head = NULL;
+    new_bag->size = 0;
+
     Item *potion = malloc(sizeof(Item));
     strcpy(potion->name, "Potion");
     potion->qtd = 5;
@@ -66,22 +71,12 @@ void initBag(Bag * list)
     rope->qtd = 2;
     rope->type = 4;
 
-    addBag(list, potion);
-    addBag(list, elixir);
-    addBag(list, revive);
-    addBag(list, rope);
-}
+    addBag(new_bag, potion);
+    addBag(new_bag, elixir);
+    addBag(new_bag, revive);
+    addBag(new_bag, rope);
 
-Bag * BagConstructor()
-{
-    Bag * new_linked = malloc(sizeof(Bag));
-
-    new_linked->head = NULL;
-    new_linked->size = 0;
-
-    initBag(new_linked);
-
-    return new_linked;
+    return new_bag;
 }
 
 Item removeBag(Bag * list, int index)
@@ -166,4 +161,4 @@ void getItem(Bag * list, int index)
 
 }
 
-#endif // !LinkedList
+#endif // !bag

@@ -19,8 +19,9 @@ typedef struct Pokemon
     struct Atack atk[4];
 } Pokemon;
 
-void initPokemon(Pokemon *poke)
+Pokemon initPokemon()
 {
+    Pokemon new_poke;
     // Escreve novos valores nos txt's
     system("pokeAPI.exe");
 
@@ -35,28 +36,32 @@ void initPokemon(Pokemon *poke)
 
     while (fgets(line, sizeof(line), name) != NULL) {
         token = strtok(line, ",");
-        strcpy(poke->name, token);
+        strcpy(new_poke.name, token);
         token = strtok(NULL, ",");
-        poke->hp = atoi(token);
+        new_poke.hp = atoi(token);
         token = strtok(NULL, ",");
     }
 
     while (fgets(line, sizeof(line), moves) != NULL) {
         token = strtok(line, ","),
 
-        strcpy(poke->atk[i].name, token);
+        strcpy(new_poke.atk[i].name, token);
         token = strtok(NULL, ",");
-        poke->atk[i].dmg = atoi(token);
+        new_poke.atk[i].dmg = atoi(token);
         token = strtok(NULL, ",");
-        poke->atk[i].uses = atoi(token);
+        new_poke.atk[i].uses = atoi(token);
         i++;
     }
     fclose(name);
     fclose(moves);
+
+    return new_poke;
 }
 
-void squirtle(Pokemon *poke)
+Pokemon squirtle()
 {
+    Pokemon squirtle;
+
     FILE *name;
     FILE *moves;
     char line[32];
@@ -68,28 +73,32 @@ void squirtle(Pokemon *poke)
 
     while (fgets(line, sizeof(line), name) != NULL) {
         token = strtok(line, ",");
-        strcpy(poke->name, token);
+        strcpy(squirtle.name, token);
         token = strtok(NULL, ",");
-        poke->hp = atoi(token);
+        squirtle.hp = atoi(token);
         token = strtok(NULL, ",");
     }
 
     while (fgets(line, sizeof(line), moves) != NULL) {
         token = strtok(line, ","),
 
-        strcpy(poke->atk[i].name, token);
+        strcpy(squirtle.atk[i].name, token);
         token = strtok(NULL, ",");
-        poke->atk[i].dmg = atoi(token);
+        squirtle.atk[i].dmg = atoi(token);
         token = strtok(NULL, ",");
-        poke->atk[i].uses = atoi(token);
+        squirtle.atk[i].uses = atoi(token);
         i++;
     }
     fclose(name);
     fclose(moves);
+
+    return squirtle;
 }
 
-void charmander(Pokemon *poke)
+Pokemon charmander()
 {
+    Pokemon mander;
+
     FILE *name;
     FILE *moves;
     char line[32];
@@ -101,28 +110,32 @@ void charmander(Pokemon *poke)
 
     while (fgets(line, sizeof(line), name) != NULL) {
         token = strtok(line, ",");
-        strcpy(poke->name, token);
+        strcpy(mander.name, token);
         token = strtok(NULL, ",");
-        poke->hp = atoi(token);
+        mander.hp = atoi(token);
         token = strtok(NULL, ",");
     }
 
     while (fgets(line, sizeof(line), moves) != NULL) {
         token = strtok(line, ","),
 
-        strcpy(poke->atk[i].name, token);
+        strcpy(mander.atk[i].name, token);
         token = strtok(NULL, ",");
-        poke->atk[i].dmg = atoi(token);
+        mander.atk[i].dmg = atoi(token);
         token = strtok(NULL, ",");
-        poke->atk[i].uses = atoi(token);
+        mander.atk[i].uses = atoi(token);
         i++;
     }
     fclose(name);
     fclose(moves);
+
+    return mander;
 }
 
-void bulbasaur(Pokemon *poke)
+Pokemon bulbasaur()
 {
+    Pokemon bulba;
+
     FILE *name;
     FILE *moves;
     char line[32];
@@ -134,57 +147,26 @@ void bulbasaur(Pokemon *poke)
 
     while (fgets(line, sizeof(line), name) != NULL) {
         token = strtok(line, ",");
-        strcpy(poke->name, token);
+        strcpy(bulba.name, token);
         token = strtok(NULL, ",");
-        poke->hp = atoi(token);
+        bulba.hp = atoi(token);
         token = strtok(NULL, ",");
     }
 
     while (fgets(line, sizeof(line), moves) != NULL) {
         token = strtok(line, ","),
 
-        strcpy(poke->atk[i].name, token);
+        strcpy(bulba.atk[i].name, token);
         token = strtok(NULL, ",");
-        poke->atk[i].dmg = atoi(token);
+        bulba.atk[i].dmg = atoi(token);
         token = strtok(NULL, ",");
-        poke->atk[i].uses = atoi(token);
+        bulba.atk[i].uses = atoi(token);
         i++;
     }
     fclose(name);
     fclose(moves);
-}
 
-void atack(Pokemon *atacker, Pokemon *atacked, int atack)
-{
-    atacker->atk[atack].uses--;
-    atacked->hp -= atacker->atk[atack].dmg;
-}
-
-void item(Pokemon *poke, Bag * bag)
-{
-    Item teste = useItem(bag, 0);
-
-    printf("Nome: %s\nQuantidade: %d\nTipo: %d",teste.name, teste.qtd, teste.type);
-
-    switch (teste.type)
-    {
-    case 1:
-        poke->hp += 30;
-        break;
-
-    case 2:
-        for (int i = 0; i < 4; i++)
-            poke->atk[i].uses += 10;
-        break;
-
-    case 3:
-        if (poke->hp == 0)
-            poke->hp += 30;
-        break;       
-    
-    default:
-        break;
-    }
+    return bulba;
 }
 
 #endif // !"mons.h"
