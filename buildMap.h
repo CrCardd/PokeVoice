@@ -46,4 +46,4 @@ void createLine(int mode, int map[HEIGHT][LENGHT],int coord_x, int coord_y, int 
 }
 
 
-#endif // !BUILD_MAP
+#endif 
