@@ -7,10 +7,11 @@ int main()
     system("color 50");
 
 
-createLine(1, map, 0, 62, 10);
-createLine(2, map, 25, 30, 15);
+// buildLine(1, map, 0, 62, 10);
+// buildLine(2, map, 25, 30, 15);
+buildSquare(1, map, 10, 20, 25, 35);
 
-showMap(map);
+// showMap(map);
 
 return 0;
 }
