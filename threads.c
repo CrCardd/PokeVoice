@@ -11,11 +11,9 @@ DWORD Something()
     for (int i = 0; i < 5; i++)
     {
         int n;
-        // printf("Something\n");
         scanf("%d", &n);
         Sleep(1000);
     }
-    
     return 0;          
 }
 
@@ -25,8 +23,7 @@ DWORD Outro()
     {
         printf("eduardo\n");    
         Sleep(1000);
-    }
-    
+    }   
     return 0;      
 }
 
