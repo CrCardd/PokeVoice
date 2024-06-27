@@ -1,10 +1,34 @@
-#ifndef BUILDMAP_H
-#define BUILDMAP_H
+#ifndef BUILDMAP
+#define BUILDMAP
 
-#define LENGHT 79
-#define HEIGHT 63
-
+#include <stdio.h>
+#include <windows.h>
+#include <stdlib.h>
 #include "main.h"
+
+#define HEIGHT 63
+#define LENGHT 79
+#define CHARACTER Ω;
+
+
+
+void buildLine(int mode,Map *map,int coordX, int coordY, int size)
+{
+    if(mode == 1)
+    {
+        for (int i = coordX; i < coordX + size; i++)
+            map->map[coordY][i] = 1;
+        
+    }else if (mode == 2)
+    {
+        for (int i = coordY; i < coordY + size; i++)
+            map->map[i][coordX] = 1;
+    }else
+    {
+        map->map[coordX][coordY] = 5;
+    }    
+}
+
 
 void buildSquare(Map* map, int coordY, int coordX, int coordY_, int coordX_)
 {
@@ -21,6 +45,4 @@ void buildSquare(Map* map, int coordY, int coordX, int coordY_, int coordX_)
 }
 
 
-
-
-#endif
+#endif 

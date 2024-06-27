@@ -53,6 +53,8 @@ void showMap(Map *game)
 
     fflush(stdout);
     MOVE_HOME();
+    
+    Sleep(75);
 }
 
 #endif
