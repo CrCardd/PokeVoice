@@ -6,7 +6,7 @@ then, clone just a part of your repo:
 
 git clone --depth 1 <repo_URI>
 
-
+$ git config --global --unset http.sslVerify
 
 
 ==========================================
