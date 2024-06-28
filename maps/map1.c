@@ -1,38 +1,32 @@
+/*
+gcc maps/map1.c -o maps/map1.exe -l gdi32 -l msimg32
+*/
+
 #include "../headers/headers.h"
+
+#include "map1.h"
 
 int main()
 {
+    pthread_t showMapThreads,checkWalkThreads;
+
     configureTerminal();
-    ERASE_ALL();
+    
+    Player player = playerInnit(PLAYER,2,2);
+    Map map = gameInnit(ROWS,COLLUMS, player, WALLS,POKEBALL);
+    mapInnit(&map);
 
-    system("color 50");
-    Player player = playerInnit(2,2,2);
-    Map map = gameInnit(63,79, player, 1);
+    map.map[8][8] = 3;
 
-    buildLine(1,&map, 0, 0, 79);
-    buildLine(1,&map, 0, 62, 79);
-    buildLine(2,&map, 0, 0, 62);
-    buildLine(2,&map, 78, 0, 62);
+    pthread_mutex_init(&mutex, NULL);
 
+    pthread_create(&showMapThreads, NULL, actionsThread, (void*)&map);
+    pthread_create(&showMapThreads, NULL, showMapThread, (void*)&map); 
+    pthread_join(checkWalkThreads, NULL);
+    pthread_join(showMapThreads, NULL);
 
-    buildLine(2,&map, 29, 0, 24);
-    buildLine(2, &map, 58, 0, 24);
+    pthread_mutex_destroy(&mutex);
 
-    buildLine(1, &map, 0, 24, 78);
-
-    buildLine(2, &map, 20, 24, 33);
-    buildLine(2, &map, 35, 24, 38);
-    buildLine(2, &map, 50, 24, 26);
-
-    buildLine(1, &map, 20, 54, 15);
-    buildLine(1, &map, 50, 45, 28);
-
-
-    while(1)
-    {
-        checkWalk(&map);
-        showMap(&map);
-
-    }
+    return 0;
 }
 

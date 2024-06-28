@@ -13,19 +13,23 @@ void showMap(Map *game)
     HIDE_CURSOR();
 
         for (int i = 0; i < game->rows; i++) 
+        {
             for (int j = 0; j < game->collums; j++) 
-            {
+            
                 if(game->map[i][j] == game->player.renderValue)
                     printf("X  ");
                 else if (game->map[i][j] == game->renderWall)
                     printf("// ");
+                else if (game->map[i][j] == game->renderPokeball)
+                    printf("O  ");
                 else if(!game->map[i][j])
                     printf("   ");
                 else
                     printf("F  ");
+                
                 // printf("%d  ",game->map[i][j]);
-
-            }
+            printf("\n");
+        }
 
     
 

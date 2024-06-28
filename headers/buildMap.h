@@ -6,11 +6,6 @@
 #include <stdlib.h>
 #include "main.h"
 
-#define HEIGHT 63
-#define LENGHT 79
-#define CHARACTER Ω;
-
-
 
 void buildLine(int mode,Map *map,int coordX, int coordY, int size)
 {

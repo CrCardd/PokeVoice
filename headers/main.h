@@ -20,6 +20,7 @@ typedef struct
     int rows;
     int collums;
     int renderWall;
+    int renderPokeball;
     Player player;
 } Map;
 
@@ -35,13 +36,14 @@ Player playerInnit(int renderValue, int y, int x)
     return player;
 }
 
-Map gameInnit(int rows, int collums, Player player, int renderWall)
+Map gameInnit(int rows, int collums, Player player, int renderWall, int renderPokeball)
 {
     Map map;
     map.rows = rows; 
     map.collums = collums; 
     map.player = player;
     map.renderWall = renderWall;
+    map.renderPokeball = renderPokeball;
     map.map = (int**) malloc(rows * sizeof(int**));
     for(int i=0; i<rows; i++)
     {
