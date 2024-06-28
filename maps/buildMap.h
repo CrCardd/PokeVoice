@@ -18,8 +18,14 @@ void showMap(Map *map)
             for (int j = 0; j < LENGHT; j++)
                 if (map->map[i][j] == 0)
                     printf("   ");
-                else
-                    printf("// ");   
+                else if (map->map[i][j] == 1)
+                    printf("// ");
+
+                else if (map->map[i][j] == 2)
+                    printf("Ω ");   
+                else if (map->map[i][j] == 3)
+                    printf("!! ");   
+                
 
             printf("\n");  
         }
@@ -44,17 +50,17 @@ void buildLine(int mode,Map *map,int coordX, int coordY, int size)
 }
 
 
-void buildSquare(Map* map, int coordUpY, int coordUpX, int coordDownY, int coordDownX)
+void buildHole(Map* map, int coordUpY, int coordUpX)
 {
-    int lenght = coordDownX - coordUpX;
-    int height = coordDownY - coordUpY;
-    int biggest = (height>lenght)?height:lenght;
-    for(float i=0; i<=biggest; i++)
+    const int lenght = 3;
+    
+    for(int i=0; i<lenght; i++)
     {
-        map->map[coordUpY + (int)((i/biggest)*height)][coordUpX] = 1;
-        map->map[coordDownY - (int)((i/biggest)*height)][coordDownX] = 1;
-        map->map[coordUpY][coordUpX + (int)((i/biggest)*lenght)] = 1;
-        map->map[coordDownY][coordDownX - (int)((i/biggest)*lenght)] = 1;
+        map->map[coordUpY+i][coordUpX] = 3;
+        map->map[coordUpY+i][coordUpX+ (lenght-2)] = 3;
+        map->map[coordUpY+i][coordUpX+ (lenght-1)] = 3;
+
     }
+
 }
 #endif 

@@ -7,14 +7,15 @@ int main()
     Player player = playerInnit(0,0);
     Map map = gameInnit(63,79, player);
 
+    //Limites do mapa
     buildLine(1,&map, 0, 0, 79);
     buildLine(1,&map, 0, 62, 79);
     buildLine(2,&map, 0, 0, 62);
     buildLine(2,&map, 78, 0, 62);
 
-
-    buildLine(2,&map, 29, 0, 24);
-    buildLine(2, &map, 58, 0, 24);
+    //Paredes
+    buildLine(2,&map, 33, 0, 24);
+    buildLine(2, &map, 56, 0, 24);
 
     buildLine(1, &map, 0, 24, 78);
 
@@ -25,10 +26,34 @@ int main()
     buildLine(1, &map, 20, 54, 15);
     buildLine(1, &map, 50, 45, 28);
 
-    buildSquare(&map, 22, 1, 23, 2);
-    buildSquare(&map, 22, 27, 23, 28);
-    buildSquare(&map, 8, 12, 9, 13);
-    buildSquare(&map, 3, 27, 4, 28);
+    //Buracos
+    buildHole(&map, 7, 12);
+    buildHole(&map, 3, 30);
+    buildHole(&map, 21, 1);
+    buildHole(&map, 21, 27);
+
+    buildHole(&map, 3, 34);
+    buildHole(&map, 21, 37);
+    buildHole(&map, 21, 50);
+
+    buildHole(&map, 7, 59);
+    buildHole(&map, 21, 70);
+
+    buildHole(&map, 30, 1);
+    buildHole(&map, 30, 17);
+    buildHole(&map, 47, 9);
+    buildHole(&map, 47, 15);
+    buildHole(&map, 50, 12);
+    buildHole(&map, 55, 1);
+
+    buildHole(&map, 28, 23);
+    buildHole(&map, 47, 23);
+    
+    buildHole(&map, 28, 38);
+    buildHole(&map, 57, 38);
+
+    buildHole(&map, 40, 56);
+
 
     showMap(&map);
 }
