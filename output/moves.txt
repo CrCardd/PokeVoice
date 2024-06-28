@@ -1,4 +1,4 @@
-drill-run ,11, 15
-memento ,37, 14
-minimize ,5, 15
-photon-geyser ,28, 19
+pursuit ,14, 13
+frenzy-plant ,24, 15
+thunderbolt ,10, 7
+dragon-rush ,13, 11

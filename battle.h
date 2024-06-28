@@ -47,7 +47,7 @@ void quickSort(Team * team, int Start, int End)
 
 void atack(Team *atacker, Team *atacked, int atack)
 {
-    printf("%s uses %s", atacker->pokes[0].name, atacker->pokes[0].atk->name);
+    printf("\n%s uses %s", atacker->pokes[0].name, atacker->pokes[0].atk->name);
 
     atacker->pokes[0].atk[atack].uses--;
     atacked->pokes[0].hp -= atacker->pokes[0].atk[atack].dmg;
@@ -60,6 +60,32 @@ void atack(Team *atacker, Team *atacked, int atack)
         quickSort(atacked, 0, 5);
     }
 
+}
+
+int voiceAtack(Team *atacker, Team *atacked)
+{
+    int indexAtack = 5;
+    char buffer[32];
+    // printf("Hearing...\n");
+    system("voice.exe");
+
+    FILE * move;
+
+    move = fopen("voice.txt", "r");
+    while (fgets(buffer, sizeof(buffer), move) != NULL)
+    fclose(move);
+
+    for (int i = 0; i < 4; i++)
+    {
+        if(strcmp(atacker->pokes[0].atk[i].name, buffer) == 0)
+        {
+            indexAtack = i;
+            atack(atacker, atacked, indexAtack);
+        }
+    }
+    
+    printf("%s\n", buffer);
+    return 0;
 }
 
 
@@ -98,7 +124,7 @@ void enemyRound(Team * you, Team * enemy)
 
     printf("enemy atack: ");
 
-    atack(&enemy->pokes[0], &you->pokes[0], indexAtack);
+    atack(enemy, you, indexAtack);
 }
 
 
@@ -114,9 +140,13 @@ void myRound(Team * you, Team * enemy, Bag * bag)
     {
     case 1:
         // Atack
-        printf("atack: ");
-        scanf(" %d", &indexAction);
-        atack(&you->pokes[0], &enemy->pokes[0], indexAction);
+        //implement voice atack
+        if(!voiceAtack(you, enemy))
+        {
+            printf("atack: ");
+            scanf(" %d", &indexAction);
+            atack(you, enemy, indexAction);
+        }
         break;
 
     case 2:
