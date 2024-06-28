@@ -7,7 +7,7 @@
 #include "main.h"
 
 
-void buildLine(int mode,Map *map,int coordX, int coordY, int size)
+void buildLine(int mode,Room *map,int coordX, int coordY, int size)
 {
     if(mode == 1)
     {
@@ -25,7 +25,7 @@ void buildLine(int mode,Map *map,int coordX, int coordY, int size)
 }
 
 
-void buildSquare(Map* map, int coordY, int coordX, int coordY_, int coordX_)
+void buildSquare(Room* map, int coordY, int coordX, int coordY_, int coordX_)
 {
     int lenght = coordX_ - coordX;
     int height = coordY_ - coordY;

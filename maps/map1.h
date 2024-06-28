@@ -5,7 +5,7 @@
 #include "../headers/buildMap.h"
 
 
-void mapInnit(Map * map)
+void mapInnit(Room * map)
 {
     system("color 50");
 
