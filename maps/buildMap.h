@@ -21,10 +21,10 @@ void showMap(Map *map)
                 else if (map->map[i][j] == 1)
                     printf("// ");
 
-                else if (map->map[i][j] == 2)
-                    printf("Ω ");   
                 else if (map->map[i][j] == 3)
                     printf("!! ");   
+                // else if (map->map[i][j] == 3)
+                //     printf("!! ");   
                 
 
             printf("\n");  
