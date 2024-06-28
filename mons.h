@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <windows.h>
 #include "bag.h"
 
 typedef struct Atack
@@ -24,6 +25,7 @@ Pokemon initPokemon()
     Pokemon new_poke;
     // Escreve novos valores nos txt's
     system("pokeAPI.exe");
+    Sleep(0.5);
 
     FILE *name;
     FILE *moves;

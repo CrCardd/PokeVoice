@@ -8,74 +8,68 @@
 #include "mons.h"
 #include "team.h"
 
-int battle(Team * you, Team * enemy)
+void switchPoke(Team * team, int index)
 {
-    srand(time(NULL));
-    int round = 1;
-
-    while (you->alive == 'a' && enemy->alive == 'a')
-    {
-        if (round % 2)
-            myRound(&you, &enemy);
-        else
-            enemyRound(&you, &enemy);
-    }
-
-    round++;
+    Pokemon aux;
+    team->pokes[0] = aux;
+    team->pokes[0] = team->pokes[index];
+    team->pokes[index] = team->pokes[0];
 }
 
-void myRound(Team * you, Team * enemy)
+
+void quickSort(Team * team, int Start, int End)
 {
-    int action;
-    int indexAction;
-    scanf(" %d", &action);
+    if(Start >= End)
+        return;
 
-    switch (action)
+    int Pivot = team->pokes[End].hp;
+    int i = Start;
+  
+    for(int j = Start; j <= End; ++j)
     {
-    case 1:
-        // Atack
-        scanf(" %d", &indexAction);
-        atack(&you->pokes[0], &enemy->pokes[0], indexAction);
-        break;
-
-    case 2:
-        // Item
-        scanf(" %d", &indexAction);
-        break;
-
-    case 3:
-        // Switch
-        scanf(" %d", &indexAction);
-        switchPoke(you, indexAction);
-        break;
-
-    case 4:
-        // Run
-        break;
+        if(team->pokes[j].hp < Pivot)
+        {
+            Pokemon aux = team->pokes[i];
+            team->pokes[i] = team->pokes[j];
+            team->pokes[j] = aux;
+            ++i;
+        }
+    }
     
-    default:
-        break;
+    Pokemon aux = team->pokes[i];
+    team->pokes[i] = team->pokes[End];
+    team->pokes[End] = aux;
+
+    quickSort(team, Start, i - 1);
+    quickSort(team, i + 1, End);
+}
+
+
+void atack(Team *atacker, Team *atacked, int atack)
+{
+    printf("%s uses %s", atacker->pokes[0].name, atacker->pokes[0].atk->name);
+
+    atacker->pokes[0].atk[atack].uses--;
+    atacked->pokes[0].hp -= atacker->pokes[0].atk[atack].dmg;
+
+    if (atacked->pokes[0].hp <= 0 && atacked->pokes[1].hp <= 0)
+        atacked->alive = 'd';
+
+    else if (atacked->pokes[0].hp <= 0)
+    {
+        quickSort(atacked, 0, 5);
     }
-}
-
-void enemyRound(Team * you, Team * enemy)
-{
 
 }
 
-void atack(Pokemon *atacker, Pokemon *atacked, int atack)
+
+void item(Pokemon *poke, Bag * bag, int index)
 {
-    atacker->atk[atack].uses--;
-    atacked->hp -= atacker->atk[atack].dmg;
-}
+    Item usedItem = useItem(bag, index);
 
-void item(Pokemon *poke, Bag * bag)
-{
-    Item teste = useItem(bag, 0);
+    printf("Nome: %s\nQuantidade: %d\nTipo: %d",usedItem.name, usedItem.qtd, usedItem.type);
 
-    printf("Nome: %s\nQuantidade: %d\nTipo: %d",teste.name, teste.qtd, teste.type);
-
-    switch (teste.type)
+    switch (usedItem.type)
     {
     case 1:
         poke->hp += 30;
@@ -87,8 +81,8 @@ void item(Pokemon *poke, Bag * bag)
         break;
 
     case 3:
-        if (poke->hp == 0)
-            poke->hp += 30;
+        if (poke->hp <= 0)
+            poke->hp = 30;
         break;       
     
     default:
@@ -96,12 +90,79 @@ void item(Pokemon *poke, Bag * bag)
     }
 }
 
-void switchPoke(Team * team, int index)
+
+void enemyRound(Team * you, Team * enemy)
 {
-    Pokemon aux;
-    team->pokes[0] = aux;
-    team->pokes[0] = team->pokes[index];
-    team->pokes[index] = team->pokes[0];
+    srand(time(NULL));
+    int indexAtack = rand()%3;
+
+    printf("enemy atack: ");
+
+    atack(&enemy->pokes[0], &you->pokes[0], indexAtack);
+}
+
+
+void myRound(Team * you, Team * enemy, Bag * bag)
+{
+    int action;
+    int indexAction;
+    int indexPoke;
+    printf("your round:");
+    scanf(" %d", &action);
+
+    switch (action)
+    {
+    case 1:
+        // Atack
+        printf("atack: ");
+        scanf(" %d", &indexAction);
+        atack(&you->pokes[0], &enemy->pokes[0], indexAction);
+        break;
+
+    case 2:
+        // Item
+        printf("item: ");
+        scanf(" %d\n", &indexAction);
+        printf("Pokemon: ");
+        scanf(" %d\n", &indexPoke);
+        item(&(you->pokes[indexPoke]), &bag, indexAction);
+        break;
+
+    case 3:
+        // Switch
+        printf("poke: ");
+        scanf(" %d", &indexAction);
+        switchPoke(you, indexAction);
+        break;
+
+    case 4:
+        // Run
+        break;
+    
+    default:
+        break;
+    }
+    
+}
+
+
+void battle(Team * you, Team * enemy, Bag * bag)
+{
+    srand(time(NULL));
+    int round = 1;
+
+    printf("me %c , enemy %c\n", you->alive, enemy->alive);
+
+    while (you->alive == 'a' && enemy->alive == 'a')
+    {
+        if (round % 2)
+            myRound(you, enemy, bag);
+        else
+            enemyRound(you, enemy);
+        round++;
+    }
+
+    printf("cabou\n");
 }
 
 #endif

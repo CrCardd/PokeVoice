@@ -1,4 +1,4 @@
-shock-wave ,34, 5
-max-phantasm ,31, 17
-metronome ,25, 7
-core-enforcer ,21, 14
+drill-run ,11, 15
+memento ,37, 14
+minimize ,5, 15
+photon-geyser ,28, 19

@@ -33,7 +33,7 @@ int main()
     // printf("\nname: %s", bulba->name);
     // printf("\nhp: %d", bulba->hp);
 
-    // Bag *bag = BagConstructor();
+    //  Bag *bag = BagConstructor();
 
     // for (int i = 0; i < 4; i++)
     // {
@@ -55,11 +55,17 @@ int main()
     //     printf("type: %d\n\n", test.type);
     // }
     
+    printf("teste\n");
+    Bag *bag = bagConstructor();
+    printf("teste1\n");
+
     Team me = myTeamConstructor();
+    printf("teste2\n");
 
     Team enemy = teamConstructor();
-
-    battle(&me, &enemy);
-
+    printf("teste3\n");
+    
+    battle(&me, &enemy, bag);
+    printf("teste4\n");
 
 }
