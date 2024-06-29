@@ -10,7 +10,6 @@
 #include <windows.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include <pthread.h>
 
 #include "headers.h"
 #include "renderValues.h"

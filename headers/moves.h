@@ -13,32 +13,30 @@ int left;
 int interact;
 
 int lastCoord = 0;
-void checkWalk(Room* game)
+
+void checkMove(Room * game, Map** matrix)
 {
     //COLISON
-    for(int i=0; i<QTDWALLS; i++)
-    {
-        up    = (game->map[game->player.pY-1][game->player.pX] != game->objects.renderWalls[i]) ? 1 : 0;
-        down  = (game->map[game->player.pY+1][game->player.pX] != game->objects.renderWalls[i]) ? 1 : 0;
-        right = (game->map[game->player.pY][game->player.pX+1] != game->objects.renderWalls[i]) ? 1 : 0;
-        left  = (game->map[game->player.pY][game->player.pX-1] != game->objects.renderWalls[i]) ? 1 : 0;
-    }
+    up    = (game->mapScreen[game->player.pY-1][game->player.pX].value != game->objects.renderWall && game->player.pY > 0) ? 1 : 0;
+    down  = (game->mapScreen[game->player.pY+1][game->player.pX].value != game->objects.renderWall && game->player.pY < game->rows-1) ? 1 : 0;
+    left  = (game->mapScreen[game->player.pY][game->player.pX-1].value != game->objects.renderWall && game->player.pX > 0) ? 1 : 0;
+    right = (game->mapScreen[game->player.pY][game->player.pX+1].value != game->objects.renderWall && game->player.pX < game->collums-1) ? 1 : 0;
 
 
     //WALK
-    game->map[game->player.pY][game->player.pX] = lastCoord;
+    game->mapScreen[game->player.pY][game->player.pX].value = lastCoord;
 
-    if(GetAsyncKeyState(VK_W) && game->player.pY && up)
+    if(GetAsyncKeyState(VK_W) && up)
         game->player.pY--;
-    else if(GetAsyncKeyState(VK_S) && game->player.pY+1<game->rows && down)
+    else if(GetAsyncKeyState(VK_S) && down)
         game->player.pY++;
-    else if(GetAsyncKeyState(VK_A) && game->player.pX && left)
+    else if(GetAsyncKeyState(VK_A) && left)
         game->player.pX--;
-    else if(GetAsyncKeyState(VK_D) && game->player.pX+1<game->collums && right)
+    else if(GetAsyncKeyState(VK_D) && right)
         game->player.pX++;
 
-    lastCoord = game->map[game->player.pY][game->player.pX];
-    game->map[game->player.pY][game->player.pX] = game->player.renderValue;
+    lastCoord = game->mapScreen[game->player.pY][game->player.pX].value;
+    game->mapScreen[game->player.pY][game->player.pX].value = game->player.renderValue;
 
     Sleep(100);
 }
@@ -50,38 +48,35 @@ void checkInteract(Room* game)
 {
     interact = 0;
 
-    up    = game->map[game->player.pY-1][game->player.pX];
-    down  = game->map[game->player.pY+1][game->player.pX];
-    right = game->map[game->player.pY][game->player.pX+1];
-    left  = game->map[game->player.pY][game->player.pX-1];
+    up    = game->mapScreen[game->player.pY-1][game->player.pX].value;
+    down  = game->mapScreen[game->player.pY+1][game->player.pX].value;
+    right = game->mapScreen[game->player.pY][game->player.pX+1].value;
+    left  = game->mapScreen[game->player.pY][game->player.pX-1].value;
 
-    if(GetAsyncKeyState(VK_R))
+    if(GetAsyncKeyState(VK_ENTER))
     {
         if(up == game->objects.renderPokeball)  //IF ITEM UP
         {
-            game->map[game->player.pY-1][game->player.pX] = 0;
+            game->mapScreen[game->player.pY-1][game->player.pX].value = 0;
             interact = 1;
         }
 
         if(down == game->objects.renderPokeball) //IF ITEM DOWN
         {
-            game->map[game->player.pY+1][game->player.pX] = 0;
+            game->mapScreen[game->player.pY+1][game->player.pX].value = 0;
             interact = 1;
-
         }
 
         if(right == game->objects.renderPokeball) //IF ITEM RIGHT
         {
-            game->map[game->player.pY][game->player.pX+1] = 0;
+            game->mapScreen[game->player.pY][game->player.pX+1].value = 0;
             interact = 1;
-
         }
 
         if(left == game->objects.renderPokeball) //IF ITEM LEFT
         {
-            game->map[game->player.pY][game->player.pX-1] = 0;
+            game->mapScreen[game->player.pY][game->player.pX-1].value = 0;
             interact = 1;
-
         }
 
         if(interact)
@@ -97,40 +92,41 @@ void checkInteract(Room* game)
 
 void checkEnemy(Room * game)
 {
-        int enemy = game->objects.renderEnemy;
-        interact = 0;
+    int enemy = game->objects.renderEnemy;
+    interact = 0;
 
-    if()
+    if(GetAsyncKeyState(VK_ENTER))
+    {
         if(up == enemy)  //IF ITEM UP
         {
-            game->map[game->player.pY-1][game->player.pX] = 0;
+            game->mapScreen[game->player.pY-1][game->player.pX].value = 0;
             interact = 1;
         }
 
         if(down == enemy) //IF ITEM DOWN
         {
-            game->map[game->player.pY+1][game->player.pX] = 0;
+            game->mapScreen[game->player.pY+1][game->player.pX].value = 0;
             interact = 1;
         }
 
         if(right == enemy) //IF ITEM RIGHT
         {
-            game->map[game->player.pY][game->player.pX+1] = 0;
+            game->mapScreen[game->player.pY][game->player.pX+1].value = 0;
             interact = 1;
         }
 
         if(left == enemy) //IF ITEM LEFT
         {
-            game->map[game->player.pY][game->player.pX-1] = 0;
+            game->mapScreen[game->player.pY][game->player.pX-1].value = 0;
             interact = 1;
         }
 
         if(interact)
         {
-            //Trampo do Cristian
-
+            game->screenModes.Map = 0;
+            game->screenModes.Fight = 1;
         }
-
+    }
 }
 
 

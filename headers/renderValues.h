@@ -4,7 +4,7 @@
 #define ROWS 63
 #define COLLUMS 79
 
-#define QTDWALLS 10
+#define WALL 1
 #define PLAYER 11
 #define ENEMY 12
 #define HOLE 13

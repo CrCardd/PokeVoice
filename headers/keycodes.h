@@ -35,3 +35,5 @@
 #define VK_X 0x58
 #define VK_Y 0x59
 #define VK_Z 0x5A
+
+#define VK_ENTER 0x0D

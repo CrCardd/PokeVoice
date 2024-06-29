@@ -12,13 +12,26 @@ typedef struct
 
 } Player;
 
+typedef struct
+{
+    int value;
+    int tp_X;
+    int tp_Y;
+    void * entity;
+
+} Map;
+
+typedef struct
+{
+
+} Enemy;
 
 
 
 
 typedef struct 
 {
-    int renderWalls[10];
+    int renderWall;
     int renderPokeball;
     int renderEnemy;
 } Objects;
@@ -35,7 +48,8 @@ typedef struct
 
 typedef struct 
 {
-    int** map;
+    Map** mapScreen;
+    Map** fightScreen;
     int rows;
     int collums;
     Objects objects;
@@ -64,12 +78,11 @@ Player playerInnit(int renderValue, int y, int x)
     return player;
 }
 
-Objects objectsInnit(int renderPokeball, int renderEnemy)
+Objects objectsInnit(int renderPokeball, int renderEnemy, int wall)
 {
     Objects objects;
     objects.renderPokeball = renderPokeball;
-    for(int i=0; i<QTDWALLS; i++)                      
-        objects.renderWalls[i] = i+1;
+    objects.renderWall = wall;
     
     objects.renderEnemy = renderEnemy;
 
@@ -90,20 +103,22 @@ Room gameInnit(int rows, int collums, Player player,Objects objects)
 
 
 
-    map.map = (int**) malloc(rows * sizeof(int**));
+    map.mapScreen = (Map**) malloc(rows * sizeof(Map**));
     for(int i=0; i<rows; i++)
     {
-        map.map[i] = (int*) malloc(collums * sizeof(int)); 
+        map.mapScreen[i] = (Map*) malloc(collums * sizeof(Map)); 
         for(int j=0; j<collums; j++)
-            map.map[i][j] = 0;
+            map.mapScreen[i][j].value = 0;
     } 
+
+    map.fightScreen = (Map**) malloc(ROWS * sizeof(Map**));
+    for(int i=0; i<ROWS; i++)
+        map.fightScreen[i] = (Map*) malloc(COLLUMS * sizeof(Map)); 
         
+
 
     return map;
 }
-
-
-
 
 
 

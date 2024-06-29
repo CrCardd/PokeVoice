@@ -15,12 +15,15 @@ int main(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmd
     configureTerminal();
     
     Player player = playerInnit(PLAYER,2,2);
-    Objects objects = objectsInnit(POKEBALL, ENEMY);
+    Objects objects = objectsInnit(POKEBALL, ENEMY, WALL);
     Room map = gameInnit(ROWS,COLLUMS, player, objects);
 
-    mapInnit(&map);
+    mapInnit(map.mapScreen);
+    fightScreenInnit(map.fightScreen);
 
-    map.map[8][8] = ENEMY;
+    map.mapScreen[8][8].value = ENEMY;
+
+
 
     Mutex = CreateMutex(NULL, FALSE, NULL);
 
