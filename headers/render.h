@@ -7,13 +7,13 @@
 #include "main.h"
 #include <windows.h>
 
-void showMap(Room *game, Map** screen)
+void showMap(Room *game, MapData screenData)
 {
 
     // ERASE_ALL();
+    system("cls");
     MOVE_HOME();
     HIDE_CURSOR();
-    system("cls");
     int wall = game->objects.renderWall;
 
     int up;
@@ -21,46 +21,47 @@ void showMap(Room *game, Map** screen)
     int right;
     int left;
 
-        for (int i = 0; i < game->rows; i++) 
+        for (int i = 0; i < screenData.rows; i++) 
         {
-            for (int j = 0; j < game->collums; j++) 
+            for (int j = 0; j < screenData.collums; j++) 
             
-                if(screen[i][j].value == game->player.renderValue)
+                if(screenData.map[i][j].value == game->player.renderValue)
                     printf(" %c ",190);
-                else if (screen[i][j].value == wall)
+                else if (screenData.map[i][j].value == wall)
                 {
-                    up = (i==0) ? 0 : screen[i-1][j].value;
-                    down = (i==game->rows-1) ? 0 : screen[i+1][j].value;
-                    left = (j==0) ? 0 : screen[i][j-1].value;
-                    right = (j==game->collums-1) ? 0 : screen[i][j+1].value;
+                    up = (i==0) ? 0 : screenData.map[i-1][j].value;
+                    down = (i==screenData.rows-1) ? 0 : screenData.map[i+1][j].value;
+                    left = (j==0) ? 0 : screenData.map[i][j-1].value;
+                    right = (j==screenData.collums-1) ? 0 : screenData.map[i][j+1].value;
 
                     if(up == wall && right == wall && down == wall && left == wall)
-                        printf("%c%c%c",206,205,205);
+                        printf("%c%c%c",205,206,205);//
                     else if(up == wall && right == wall && down == wall && left != wall)
-                        printf("%c%c%c",204,205,205);
+                        printf(" %c%c",204,205);//
                     else if(up == wall && right == wall && down != wall && left != wall)
-                        printf("%c%c%c",200,205,205);
+                        printf(" %c%c",200,205);//
                     else if(right == wall && down == wall && left == wall && up != wall)
-                        printf("%c%c%c",203,205,205);
+                        printf("%c%c%c",205,203,205);
                     else if(right == wall && down == wall && left != wall && up != wall)
-                        printf("%c%c%c",201,205,205);
+                        printf(" %c%c",201,205);
                     else if(down == wall && left == wall && up == wall && right != wall)
-                        printf("%c  ",185);
+                        printf("%c%c ",205,185);
                     else if(down == wall && left == wall && up != wall && right != wall)
-                        printf("%c  ",187);
+                        printf("%c%c ",205,187);
                     else if(left == wall && up == wall && right == wall && down != wall)
-                        printf("%c%c%c",202,205,205);
+                        printf("%c%c%c",205,202,205);
                     else if(left == wall && up == wall && right != wall && down != wall)
-                        printf("%c  ",188);
+                        printf("%c%c ",205,188);
                     else if((up || down) && right != wall && left != wall)
-                        printf("%c  ",186);
-                    else if((left || right) && up != wall && down != wall)
+                        printf(" %c ",186);
+                    else //if((left || right) && up != wall && down != wall)
                         printf("%c%c%c",205,205,205);
+                    
                 }
                 
-                else if (screen[i][j].value == game->objects.renderPokeball)
+                else if (screenData.map[i][j].value == game->objects.renderPokeball)
                     printf(" O ");
-                else if(!screen[i][j].value)
+                else if(!screenData.map[i][j].value)
                     printf("   ");
 
 
@@ -72,8 +73,8 @@ void showMap(Room *game, Map** screen)
 
 
 
-                // if(game->map[i][j].value)
-                //     printf("%d  ",game->map[i][j].value);
+                // if(screenData.map[i][j].value)
+                    // printf("%d  ",screenData.map[i][j].value);
                 // else
                 //     printf("   ");
 

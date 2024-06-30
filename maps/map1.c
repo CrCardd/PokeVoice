@@ -18,13 +18,24 @@ int main(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmd
     Objects objects = objectsInnit(POKEBALL, ENEMY, WALL);
     Room map = gameInnit(ROWS,COLLUMS, player, objects);
 
-    mapInnit(map.mapScreen);
-    fightScreenInnit(map.fightScreen);
-
-    map.mapScreen[8][8].value = ENEMY;
 
 
+    mapConstruct(map.mapScreen.map);
+    fightScreenConstruct(map.fightScreen.map);
 
+
+    map.mapScreen.map[8][8].value = ENEMY;
+
+    MapData event = peek(&map.stackEvents);
+
+    // int a;
+    // showMap(&map,event);
+    // push(&map.stackEvents,&map.fightScreen);
+    // scanf(" %d",&a);
+    // event = peek(&map.stackEvents);
+    // showMap(&map, *event);
+
+    // /*  
     Mutex = CreateMutex(NULL, FALSE, NULL);
 
     checkKeyboardThread = CreateThread(NULL, 0, (LPTHREAD_START_ROUTINE)checkKeyboard, &map, 0, NULL);
@@ -34,7 +45,7 @@ int main(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmd
     WaitForSingleObject(checkKeyboardThread,checkKeyboard);
 
     CloseHandle(Mutex);
-
+    // */
     return 0;
 }
 

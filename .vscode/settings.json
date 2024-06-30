@@ -60,6 +60,7 @@
     "stdio.h": "c",
     "headers.h": "c",
     "render.h": "c",
-    "pthread.h": "c"
+    "pthread.h": "c",
+    "stdlib.h": "c"
   }
 }

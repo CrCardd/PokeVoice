@@ -3,8 +3,10 @@
  
 #include <windows.h>
 #include "keycodes.h"
+#include "stack.h"
 #include "main.h"
 #include"renderValues.h"
+
 
 int up;
 int down;
@@ -12,19 +14,18 @@ int right;
 int left;
 int interact;
 
-int lastCoord = 0;
-
-void checkMove(Room * game, Map** matrix)
+void checkMove(Room * game, MapData mapData)
 {
+    
     //COLISON
-    up    = (game->mapScreen[game->player.pY-1][game->player.pX].value != game->objects.renderWall && game->player.pY > 0) ? 1 : 0;
-    down  = (game->mapScreen[game->player.pY+1][game->player.pX].value != game->objects.renderWall && game->player.pY < game->rows-1) ? 1 : 0;
-    left  = (game->mapScreen[game->player.pY][game->player.pX-1].value != game->objects.renderWall && game->player.pX > 0) ? 1 : 0;
-    right = (game->mapScreen[game->player.pY][game->player.pX+1].value != game->objects.renderWall && game->player.pX < game->collums-1) ? 1 : 0;
+    up    = (game->player.pY > 0 && mapData.map[game->player.pY-1][game->player.pX].value != game->objects.renderWall) ? 1 : 0;
+    down  = (game->player.pY < mapData.rows-1 && mapData.map[game->player.pY+1][game->player.pX].value != game->objects.renderWall) ? 1 : 0;
+    left  = (game->player.pX > 0 && mapData.map[game->player.pY][game->player.pX-1].value != game->objects.renderWall) ? 1 : 0;
+    right = (game->player.pX < mapData.collums-1 && mapData.map[game->player.pY][game->player.pX+1].value != game->objects.renderWall) ? 1 : 0;
 
-
+    
     //WALK
-    game->mapScreen[game->player.pY][game->player.pX].value = lastCoord;
+    mapData.map[game->player.pY][game->player.pX].value = game->player.lastCoord;
 
     if(GetAsyncKeyState(VK_W) && up)
         game->player.pY--;
@@ -35,8 +36,8 @@ void checkMove(Room * game, Map** matrix)
     else if(GetAsyncKeyState(VK_D) && right)
         game->player.pX++;
 
-    lastCoord = game->mapScreen[game->player.pY][game->player.pX].value;
-    game->mapScreen[game->player.pY][game->player.pX].value = game->player.renderValue;
+    game->player.lastCoord = mapData.map[game->player.pY][game->player.pX].value;
+    mapData.map[game->player.pY][game->player.pX].value = game->player.renderValue;
 
     Sleep(100);
 }
@@ -48,34 +49,34 @@ void checkInteract(Room* game)
 {
     interact = 0;
 
-    up    = game->mapScreen[game->player.pY-1][game->player.pX].value;
-    down  = game->mapScreen[game->player.pY+1][game->player.pX].value;
-    right = game->mapScreen[game->player.pY][game->player.pX+1].value;
-    left  = game->mapScreen[game->player.pY][game->player.pX-1].value;
+    up    = game->mapScreen.map[game->player.pY-1][game->player.pX].value;
+    down  = game->mapScreen.map[game->player.pY+1][game->player.pX].value;
+    right = game->mapScreen.map[game->player.pY][game->player.pX+1].value;
+    left  = game->mapScreen.map[game->player.pY][game->player.pX-1].value;
 
     if(GetAsyncKeyState(VK_ENTER))
     {
         if(up == game->objects.renderPokeball)  //IF ITEM UP
         {
-            game->mapScreen[game->player.pY-1][game->player.pX].value = 0;
+            game->mapScreen.map[game->player.pY-1][game->player.pX].value = 0;
             interact = 1;
         }
 
         if(down == game->objects.renderPokeball) //IF ITEM DOWN
         {
-            game->mapScreen[game->player.pY+1][game->player.pX].value = 0;
+            game->mapScreen.map[game->player.pY+1][game->player.pX].value = 0;
             interact = 1;
         }
 
         if(right == game->objects.renderPokeball) //IF ITEM RIGHT
         {
-            game->mapScreen[game->player.pY][game->player.pX+1].value = 0;
+            game->mapScreen.map[game->player.pY][game->player.pX+1].value = 0;
             interact = 1;
         }
 
         if(left == game->objects.renderPokeball) //IF ITEM LEFT
         {
-            game->mapScreen[game->player.pY][game->player.pX-1].value = 0;
+            game->mapScreen.map[game->player.pY][game->player.pX-1].value = 0;
             interact = 1;
         }
 
@@ -99,32 +100,31 @@ void checkEnemy(Room * game)
     {
         if(up == enemy)  //IF ITEM UP
         {
-            game->mapScreen[game->player.pY-1][game->player.pX].value = 0;
+            game->mapScreen.map[game->player.pY-1][game->player.pX].value = 0;
             interact = 1;
         }
 
         if(down == enemy) //IF ITEM DOWN
         {
-            game->mapScreen[game->player.pY+1][game->player.pX].value = 0;
+            game->mapScreen.map[game->player.pY+1][game->player.pX].value = 0;
             interact = 1;
         }
 
         if(right == enemy) //IF ITEM RIGHT
         {
-            game->mapScreen[game->player.pY][game->player.pX+1].value = 0;
+            game->mapScreen.map[game->player.pY][game->player.pX+1].value = 0;
             interact = 1;
         }
 
         if(left == enemy) //IF ITEM LEFT
         {
-            game->mapScreen[game->player.pY][game->player.pX-1].value = 0;
+            game->mapScreen.map[game->player.pY][game->player.pX-1].value = 0;
             interact = 1;
         }
 
         if(interact)
         {
-            game->screenModes.Map = 0;
-            game->screenModes.Fight = 1;
+            push(&game->stackEvents, game->fightScreen);
         }
     }
 }

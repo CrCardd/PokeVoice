@@ -1,6 +1,7 @@
 #ifndef MAIN_H
 #define MAIN_H
 
+#include "stack.h"
 #include <stdlib.h>
 #include "renderValues.h"
 
@@ -9,24 +10,34 @@ typedef struct
     int pX;
     int pY;
     int renderValue;
+    int lastCoord;
 
 } Player;
 
-typedef struct
-{
-    int value;
-    int tp_X;
-    int tp_Y;
-    void * entity;
 
-} Map;
+// typedef struct
+// {
+//     int value;
+//     int tp_X;
+//     int tp_Y;
+//     void * entity;
+
+// } Map;
+
+
+// typedef struct
+// {
+//     Map** map;
+//     int rows;
+//     int collums;
+//     Map** options;
+// } MapData;
+
 
 typedef struct
 {
 
 } Enemy;
-
-
 
 
 typedef struct 
@@ -45,17 +56,18 @@ typedef struct
 } ScreenModes;
 
 
-
 typedef struct 
 {
-    Map** mapScreen;
-    Map** fightScreen;
-    int rows;
-    int collums;
+    Stack stackEvents;
+    MapData mapScreen;
+    MapData fightScreen;
     Objects objects;
     Player player;
     ScreenModes screenModes;
 } Room;
+
+
+
 
 
 
@@ -75,6 +87,7 @@ Player playerInnit(int renderValue, int y, int x)
     player.pX = x;
     player.pY = y;
     player.renderValue = renderValue;
+    player.lastCoord = 0;
     return player;
 }
 
@@ -90,32 +103,46 @@ Objects objectsInnit(int renderPokeball, int renderEnemy, int wall)
 }
 
 
+Map** mapInnit(int rows, int collums)
+{
+    Map **map = malloc(rows * sizeof(Map*));
+    for(int i=0; i<rows; i++)
+    {
+        map[i] = malloc(collums * sizeof(Map));
+        for(int j=0; j<collums; j++)
+            map[i][j].value = 0;
+    }
+
+    return map;
+}
+
+MapData mapDataInnit(int rows, int collums)
+{
+    MapData mapData;
+    mapData.collums = collums;
+    mapData.rows = rows;
+    mapData.map = mapInnit(rows,collums);
+
+
+    return mapData;
+}
+
+
+
 Room gameInnit(int rows, int collums, Player player,Objects objects)
 {
     Room map;
-    map.rows = rows; 
-    map.collums = collums; 
     map.player = player;
     map.objects = objects;
     map.screenModes = screenModesInnit();
 
+    map.mapScreen = mapDataInnit(rows,collums);
+    map.fightScreen = mapDataInnit(rows,collums);
+    
+    map.fightScreen.options = mapInnit(2,2);
 
-
-
-
-    map.mapScreen = (Map**) malloc(rows * sizeof(Map**));
-    for(int i=0; i<rows; i++)
-    {
-        map.mapScreen[i] = (Map*) malloc(collums * sizeof(Map)); 
-        for(int j=0; j<collums; j++)
-            map.mapScreen[i][j].value = 0;
-    } 
-
-    map.fightScreen = (Map**) malloc(ROWS * sizeof(Map**));
-    for(int i=0; i<ROWS; i++)
-        map.fightScreen[i] = (Map*) malloc(COLLUMS * sizeof(Map)); 
-        
-
+    map.stackEvents = constructor_list();
+    push(&map.stackEvents, map.mapScreen);
 
     return map;
 }

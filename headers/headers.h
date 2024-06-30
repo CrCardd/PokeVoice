@@ -5,6 +5,7 @@
 #define _UNICODE
 
 
+#include "stack.h"
 
 
 #include <windows.h>
@@ -15,7 +16,6 @@
 #include "renderValues.h"
 #include "keycodes.h"
 #include "linkedList.h"
-#include "arrayList.h"
 #include "moves.h"
 #include "sort_algorithms.h" 
 #include "render.h" 
