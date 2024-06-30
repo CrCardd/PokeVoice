@@ -26,7 +26,7 @@ void showMap(Room *game, MapData screenData)
             for (int j = 0; j < screenData.collums; j++) 
             
                 if(screenData.map[i][j].value == game->player.renderValue)
-                    printf(" %c ",190);
+                    printf("%c%c%c",218,219,191);
                 else if (screenData.map[i][j].value == wall)
                 {
                     up = (i==0) ? 0 : screenData.map[i-1][j].value;

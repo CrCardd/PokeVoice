@@ -24,9 +24,10 @@ int main(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmd
     fightScreenConstruct(map.fightScreen.map);
 
 
+
     map.mapScreen.map[8][8].value = HOLE;
     map.mapScreen.map[8][8].tp_X = 50;
-    map.mapScreen.map[8][8].tp_Y = 50;
+    map.mapScreen.map[8][8].tp_Y = 10;
 
 
 

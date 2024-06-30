@@ -141,7 +141,9 @@ void checkHole(Room * game)
 {
     if(GetAsyncKeyState(VK_ENTER) && game->player.lastCoord.value == game->objects.renderHole)
     {
-        game->mapScreen.map;
+        game->player.lastCoord.value = game->mapScreen.map[game->player.lastCoord.tp_Y][game->player.lastCoord.tp_X].value;
+        game->mapScreen.map[game->player.pY][game->player.pX].value = game->objects.renderHole;
+
         game->player.pX = game->player.lastCoord.tp_X;
         game->player.pY = game->player.lastCoord.tp_Y;
     }
