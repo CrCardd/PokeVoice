@@ -1,4 +1,4 @@
-pursuit ,14, 13
-frenzy-plant ,24, 15
-thunderbolt ,10, 7
-dragon-rush ,13, 11
+metal-claw ,9, 13
+safeguard ,40, 11
+charge ,5, 8
+hold-hands ,14, 13

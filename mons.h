@@ -24,6 +24,7 @@ Pokemon initPokemon()
 {
     Pokemon new_poke;
     // Escreve novos valores nos txt's
+    // system("../output/pokeAPI.exe");
     system("pokeAPI.exe");
     Sleep(0.5);
 
@@ -70,8 +71,10 @@ Pokemon squirtle()
     char *token;
     int i = 0;
 
-    name = fopen("../starters/squirtle/pokemon.txt", "r");
-    moves = fopen("../starters/squirtle/moves.txt", "r");
+    // name = fopen("../starters/squirtle/pokemon.txt", "r");
+    name = fopen("starters/squirtle/pokemon.txt", "r");
+    // moves = fopen("../starters/squirtle/moves.txt", "r");
+    moves = fopen("starters/squirtle/moves.txt", "r");
 
     while (fgets(line, sizeof(line), name) != NULL) {
         token = strtok(line, ",");
@@ -107,8 +110,10 @@ Pokemon charmander()
     char *token;
     int i = 0;
 
-    name = fopen("../starters/charmander/pokemon.txt", "r");
-    moves = fopen("../starters/charmander/moves.txt", "r");
+    // name = fopen("../starters/charmander/pokemon.txt", "r");
+    name = fopen("starters/charmander/pokemon.txt", "r");
+    // moves = fopen("../starters/charmander/moves.txt", "r");
+    moves = fopen("starters/charmander/moves.txt", "r");
 
     while (fgets(line, sizeof(line), name) != NULL) {
         token = strtok(line, ",");
@@ -144,8 +149,10 @@ Pokemon bulbasaur()
     char *token;
     int i = 0;
 
-    name = fopen("../starters/bulbasaur/pokemon.txt", "r");
-    moves = fopen("../starters/bulbasaur/moves.txt", "r");
+    // name = fopen("../starters/bulbasaur/pokemon.txt", "r");
+    name = fopen("starters/bulbasaur/pokemon.txt", "r");
+    // moves = fopen("../starters/bulbasaur/moves.txt", "r");
+    moves = fopen("starters/bulbasaur/moves.txt", "r");
 
     while (fgets(line, sizeof(line), name) != NULL) {
         token = strtok(line, ",");

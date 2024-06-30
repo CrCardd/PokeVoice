@@ -1,7 +1,6 @@
 #ifndef battle_h
 #define battle_h
 #include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
 #include <time.h>
 #include "bag.h"
@@ -47,7 +46,7 @@ void quickSort(Team * team, int Start, int End)
 
 void atack(Team *atacker, Team *atacked, int atack)
 {
-    printf("\n%s uses %s", atacker->pokes[0].name, atacker->pokes[0].atk->name);
+    printf("\n%s uses %s\n", atacker->pokes[0].name, atacker->pokes[0].atk[atack].name);
 
     atacker->pokes[0].atk[atack].uses--;
     atacked->pokes[0].hp -= atacker->pokes[0].atk[atack].dmg;
@@ -67,10 +66,12 @@ int voiceAtack(Team *atacker, Team *atacked)
     int indexAtack = 5;
     char buffer[32];
     // printf("Hearing...\n");
+    // system("./output/voice.exe");
     system("voice.exe");
 
     FILE * move;
 
+    // move = fopen("./output/voice.txt", "r");
     move = fopen("voice.txt", "r");
     while (fgets(buffer, sizeof(buffer), move) != NULL)
     fclose(move);
@@ -81,6 +82,7 @@ int voiceAtack(Team *atacker, Team *atacked)
         {
             indexAtack = i;
             atack(atacker, atacked, indexAtack);
+            return 1;
         }
     }
     
@@ -118,7 +120,8 @@ void item(Pokemon *poke, Bag * bag, int index)
 
 
 void enemyRound(Team * you, Team * enemy)
-{
+{   
+
     srand(time(NULL));
     int indexAtack = rand()%3;
 
@@ -141,6 +144,9 @@ void myRound(Team * you, Team * enemy, Bag * bag)
     case 1:
         // Atack
         //implement voice atack
+        for (int i = 0; i < 4; i++)
+            printf("%s\n", you->pokes[0].atk[i].name);
+        
         if(!voiceAtack(you, enemy))
         {
             printf("atack: ");
@@ -155,7 +161,7 @@ void myRound(Team * you, Team * enemy, Bag * bag)
         scanf(" %d\n", &indexAction);
         printf("Pokemon: ");
         scanf(" %d\n", &indexPoke);
-        item(&(you->pokes[indexPoke]), &bag, indexAction);
+        item(&(you->pokes[indexPoke]), bag, indexAction);
         break;
 
     case 3:
@@ -179,13 +185,13 @@ void myRound(Team * you, Team * enemy, Bag * bag)
 void battle(Team * you, Team * enemy, Bag * bag)
 {
     srand(time(NULL));
-    int round = 1;
+    int round = 0;
 
     printf("me %c , enemy %c\n", you->alive, enemy->alive);
 
     while (you->alive == 'a' && enemy->alive == 'a')
     {
-        if (round % 2)
+        if (round % 2 == 0)
             myRound(you, enemy, bag);
         else
             enemyRound(you, enemy);

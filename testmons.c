@@ -1,11 +1,9 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include "mons.h"
+#include "headers.h"
 
 int main()
 {
     char buffer[32];
-    Pokemon poke = initPokemon();
+    Pokemon poke = charmander();
 
     printf("\nname: %s", poke.name);
     printf("\nhp: %d", poke.hp);
@@ -15,15 +13,15 @@ int main()
     printf("\nmove 4: %s", poke.atk[3].name);
 
 
-    system("voice.exe");
+    // system("voice.exe");
 
-    FILE * move;
+    // FILE * move;
 
-    move = fopen("voice.txt", "r");
+    // move = fopen("voice.txt", "r");
 
-    while (fgets(buffer, sizeof(buffer), move) != NULL)
+    // while (fgets(buffer, sizeof(buffer), move) != NULL)
 
-    fclose(move);
+    // fclose(move);
 
-    printf("%s", buffer);
+    // printf("%s", buffer);
 }
