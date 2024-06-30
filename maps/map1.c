@@ -26,14 +26,13 @@ int main(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmd
 
     map.mapScreen.map[8][8].value = ENEMY;
 
-    MapData event = peek(&map.stackEvents);
 
-    // int a;
-    // showMap(&map,event);
-    // push(&map.stackEvents,&map.fightScreen);
-    // scanf(" %d",&a);
-    // event = peek(&map.stackEvents);
-    // showMap(&map, *event);
+    // push(&map.stackEvents,map.fightScreen);
+    // map.screenModes.Fight = 1;
+    // map.screenModes.Map = 0;
+    // map.playerActions = playerInnit(0,0,0);
+
+    
 
     // /*  
     Mutex = CreateMutex(NULL, FALSE, NULL);

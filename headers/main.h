@@ -61,9 +61,15 @@ typedef struct
     Stack stackEvents;
     MapData mapScreen;
     MapData fightScreen;
+
+    MapData options;
+    MapData bag;
+    Player playerActions;
+
     Objects objects;
     Player player;
     ScreenModes screenModes;
+    
 } Room;
 
 
@@ -133,13 +139,28 @@ Room gameInnit(int rows, int collums, Player player,Objects objects)
 {
     Room map;
     map.player = player;
+
+
     map.objects = objects;
     map.screenModes = screenModesInnit();
 
     map.mapScreen = mapDataInnit(rows,collums);
     map.fightScreen = mapDataInnit(rows,collums);
+
+    map.options = mapDataInnit(2,2);   //
+
+    map.options.map[0][0].tp_X = 2878;
+    map.options.map[0][0].tp_Y = 3768;
+
+    map.options.map[0][1].tp_X = 2900;
+    map.options.map[0][1].tp_Y = 3790;
     
-    map.fightScreen.options = mapInnit(2,2);
+    map.options.map[1][0].tp_X = 3826;
+    map.options.map[1][0].tp_Y = 4716;
+
+    map.options.map[1][1].tp_X = 3848;
+    map.options.map[1][1].tp_Y = 4738; 
+
 
     map.stackEvents = constructor_list();
     push(&map.stackEvents, map.mapScreen);

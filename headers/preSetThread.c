@@ -6,6 +6,8 @@
 #include "main.h"
 #include "moves.h"
 
+#include <stdio.h>
+
 HANDLE Mutex;
 
 DWORD showScreen(void *arg)
@@ -39,10 +41,19 @@ DWORD checkKeyboard(void *arg)
         
         WaitForSingleObject(Mutex, INFINITE);
 
-        
-        checkMove(map,event);
-        checkInteract(map);
-        checkEnemy(map);
+        if(map->screenModes.Map)
+        {
+            checkMove(map);
+            checkInteract(map);
+            checkEnemy(map);
+        }
+        if(map->screenModes.Fight)
+        {
+            chooseOption(map);
+            // printf("y %d      x%d\n",map->playerActions.pY,map->playerActions.pX);
+            
+
+        }
 
         ReleaseMutex(Mutex);
     }

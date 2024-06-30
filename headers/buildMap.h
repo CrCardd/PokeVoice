@@ -26,17 +26,17 @@ void buildLine(int mode, Map ** screen,int coordX, int coordY, int size)
 }
 
 
-void buildSquare(Map ** map, int coordY, int coordX, int coordY_, int coordX_)
+void buildSquare(Map ** map, int coordY, int coordX, int coordY_, int coordX_, int value)
 {
     int lenght = coordX_ - coordX;
     int height = coordY_ - coordY;
     int biggest = (height>lenght)?height:lenght;
     for(float i=0; i<=biggest; i++)
     {
-        map[coordY + (int)((i/biggest)*height)][coordX].value = 1;
-        map[coordY_ - (int)((i/biggest)*height)][coordX_].value = 1;
-        map[coordY][coordX + (int)((i/biggest)*lenght)].value = 1;
-        map[coordY_][coordX_ - (int)((i/biggest)*lenght)].value = 1;
+        map[coordY + (int)((i/biggest)*height)][coordX].value = value;
+        map[coordY_ - (int)((i/biggest)*height)][coordX_].value = value;
+        map[coordY][coordX + (int)((i/biggest)*lenght)].value = value;
+        map[coordY_][coordX_ - (int)((i/biggest)*lenght)].value = value;
     }
 }
 

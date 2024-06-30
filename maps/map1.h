@@ -43,7 +43,7 @@ void fightScreenConstruct(Map **screen)
     buildLine(1,screen,2,60,29);
 
     //MOLDE
-        // buildSquare(screen, 37,33,60,76);
+        // buildSquare(screen, 37,33,60,76,1);
         // buildLine(1,screen, 34,49,42);
         // buildLine(1,screen, 34,48,42);
         // buildLine(2,screen, 55,37,23);
@@ -51,13 +51,13 @@ void fightScreenConstruct(Map **screen)
 
     //QUADRANTES
         //1/4
-            // buildSquare(screen,37,33,48,54);
+            // buildSquare(screen,37,33,48,54,1);
         //2/4
-            // buildSquare(screen,37,55,48,76);
+            // buildSquare(screen,37,55,48,76,1);
         //3/4
-            // buildSquare(screen,49,33,60,54);
+            // buildSquare(screen,49,33,60,54,1);
         //4/4
-            // buildSquare(screen,49,55,60,76);
+            // buildSquare(screen,49,55,60,76,1);
 
     //FIGHT
         //F

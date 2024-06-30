@@ -16,13 +16,15 @@ typedef struct
 
 } Map;
 
-typedef struct
+
+
+typedef struct MapData
 {
     Map** map;
     int rows;
     int collums;
-    Map** options;
 } MapData;
+
 
 typedef struct Node Node;
 
