@@ -9,6 +9,8 @@
 
 void mapConstruct(Map ** screen)
 {
+
+    
     
     buildLine(1,screen, 0, 0, 79);
     buildLine(1,screen, 0, 62, 79);

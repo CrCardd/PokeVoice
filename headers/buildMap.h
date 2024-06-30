@@ -55,6 +55,14 @@ void resetScreen(MapData * mapData)
 
 void fightScreenConstruct(Map **screen)
 {
+
+
+    buildLine(1,screen,0,1,30);
+    buildLine(1,screen,0,11,30);
+    buildLine(2,screen,0,0,11);
+    buildLine(2,screen,41,0,11);
+
+
     buildLine(1,screen,0,35,79);
     buildLine(1,screen,0,62,79);
     buildLine(2,screen,0,36,26);
@@ -65,6 +73,8 @@ void fightScreenConstruct(Map **screen)
     buildLine(2,screen,31,37,24);
     buildLine(1,screen,2,37,29);
     buildLine(1,screen,2,60,29);
+
+
 
     //MOLDE
         // buildSquare(screen, 37,33,60,76,1);
