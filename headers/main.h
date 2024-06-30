@@ -143,15 +143,21 @@ MapData optionsInnit()
 
     options.map[0][0].tp_X = 2878;
     options.map[0][0].tp_Y = 3768;
+    options.map[0][0].entity = "Fight";
 
     options.map[0][1].tp_X = 2900;
     options.map[0][1].tp_Y = 3790;
+    options.map[0][1].entity = "Bag";
     
     options.map[1][0].tp_X = 3826;
     options.map[1][0].tp_Y = 4716;
+    options.map[1][0].entity = "Poke";
 
     options.map[1][1].tp_X = 3848;
     options.map[1][1].tp_Y = 4738;
+    options.map[1][1].entity = "Run";
+
+    // options.map[0][0].entity 
 
     return options;
 }

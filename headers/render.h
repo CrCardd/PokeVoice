@@ -35,11 +35,11 @@ void showMap(Room *game, MapData screenData)
                     right = (j==screenData.collums-1) ? 0 : screenData.map[i][j+1].value;
 
                     if(up == wall && right == wall && down == wall && left == wall)
-                        printf("%c%c%c",205,206,205);//
+                        printf("%c%c%c",205,206,205);
                     else if(up == wall && right == wall && down == wall && left != wall)
-                        printf(" %c%c",204,205);//
+                        printf(" %c%c",204,205);
                     else if(up == wall && right == wall && down != wall && left != wall)
-                        printf(" %c%c",200,205);//
+                        printf(" %c%c",200,205);
                     else if(right == wall && down == wall && left == wall && up != wall)
                         printf("%c%c%c",205,203,205);
                     else if(right == wall && down == wall && left != wall && up != wall)

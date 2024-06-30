@@ -20,7 +20,7 @@ void checkMove(Room * game)
 {  
 
     //COLISON
-    up    = (game->player.pY > 0 && game->mapScreen.map[game->player.pY-1][game->player.pX].value != game->objects.renderWall) ? 1 : 0;
+    up    = (game->player.pY > 0 && game->mapScreen.map[game->player.pY-1][game->player.pX].value != game->objects.renderWall ) ? 1 : 0;
     down  = (game->player.pY < game->mapScreen.rows-1 && game->mapScreen.map[game->player.pY+1][game->player.pX].value != game->objects.renderWall) ? 1 : 0;
     left  = (game->player.pX > 0 && game->mapScreen.map[game->player.pY][game->player.pX-1].value != game->objects.renderWall) ? 1 : 0;
     right = (game->player.pX < game->mapScreen.collums-1 && game->mapScreen.map[game->player.pY][game->player.pX+1].value != game->objects.renderWall) ? 1 : 0;
@@ -80,8 +80,27 @@ void selectOption(Room * game)
 
     buildSquare(game->fightScreen.map,coordUp_Y,coordUp_X,coordDown_Y,coordDown_X,1);
 
+    if(GetAsyncKeyState(VK_ENTER))
+    {
+        if((char *)game->options.map[game->playerActions.pY][game->playerActions.pX].entity == "Fight")
+        {
+            
+        }
+        if((char *)game->options.map[game->playerActions.pY][game->playerActions.pX].entity == "Bag")
+        {
 
+        }
+        if((char *)game->options.map[game->playerActions.pY][game->playerActions.pX].entity == "Poke")
+        {
 
+        }
+        if((char *)game->options.map[game->playerActions.pY][game->playerActions.pX].entity == "Run")
+        {
+            pop(&game->stackEvents);
+            game->screenModes.Fight = 0;
+            game->screenModes.Map = 1;
+        }
+    }
 
     
 
@@ -184,9 +203,12 @@ void checkEnemy(Room * game)
 
         if(interact)
         {
-            Sleep(10000);
             push(&game->stackEvents, game->fightScreen);
             game->screenModes.Fight = 1;
+
+            resetScreen(&game->fightScreen);
+            fightScreenConstruct(game->fightScreen.map);
+
             game->playerActions = playerInnit(0,0,0);
             game->screenModes.Map = 0;
         }
