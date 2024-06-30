@@ -15,7 +15,7 @@ int main(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmd
     configureTerminal();
     
     Player player = playerInnit(PLAYER,2,2);
-    Objects objects = objectsInnit(POKEBALL, ENEMY, WALL);
+    Objects objects = objectsInnit(POKEBALL, ENEMY, WALL,HOLE);
     Room map = gameInnit(ROWS,COLLUMS, player, objects);
 
 
@@ -24,7 +24,10 @@ int main(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmd
     fightScreenConstruct(map.fightScreen.map);
 
 
-    map.mapScreen.map[8][8].value = ENEMY;
+    map.mapScreen.map[8][8].value = HOLE;
+    map.mapScreen.map[8][8].tp_X = 50;
+    map.mapScreen.map[8][8].tp_Y = 50;
+
 
 
     // push(&map.stackEvents,map.fightScreen);

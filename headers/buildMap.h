@@ -41,4 +41,5 @@ void buildSquare(Map ** map, int coordY, int coordX, int coordY_, int coordX_, i
 }
 
 
+
 #endif 

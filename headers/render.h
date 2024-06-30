@@ -65,8 +65,11 @@ void showMap(Room *game, MapData screenData)
                     printf("   ");
 
 
+                else if(screenData.map[i][j].value == game->objects.renderHole)
+                    printf("[ ]");
+                
                 else
-                    printf("F  ");
+                printf(" F ");
 
 
 

@@ -44,15 +44,13 @@ DWORD checkKeyboard(void *arg)
         if(map->screenModes.Map)
         {
             checkMove(map);
-            checkInteract(map);
+            checkInteract(map,map->objects.renderPokeball);
+            checkHole(map);
             checkEnemy(map);
         }
         if(map->screenModes.Fight)
         {
-            chooseOption(map);
-            // printf("y %d      x%d\n",map->playerActions.pY,map->playerActions.pX);
-            
-
+            selectOption(map);
         }
 
         ReleaseMutex(Mutex);

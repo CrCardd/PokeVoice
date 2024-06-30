@@ -10,7 +10,7 @@ typedef struct
     int pX;
     int pY;
     int renderValue;
-    int lastCoord;
+    Map lastCoord;
 
 } Player;
 
@@ -45,6 +45,7 @@ typedef struct
     int renderWall;
     int renderPokeball;
     int renderEnemy;
+    int renderHole;
 } Objects;
 
 
@@ -64,8 +65,9 @@ typedef struct
 
     MapData options;
     MapData bag;
-    Player playerActions;
 
+    Player playerActions;
+    
     Objects objects;
     Player player;
     ScreenModes screenModes;
@@ -93,17 +95,17 @@ Player playerInnit(int renderValue, int y, int x)
     player.pX = x;
     player.pY = y;
     player.renderValue = renderValue;
-    player.lastCoord = 0;
+    player.lastCoord.value = 0;
     return player;
 }
 
-Objects objectsInnit(int renderPokeball, int renderEnemy, int wall)
+Objects objectsInnit(int renderPokeball, int renderEnemy, int wall, int hole)
 {
     Objects objects;
     objects.renderPokeball = renderPokeball;
     objects.renderWall = wall;
-    
     objects.renderEnemy = renderEnemy;
+    objects.renderHole = hole;
 
     return objects;
 }
@@ -134,6 +136,27 @@ MapData mapDataInnit(int rows, int collums)
 }
 
 
+MapData optionsInnit()
+{
+    MapData options;
+    options = mapDataInnit(2,2);
+
+    options.map[0][0].tp_X = 2878;
+    options.map[0][0].tp_Y = 3768;
+
+    options.map[0][1].tp_X = 2900;
+    options.map[0][1].tp_Y = 3790;
+    
+    options.map[1][0].tp_X = 3826;
+    options.map[1][0].tp_Y = 4716;
+
+    options.map[1][1].tp_X = 3848;
+    options.map[1][1].tp_Y = 4738;
+
+    return options;
+}
+
+
 
 Room gameInnit(int rows, int collums, Player player,Objects objects)
 {
@@ -147,20 +170,7 @@ Room gameInnit(int rows, int collums, Player player,Objects objects)
     map.mapScreen = mapDataInnit(rows,collums);
     map.fightScreen = mapDataInnit(rows,collums);
 
-    map.options = mapDataInnit(2,2);   //
-
-    map.options.map[0][0].tp_X = 2878;
-    map.options.map[0][0].tp_Y = 3768;
-
-    map.options.map[0][1].tp_X = 2900;
-    map.options.map[0][1].tp_Y = 3790;
-    
-    map.options.map[1][0].tp_X = 3826;
-    map.options.map[1][0].tp_Y = 4716;
-
-    map.options.map[1][1].tp_X = 3848;
-    map.options.map[1][1].tp_Y = 4738; 
-
+    map.options = optionsInnit();   
 
     map.stackEvents = constructor_list();
     push(&map.stackEvents, map.mapScreen);

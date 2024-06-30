@@ -16,7 +16,6 @@ int left;
 int interact;
 
 
-
 void checkMove(Room * game)
 {  
 
@@ -28,7 +27,7 @@ void checkMove(Room * game)
 
     
     //WALK
-    game->mapScreen.map[game->player.pY][game->player.pX].value = game->player.lastCoord;
+    game->mapScreen.map[game->player.pY][game->player.pX] = game->player.lastCoord;
 
     if(GetAsyncKeyState(VK_W) && up)
         game->player.pY--;
@@ -39,14 +38,14 @@ void checkMove(Room * game)
     else if(GetAsyncKeyState(VK_D) && right)
         game->player.pX++;
 
-    game->player.lastCoord = game->mapScreen.map[game->player.pY][game->player.pX].value;
+    game->player.lastCoord = game->mapScreen.map[game->player.pY][game->player.pX];
     game->mapScreen.map[game->player.pY][game->player.pX].value = game->player.renderValue;
 
     Sleep(100);
 }
 
 
-void chooseOption(Room * game)
+void selectOption(Room * game)
 { 
 
     //COLISON
@@ -81,6 +80,9 @@ void chooseOption(Room * game)
 
     buildSquare(game->fightScreen.map,coordUp_Y,coordUp_X,coordDown_Y,coordDown_X,1);
 
+
+
+
     
 
     Sleep(100);
@@ -90,9 +92,10 @@ void chooseOption(Room * game)
 
 
 
-void checkInteract(Room* game)
+void checkInteract(Room* game, int entity)
 {
     interact = 0;
+
 
     up    = game->mapScreen.map[game->player.pY-1][game->player.pX].value;
     down  = game->mapScreen.map[game->player.pY+1][game->player.pX].value;
@@ -134,6 +137,16 @@ void checkInteract(Room* game)
 
 }
 
+void checkHole(Room * game)
+{
+    if(GetAsyncKeyState(VK_ENTER) && game->player.lastCoord.value == game->objects.renderHole)
+    {
+        game->mapScreen.map;
+        game->player.pX = game->player.lastCoord.tp_X;
+        game->player.pY = game->player.lastCoord.tp_Y;
+    }
+}
+
 
 
 void checkEnemy(Room * game)
@@ -145,34 +158,34 @@ void checkEnemy(Room * game)
     {
         if(up == enemy)  //IF ITEM UP
         {
-            game->mapScreen.map[game->player.pY-1][game->player.pX].value = 0;
+            // game->mapScreen.map[game->player.pY-1][game->player.pX].value = 0;
             interact = 1;
         }
 
         if(down == enemy) //IF ITEM DOWN
         {
-            game->mapScreen.map[game->player.pY+1][game->player.pX].value = 0;
+            // game->mapScreen.map[game->player.pY+1][game->player.pX].value = 0;
             interact = 1;
         }
 
         if(right == enemy) //IF ITEM RIGHT
         {
-            game->mapScreen.map[game->player.pY][game->player.pX+1].value = 0;
+            // game->mapScreen.map[game->player.pY][game->player.pX+1].value = 0;
             interact = 1;
         }
 
         if(left == enemy) //IF ITEM LEFT
         {
-            game->mapScreen.map[game->player.pY][game->player.pX-1].value = 0;
+            // game->mapScreen.map[game->player.pY][game->player.pX-1].value = 0;
             interact = 1;
         }
 
         if(interact)
         {
+            Sleep(10000);
             push(&game->stackEvents, game->fightScreen);
             game->screenModes.Fight = 1;
             game->playerActions = playerInnit(0,0,0);
-
             game->screenModes.Map = 0;
         }
     }
