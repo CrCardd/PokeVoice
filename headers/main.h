@@ -53,6 +53,7 @@ typedef struct
 typedef struct 
 {
     int Map;
+    int SecondMap;
     int Fight;
 } ScreenModes;
 
@@ -61,6 +62,7 @@ typedef struct
 {
     Stack stackEvents;
     MapData mapScreen;
+    MapData secondMapScreen;
     MapData fightScreen;
 
     MapData options;
@@ -83,6 +85,7 @@ ScreenModes screenModesInnit()
     ScreenModes screenModes;
     screenModes.Fight = 0;
     screenModes.Map = 1;
+    screenModes.SecondMap = 0;
 
     return screenModes;
 }
@@ -173,6 +176,7 @@ Room gameInnit(int rows, int collums, Player player,Objects objects)
     map.screenModes = screenModesInnit();
 
     map.mapScreen = mapDataInnit(rows,collums);
+    map.secondMapScreen = mapDataInnit(rows,collums);
     map.fightScreen = mapDataInnit(rows,collums);
 
     map.options = optionsInnit();   

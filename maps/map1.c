@@ -22,24 +22,27 @@ int main(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmd
 
 
     mapConstruct(map.mapScreen.map);
+
+    secondMapConstruct(map.secondMapScreen.map);
+
     fightScreenConstruct(map.fightScreen.map);
 
 
 
 
-    map.mapScreen.map[4][30].value = POKEBALL;
+    // map.mapScreen.map[4][30].value = POKEBALL;
     map.mapScreen.map[6][8].value = ENEMY;
-    map.mapScreen.map[20][8].value = HOLE;
-    map.mapScreen.map[20][8].tp_X = 50;
-    map.mapScreen.map[20][8].tp_Y = 10;
+    // map.mapScreen.map[20][8].value = HOLE;
+    // map.mapScreen.map[20][8].tp_X = 50;
+    // map.mapScreen.map[20][8].tp_Y = 10;
 
-    map.mapScreen.map[10][50].value = HOLE;
-    map.mapScreen.map[10][50].tp_X = 8;
-    map.mapScreen.map[10][50].tp_Y = 20;
+    // map.mapScreen.map[10][50].value = HOLE;
+    // map.mapScreen.map[10][50].tp_X = 8;
+    // map.mapScreen.map[10][50].tp_Y = 20;
 
 
 
-    // map.mapScreen.map[40][40].entity = "mensagem para a tela HAHA";
+    // map.mapScreen.map[40][40].entity = "charmandaer used flamethrower";
     // map.mapScreen.map[40][40].value = MESSAGE;
 
 

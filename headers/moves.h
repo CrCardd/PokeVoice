@@ -16,20 +16,20 @@ int right;
 int left;
 
 
-void checkMove(Room * game)
+void checkMove(Room * game, MapData * screen)
 {  
 
     //COLISON
-    up    = (game->player.pY > 0 && game->mapScreen.map[game->player.pY-1][game->player.pX].value != game->objects.renderWall ) ? 1 : 0;
-    down  = (game->player.pY < game->mapScreen.rows-1 && game->mapScreen.map[game->player.pY+1][game->player.pX].value != game->objects.renderWall) ? 1 : 0;
-    left  = (game->player.pX > 0 && game->mapScreen.map[game->player.pY][game->player.pX-1].value != game->objects.renderWall) ? 1 : 0;
-    right = (game->player.pX < game->mapScreen.collums-1 && game->mapScreen.map[game->player.pY][game->player.pX+1].value != game->objects.renderWall) ? 1 : 0;
+    up    = (game->player.pY > 0 && screen->map[game->player.pY-1][game->player.pX].value != game->objects.renderWall ) ? 1 : 0;
+    down  = (game->player.pY < screen->rows-1 && screen->map[game->player.pY+1][game->player.pX].value != game->objects.renderWall) ? 1 : 0;
+    left  = (game->player.pX > 0 && screen->map[game->player.pY][game->player.pX-1].value != game->objects.renderWall) ? 1 : 0;
+    right = (game->player.pX < screen->collums-1 && screen->map[game->player.pY][game->player.pX+1].value != game->objects.renderWall) ? 1 : 0;
 
 
 
     
     //WALK
-    game->mapScreen.map[game->player.pY][game->player.pX] = game->player.lastCoord;
+    screen->map[game->player.pY][game->player.pX] = game->player.lastCoord;
 
     if(GetAsyncKeyState(VK_W) && up)
         game->player.pY--;
@@ -42,8 +42,8 @@ void checkMove(Room * game)
 
     
 
-    game->player.lastCoord = game->mapScreen.map[game->player.pY][game->player.pX];
-    game->mapScreen.map[game->player.pY][game->player.pX].value = game->player.renderValue;
+    game->player.lastCoord = screen->map[game->player.pY][game->player.pX];
+    screen->map[game->player.pY][game->player.pX].value = game->player.renderValue;
 
     Sleep(100);
 }
@@ -110,6 +110,7 @@ void selectOption(Room * game)
             game->screenModes.Map = 1;
             buildSquare(game->fightScreen.map,coordUp_Y,coordUp_X,coordDown_Y,coordDown_X,0);
             screenOn(&game->mapScreen);
+            Sleep(80);
         }
     }
 
@@ -118,39 +119,39 @@ void selectOption(Room * game)
 }
 
 
-int checkInteract(Room* game, int entity, int put)
+int checkInteract(Room * game, MapData * screen, int entity, int put)
 {
     int interact = 0;
 
 
-    up    = game->mapScreen.map[game->player.pY-1][game->player.pX].value;
-    down  = game->mapScreen.map[game->player.pY+1][game->player.pX].value;
-    right = game->mapScreen.map[game->player.pY][game->player.pX+1].value;
-    left  = game->mapScreen.map[game->player.pY][game->player.pX-1].value;
+    up    = screen->map[game->player.pY-1][game->player.pX].value;
+    down  = screen->map[game->player.pY+1][game->player.pX].value;
+    right = screen->map[game->player.pY][game->player.pX+1].value;
+    left  = screen->map[game->player.pY][game->player.pX-1].value;
 
     if(GetAsyncKeyState(VK_ENTER))
     {
         if(up == entity)  //IF ITEM UP
         {
-            game->mapScreen.map[game->player.pY-1][game->player.pX].value = put;
+            screen->map[game->player.pY-1][game->player.pX].value = put;
             interact = 1;
         }
 
         if(down == entity) //IF ITEM DOWN
         {
-            game->mapScreen.map[game->player.pY+1][game->player.pX].value = put;
+            screen->map[game->player.pY+1][game->player.pX].value = put;
             interact = 1;
         }
 
         if(right == entity) //IF ITEM RIGHT
         {
-            game->mapScreen.map[game->player.pY][game->player.pX+1].value = put;
+            screen->map[game->player.pY][game->player.pX+1].value = put;
             interact = 1;
         }
 
         if(left == entity) //IF ITEM LEFT
         {
-            game->mapScreen.map[game->player.pY][game->player.pX-1].value = put;
+            screen->map[game->player.pY][game->player.pX-1].value = put;
             interact = 1;
         }
     }
@@ -162,10 +163,30 @@ void checkHole(Room * game)
 {
     if(GetAsyncKeyState(VK_ENTER) && game->player.lastCoord.value == game->objects.renderHole)
     {
-        game->mapScreen.map[game->player.pY][game->player.pX] = game->player.lastCoord;
-        game->player.pX = game->player.lastCoord.tp_X;
-        game->player.pY = game->player.lastCoord.tp_Y;
-        game->player.lastCoord = game->mapScreen.map[game->player.pY][game->player.pX];
+        // game->player.pX = game->player.lastCoord.tp_X;
+        // game->player.pY = game->player.lastCoord.tp_Y;
+        if(game->screenModes.Map)
+        {
+            game->mapScreen.map[game->player.pY][game->player.pX] = game->player.lastCoord;
+            push(&game->stackEvents,&game->secondMapScreen);
+            game->screenModes.Map = 0;
+            game->screenModes.SecondMap = 1;
+            game->player.lastCoord = game->secondMapScreen.map[game->player.pY][game->player.pX];
+            
+        }
+        else if(game->screenModes.SecondMap)
+        {
+            game->secondMapScreen.map[game->player.pY][game->player.pX] = game->player.lastCoord;
+            pop(&game->stackEvents);
+            game->screenModes.Map = 1;
+            game->screenModes.SecondMap = 0;
+            game->player.lastCoord = game->mapScreen.map[game->player.pY][game->player.pX];
+        }
+
+        
+
+
+
     }
 }
 
@@ -173,7 +194,7 @@ void checkHole(Room * game)
 void checkEnemy(Room * game)
 {
 
-    int interact = checkInteract(game,game->objects.renderEnemy,game->objects.renderEnemy);
+    int interact = checkInteract(game, &game->mapScreen,game->objects.renderEnemy,game->objects.renderEnemy);
 
     if(GetAsyncKeyState(VK_ENTER) && interact)
     {
@@ -189,12 +210,14 @@ void checkEnemy(Room * game)
     
 }
 
+
 void checkScreenUpdate(MapData * map)
 {
     if(GetAsyncKeyState(VK_W) || GetAsyncKeyState(VK_A) || GetAsyncKeyState(VK_S) || GetAsyncKeyState(VK_D) || GetAsyncKeyState(VK_ENTER))
         screenOn(map);
     else
         screenOff(map);
+
 }
 
 

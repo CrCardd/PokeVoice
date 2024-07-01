@@ -40,6 +40,20 @@ void buildSquare(Map ** map, int coordY, int coordX, int coordY_, int coordX_, i
     }
 }
 
+void buildHole(Map ** map, int coordUpY, int coordUpX)
+{
+    int lenght = 3;
+    
+    for(int i=0; i<lenght; i++)
+    {
+        map[coordUpY+i][coordUpX].value = HOLE;
+        map[coordUpY+i][coordUpX+ (lenght-2)].value = HOLE;
+        map[coordUpY+i][coordUpX+ (lenght-1)].value = HOLE;
+
+    }
+
+}
+
 
 
 

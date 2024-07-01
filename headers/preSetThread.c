@@ -29,8 +29,10 @@ DWORD showScreen(void *arg)
             showMap(map,*event);
         }
 
-        checkScreenUpdate(event);
         
+
+        checkScreenUpdate(event);
+
         
         ReleaseMutex(Mutex);
     }   
@@ -47,11 +49,11 @@ DWORD checkKeyboard(void *arg)
         WaitForSingleObject(Mutex, INFINITE);
 
 
-        if(map->screenModes.Map)
+        if(map->screenModes.Map || map->screenModes.SecondMap)
         {
             checkEnemy(map);
 
-            checkMove(map);
+            checkMove(map,event);
 
             checkHole(map);
         }

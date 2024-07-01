@@ -16,6 +16,7 @@ void showMap(Room *game, MapData screenData)
 {
     HIDE_CURSOR();
     MOVE_HOME();
+    // system("cls");
     // ERASE_ALL();
     // ERASE_LEND();
     // printf("\e[1;1H\e[2J");
@@ -74,7 +75,8 @@ void showMap(Room *game, MapData screenData)
 
 
                 else if(screenData.map[i][j].value == game->objects.renderHole)
-                    printf("%c%c%c",219,219,219);
+                    printf("%c%c%c",177,177,177);
+                    // printf("%c%c%c",217,217,217);
                 else if(screenData.map[i][j].value == game->objects.renderEnemy)
                     printf("<_>");
                 
@@ -97,7 +99,7 @@ void showMap(Room *game, MapData screenData)
 
 
                 // if(screenData.map[i][j].value)
-                    // printf("%d  ",screenData.map[i][j].value);
+                //     printf("%d  ",screenData.map[i][j].value);
                 // else
                 //     printf("   ");
 
