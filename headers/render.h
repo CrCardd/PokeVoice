@@ -7,14 +7,20 @@
 #include "terminal.c"
 #include "main.h"
 #include <windows.h>
+#include <conio.h>
+
+
+
 
 void showMap(Room *game, MapData screenData)
 {
-
-    // ERASE_ALL();
-    system("cls");
     HIDE_CURSOR();
     MOVE_HOME();
+    // ERASE_ALL();
+    // ERASE_LEND();
+    // printf("\e[1;1H\e[2J");
+
+
     int wall = game->objects.renderWall;
 
     int up;
@@ -28,7 +34,7 @@ void showMap(Room *game, MapData screenData)
             
             
                 if(screenData.map[i][j].value == game->player.renderValue)
-                    printf("%c%c%c",218,219,191);
+                    printf("%c%c%c",218,234,191);
                 else if (screenData.map[i][j].value == wall)
                 {
                     up = (i==0) ? 0 : screenData.map[i-1][j].value;
@@ -68,7 +74,7 @@ void showMap(Room *game, MapData screenData)
 
 
                 else if(screenData.map[i][j].value == game->objects.renderHole)
-                    printf("[ ]");
+                    printf("%c%c%c",219,219,219);
                 else if(screenData.map[i][j].value == game->objects.renderEnemy)
                     printf("<_>");
                 
@@ -98,8 +104,9 @@ void showMap(Room *game, MapData screenData)
             printf("\n");
         }
 
-    ERASE_LEND();
+    
     fflush(stdout);
+
 }
 
 #endif

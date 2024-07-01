@@ -32,29 +32,13 @@ void checkMove(Room * game)
     game->mapScreen.map[game->player.pY][game->player.pX] = game->player.lastCoord;
 
     if(GetAsyncKeyState(VK_W) && up)
-    {
         game->player.pY--;
-        // game->mapScreen.screenUpdated = 1;
-    }
     else if(GetAsyncKeyState(VK_S) && down)
-    {
         game->player.pY++;
-        // game->mapScreen.screenUpdated = 1;
-    }
     else if(GetAsyncKeyState(VK_A) && left)
-    {
         game->player.pX--;
-        // game->mapScreen.screenUpdated = 1;
-    }
     else if(GetAsyncKeyState(VK_D) && right)
-    {
         game->player.pX++;
-        // game->mapScreen.screenUpdated = 1;
-    }
-    else
-    {
-        // game->mapScreen.screenUpdated = 0;
-    }
 
     
 
@@ -67,6 +51,8 @@ void checkMove(Room * game)
 
 void selectOption(Room * game)
 { 
+    
+
 
     //COLISON
     up    = (game->playerActions.pY > 0 && game->options.map[game->playerActions.pY-1][game->playerActions.pX].value != game->objects.renderWall) ? 1 : 0;
@@ -99,9 +85,12 @@ void selectOption(Room * game)
     coordDown_X = (game->options.map[game->playerActions.pY][game->playerActions.pX].tp_Y - 1) % game->fightScreen.collums;
 
     buildSquare(game->fightScreen.map,coordUp_Y,coordUp_X,coordDown_Y,coordDown_X,1);
+    Sleep(100);
 
     if(GetAsyncKeyState(VK_ENTER))
     {
+        screenOn(&game->fightScreen);
+
         if((char *)game->options.map[game->playerActions.pY][game->playerActions.pX].entity == "Fight")
         {
             
@@ -117,16 +106,15 @@ void selectOption(Room * game)
         if((char *)game->options.map[game->playerActions.pY][game->playerActions.pX].entity == "Run")
         {
             pop(&game->stackEvents);
-
             game->screenModes.Fight = 0;
             game->screenModes.Map = 1;
             buildSquare(game->fightScreen.map,coordUp_Y,coordUp_X,coordDown_Y,coordDown_X,0);
+            screenOn(&game->mapScreen);
         }
     }
 
     
 
-    Sleep(100);
 }
 
 
@@ -192,12 +180,21 @@ void checkEnemy(Room * game)
 
 
         push(&game->stackEvents, &game->fightScreen);
-        game->screenModes.Fight = 1;
 
         game->playerActions = playerInnit(0,0,0);
+
+        game->screenModes.Fight = 1;
         game->screenModes.Map = 0;
     }   
     
+}
+
+void checkScreenUpdate(MapData * map)
+{
+    if(GetAsyncKeyState(VK_W) || GetAsyncKeyState(VK_A) || GetAsyncKeyState(VK_S) || GetAsyncKeyState(VK_D) || GetAsyncKeyState(VK_ENTER))
+        screenOn(map);
+    else
+        screenOff(map);
 }
 
 

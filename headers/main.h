@@ -131,7 +131,6 @@ MapData mapDataInnit(int rows, int collums)
     mapData.map = mapInnit(rows,collums);
     mapData.screenUpdated = 1;
 
-
     return mapData;
 }
 
@@ -179,9 +178,18 @@ Room gameInnit(int rows, int collums, Player player,Objects objects)
     map.options = optionsInnit();   
 
     map.stackEvents = constructor_list();
-    push(&map.stackEvents, &map.mapScreen);
 
     return map;
+}
+
+
+void screenOff(MapData * map)
+{
+    map->screenUpdated = 0;
+}
+void screenOn(MapData * map)
+{
+    map->screenUpdated = 1;
 }
 
 

@@ -15,17 +15,21 @@ DWORD showScreen(void *arg)
     Room * map = (Room*) arg;
     while(1)
     {
+        
         MapData * event = peek(&map->stackEvents);
         WaitForSingleObject(Mutex, INFINITE);
+
+        
 
         if(map->screenModes.Map)    
             system("color 50");
 
-        // if(event->screenUpdated)
-        // {
+        if(event->screenUpdated)
+        {
             showMap(map,*event);
-            // printf("Updated\n");
-        // }
+        }
+
+        checkScreenUpdate(event);
         
         
         ReleaseMutex(Mutex);
@@ -41,20 +45,21 @@ DWORD checkKeyboard(void *arg)
     {
         MapData * event = peek(&map->stackEvents);
         WaitForSingleObject(Mutex, INFINITE);
-        
+
 
         if(map->screenModes.Map)
         {
+            checkEnemy(map);
+
             checkMove(map);
 
             checkHole(map);
-
-            checkEnemy(map);
         }
         if(map->screenModes.Fight)
         {
             selectOption(map);
         }
+
 
         ReleaseMutex(Mutex);
     }

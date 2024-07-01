@@ -17,6 +17,7 @@ int main(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmd
     Player player = playerInnit(PLAYER,5,5);
     Objects objects = objectsInnit(POKEBALL, ENEMY, WALL,HOLE);
     Room map = gameInnit(ROWS,COLLUMS, player, objects);
+    push(&map.stackEvents, &map.mapScreen);
 
 
 
@@ -43,6 +44,7 @@ int main(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmd
 
 
 
+    // showMap(&map, map.mapScreen);
 
     // push(&map.stackEvents,map.fightScreen);
     // map.screenModes.Fight = 1;
@@ -65,4 +67,3 @@ int main(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmd
     // */
     return 0;
 }
-
