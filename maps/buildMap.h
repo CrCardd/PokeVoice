@@ -22,7 +22,7 @@ void showMap(Map *map)
                     printf("// ");
 
                 else if (map->map[i][j] == 3)
-                    printf("!! ");   
+                    printf("%c%c%c", 177,177,177);   
                 // else if (map->map[i][j] == 3)
                 //     printf("!! ");   
                 

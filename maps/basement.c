@@ -54,7 +54,6 @@ int main()
     buildHole(&map, 57, 42);
 
 
-
     showMap(&map);
 }
 
