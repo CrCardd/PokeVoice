@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "c:/Users/Aluno/VoiceProject",
-      "program": "c:/Users/Aluno/VoiceProject/build/Debug/outDebug",
+      "cwd": "c:/Users/Aluno/Desktop/VoiceProject",
+      "program": "c:/Users/Aluno/Desktop/VoiceProject/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [
