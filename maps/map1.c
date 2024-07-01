@@ -26,18 +26,22 @@ int main(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmd
 
 
 
-    // map.mapScreen.map[6][8].value = ENEMY;
-    // map.mapScreen.map[20][8].value = HOLE;
-    // map.mapScreen.map[20][8].tp_X = 50;
-    // map.mapScreen.map[20][8].tp_Y = 10;
+    map.mapScreen.map[6][8].value = ENEMY;
+    map.mapScreen.map[20][8].value = HOLE;
+    map.mapScreen.map[20][8].tp_X = 50;
+    map.mapScreen.map[20][8].tp_Y = 10;
+
+    map.mapScreen.map[10][50].value = HOLE;
+    map.mapScreen.map[10][50].tp_X = 8;
+    map.mapScreen.map[10][50].tp_Y = 20;
 
 
 
 
+    // push(&map.stackEvents,map.fightScreen);
+    // map.screenModes.Fight = 1;
+    // map.screenModes.Map = 0;
 
-    push(&map.stackEvents,map.fightScreen);
-    map.screenModes.Fight = 1;
-    map.screenModes.Map = 0;
     // map.playerActions = playerInnit(0,0,0);
 
     

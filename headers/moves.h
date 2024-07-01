@@ -27,16 +27,32 @@ void checkMove(Room * game)
 
     
     //WALK
+    int move = 0;
+
     game->mapScreen.map[game->player.pY][game->player.pX] = game->player.lastCoord;
 
     if(GetAsyncKeyState(VK_W) && up)
+    {
         game->player.pY--;
+        move = 1;
+    }
     else if(GetAsyncKeyState(VK_S) && down)
+    {
         game->player.pY++;
+        move = 1;
+    }
     else if(GetAsyncKeyState(VK_A) && left)
+    {
         game->player.pX--;
+        move = 1;
+    }
     else if(GetAsyncKeyState(VK_D) && right)
+    {
         game->player.pX++;
+        move = 1;
+    }
+
+    
 
     game->player.lastCoord = game->mapScreen.map[game->player.pY][game->player.pX];
     game->mapScreen.map[game->player.pY][game->player.pX].value = game->player.renderValue;
@@ -160,11 +176,13 @@ void checkHole(Room * game)
 {
     if(GetAsyncKeyState(VK_ENTER) && game->player.lastCoord.value == game->objects.renderHole)
     {
-        game->player.lastCoord.value = game->mapScreen.map[game->player.lastCoord.tp_Y][game->player.lastCoord.tp_X].value;
-        game->mapScreen.map[game->player.pY][game->player.pX].value = game->objects.renderHole;
+        // game->player.lastCoord.value = game->mapScreen.map[game->player.lastCoord.tp_Y][game->player.lastCoord.tp_X].value;
+        // game->mapScreen.map[game->player.pY][game->player.pX].value = game->objects.renderHole;
 
+        game->mapScreen.map[game->player.pY][game->player.pX] = game->player.lastCoord;
         game->player.pX = game->player.lastCoord.tp_X;
         game->player.pY = game->player.lastCoord.tp_Y;
+        game->player.lastCoord = game->mapScreen.map[game->player.pY][game->player.pX];
     }
 }
 
