@@ -12,8 +12,8 @@ void showMap(Room *game, MapData screenData)
 
     // ERASE_ALL();
     system("cls");
-    MOVE_HOME();
     HIDE_CURSOR();
+    MOVE_HOME();
     int wall = game->objects.renderWall;
 
     int up;
@@ -60,16 +60,18 @@ void showMap(Room *game, MapData screenData)
                 }
                 
                 else if (screenData.map[i][j].value == game->objects.renderPokeball)
-                    printf(" O ");
+                    printf("{o}");
                 else if(!screenData.map[i][j].value)
                     printf("   ");
 
 
                 else if(screenData.map[i][j].value == game->objects.renderHole)
                     printf("[ ]");
+                else if(screenData.map[i][j].value == game->objects.renderEnemy)
+                    printf("<_>");
                 
                 else
-                printf(" F ");
+                printf(" a ");
 
 
 
@@ -84,6 +86,7 @@ void showMap(Room *game, MapData screenData)
             printf("\n");
         }
 
+    ERASE_LEND();
     fflush(stdout);
 }
 

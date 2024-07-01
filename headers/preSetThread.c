@@ -20,8 +20,6 @@ DWORD showScreen(void *arg)
 
         if(map->screenModes.Map)    
             system("color 50");
-        // if(map->screenModes.Fight)
-            //COLOR
 
         showMap(map,event);
         
@@ -44,8 +42,9 @@ DWORD checkKeyboard(void *arg)
         if(map->screenModes.Map)
         {
             checkMove(map);
-            checkInteract(map,map->objects.renderPokeball);
+
             checkHole(map);
+
             checkEnemy(map);
         }
         if(map->screenModes.Fight)
