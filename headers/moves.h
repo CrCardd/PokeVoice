@@ -25,18 +25,36 @@ void checkMove(Room * game)
     left  = (game->player.pX > 0 && game->mapScreen.map[game->player.pY][game->player.pX-1].value != game->objects.renderWall) ? 1 : 0;
     right = (game->player.pX < game->mapScreen.collums-1 && game->mapScreen.map[game->player.pY][game->player.pX+1].value != game->objects.renderWall) ? 1 : 0;
 
+
+
     
     //WALK
     game->mapScreen.map[game->player.pY][game->player.pX] = game->player.lastCoord;
 
     if(GetAsyncKeyState(VK_W) && up)
+    {
         game->player.pY--;
+        // game->mapScreen.screenUpdated = 1;
+    }
     else if(GetAsyncKeyState(VK_S) && down)
+    {
         game->player.pY++;
+        // game->mapScreen.screenUpdated = 1;
+    }
     else if(GetAsyncKeyState(VK_A) && left)
+    {
         game->player.pX--;
+        // game->mapScreen.screenUpdated = 1;
+    }
     else if(GetAsyncKeyState(VK_D) && right)
+    {
         game->player.pX++;
+        // game->mapScreen.screenUpdated = 1;
+    }
+    else
+    {
+        // game->mapScreen.screenUpdated = 0;
+    }
 
     
 
@@ -173,7 +191,7 @@ void checkEnemy(Room * game)
     {
 
 
-        push(&game->stackEvents, game->fightScreen);
+        push(&game->stackEvents, &game->fightScreen);
         game->screenModes.Fight = 1;
 
         game->playerActions = playerInnit(0,0,0);

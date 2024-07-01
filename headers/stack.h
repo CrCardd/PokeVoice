@@ -23,6 +23,7 @@ typedef struct MapData
     Map** map;
     int rows;
     int collums;
+    int screenUpdated;
 } MapData;
 
 
@@ -30,13 +31,13 @@ typedef struct Node Node;
 
 typedef struct Node
 {
-    MapData mapData;
+    MapData * mapData;
     Node *next;
     Node *prev;
 }Node;
 
 
-Node* constructor_node(MapData value)
+Node* constructor_node(MapData * value)
 {
     Node* new_ = (Node*) malloc(sizeof(Node));
     new_->next = NULL;
@@ -66,7 +67,7 @@ Stack constructor_list()
 }
 
 
-void push(Stack *linkedList, MapData event)
+void push(Stack *linkedList, MapData * event)
 {
     Node *node = constructor_node(event);
 
@@ -95,7 +96,7 @@ void pop(Stack *linkedList)
 }
 
 
-MapData peek(Stack *LinkedList)
+MapData * peek(Stack *LinkedList)
 {
     if (LinkedList->size == 0)
         return;

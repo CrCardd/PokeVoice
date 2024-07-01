@@ -71,7 +71,6 @@ typedef struct
     Objects objects;
     Player player;
     ScreenModes screenModes;
-    
 } Room;
 
 
@@ -130,6 +129,7 @@ MapData mapDataInnit(int rows, int collums)
     mapData.collums = collums;
     mapData.rows = rows;
     mapData.map = mapInnit(rows,collums);
+    mapData.screenUpdated = 1;
 
 
     return mapData;
@@ -179,7 +179,7 @@ Room gameInnit(int rows, int collums, Player player,Objects objects)
     map.options = optionsInnit();   
 
     map.stackEvents = constructor_list();
-    push(&map.stackEvents, map.mapScreen);
+    push(&map.stackEvents, &map.mapScreen);
 
     return map;
 }

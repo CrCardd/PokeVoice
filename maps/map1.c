@@ -14,7 +14,7 @@ int main(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmd
 {
     configureTerminal();
     
-    Player player = playerInnit(PLAYER,2,2);
+    Player player = playerInnit(PLAYER,5,5);
     Objects objects = objectsInnit(POKEBALL, ENEMY, WALL,HOLE);
     Room map = gameInnit(ROWS,COLLUMS, player, objects);
 
@@ -26,6 +26,7 @@ int main(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmd
 
 
 
+    map.mapScreen.map[4][30].value = POKEBALL;
     map.mapScreen.map[6][8].value = ENEMY;
     map.mapScreen.map[20][8].value = HOLE;
     map.mapScreen.map[20][8].tp_X = 50;
@@ -34,6 +35,11 @@ int main(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmd
     map.mapScreen.map[10][50].value = HOLE;
     map.mapScreen.map[10][50].tp_X = 8;
     map.mapScreen.map[10][50].tp_Y = 20;
+
+
+
+    // map.mapScreen.map[40][40].entity = "mensagem para a tela HAHA";
+    // map.mapScreen.map[40][40].value = MESSAGE;
 
 
 

@@ -3,6 +3,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "terminal.c"
 #include "main.h"
 #include <windows.h>
@@ -23,7 +24,8 @@ void showMap(Room *game, MapData screenData)
 
         for (int i = 0; i < screenData.rows; i++) 
         {
-            for (int j = 0; j < screenData.collums; j++) 
+            for (int j = 0; j < screenData.collums; j++)
+            
             
                 if(screenData.map[i][j].value == game->player.renderValue)
                     printf("%c%c%c",218,219,191);
@@ -70,8 +72,18 @@ void showMap(Room *game, MapData screenData)
                 else if(screenData.map[i][j].value == game->objects.renderEnemy)
                     printf("<_>");
                 
-                else
-                printf(" a ");
+                else if(screenData.map[i][j].value == MESSAGE)
+                {   
+                    int size = strlen((char*)screenData.map[i][j].entity);
+                    // printf("%d",size%3);
+                    printf("%s",(char*)screenData.map[i][j].entity);
+                    for(int k=0; k < (3 - (size%3)); k++)
+                        printf("X");
+                    size = size/3 + ((size%3)/(size%3))-1;
+
+                    j += size; 
+                }
+            
 
 
 

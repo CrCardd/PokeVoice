@@ -9,5 +9,6 @@
 #define ENEMY 12
 #define HOLE 13
 #define POKEBALL 14
+#define MESSAGE 15
 
 #endif // !RENDERVALUES_H
