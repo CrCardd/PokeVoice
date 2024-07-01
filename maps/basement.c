@@ -19,6 +19,7 @@ int main()
 
     buildLine(1, &map, 0, 10, 78);
 
+
     buildLine(1, &map, 0, 35, 20);
 
     buildLine(2, &map, 20, 11, 43);
@@ -36,25 +37,22 @@ int main()
 
     //Buracos
     buildHole(&map, 7, 12);
-    buildHole(&map, 21, 1);
-
     buildHole(&map, 3, 34);
-
     buildHole(&map, 7, 59);
 
 
-    buildHole(&map, 30, 1);
-
+    buildHole(&map, 21, 1);
     buildHole(&map, 47, 9);
 
+    buildHole(&map, 30, 1);
     buildHole(&map, 55, 1);
 
     buildHole(&map, 47, 23);
     
     buildHole(&map, 28, 36);
+    buildHole(&map, 40, 56);    
     buildHole(&map, 57, 42);
 
-    buildHole(&map, 40, 56);
 
 
     showMap(&map);
