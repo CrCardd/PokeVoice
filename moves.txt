@@ -1,4 +1,0 @@
-court-change ,8, 13
-leaf-blade ,37, 9
-psycho-boost ,33, 9
-dragon-ascent ,37, 10

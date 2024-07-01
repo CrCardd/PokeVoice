@@ -1,4 +1,4 @@
-metal-claw ,9, 13
-safeguard ,40, 11
-charge ,5, 8
-hold-hands ,14, 13
+crush-grip ,33, 18
+acid-downpour--special ,12, 10
+stuff-cheeks ,21, 10
+max-rockfall ,18, 10

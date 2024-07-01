@@ -1,4 +1,4 @@
 tackle, 15, 30
 razor leaf, 30, 5
-solar beam, 35, 2
+solar beam, 45, 2
 toxic , 20, 10
