@@ -1,1 +1,1 @@
-bulbasaur, 100
+bulbasaur, 100, 11

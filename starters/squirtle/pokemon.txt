@@ -1,1 +1,1 @@
-squirtle, 90
+squirtle, 90, 10

@@ -56,7 +56,7 @@ match pokeTypeName:
 hp = random.randint(25, 90)
 
 with open('pokemon.txt', 'w') as file:
-    file.write(name + ', ' + str(hp))
+    file.write(name + ', ' + str(hp) + ',' + str(pokeType))
 
 with open('moves.txt', 'w') as file:
     for move in range(4):

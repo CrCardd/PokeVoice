@@ -11,6 +11,7 @@ typedef struct Atack
     char name[50];
     int dmg;
     int uses;
+    int type;
 } Atack;
 
 typedef struct Pokemon
@@ -18,6 +19,7 @@ typedef struct Pokemon
     char name[12];
     int hp;
     struct Atack atk[4];
+    int type;
 } Pokemon;
 
 Pokemon initPokemon()
@@ -42,6 +44,7 @@ Pokemon initPokemon()
         token = strtok(NULL, ",");
         new_poke.hp = atoi(token);
         token = strtok(NULL, ",");
+        new_poke.type = atoi(token);
     }
 
     while (fgets(line, sizeof(line), moves) != NULL) {
@@ -51,6 +54,8 @@ Pokemon initPokemon()
         new_poke.atk[i].dmg = atoi(token);
         token = strtok(NULL, ",");
         new_poke.atk[i].uses = atoi(token);
+        token = strtok(NULL, ",");
+        new_poke.atk[i].type = atoi(token);
         i++;
     }
     fclose(name);
