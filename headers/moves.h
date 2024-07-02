@@ -20,7 +20,7 @@ void checkMove(Room * game, MapData * screen)
 {  
 
     //COLISON
-    up    = (game->player.pY > 0 && screen->map[game->player.pY-1][game->player.pX].value != game->objects.renderWall ) ? 1 : 0;
+    up    = (game->player.pY > 0 && screen->map[game->player.pY-1][game->player.pX].value != game->objects.renderWall && screen->map[game->player.pY-1][game->player.pX].value != game->objects.renderStep) ? 1 : 0;
     down  = (game->player.pY < screen->rows-1 && screen->map[game->player.pY+1][game->player.pX].value != game->objects.renderWall) ? 1 : 0;
     left  = (game->player.pX > 0 && screen->map[game->player.pY][game->player.pX-1].value != game->objects.renderWall) ? 1 : 0;
     right = (game->player.pX < screen->collums-1 && screen->map[game->player.pY][game->player.pX+1].value != game->objects.renderWall) ? 1 : 0;
@@ -110,7 +110,7 @@ void selectOption(Room * game)
             game->screenModes.Map = 1;
             buildSquare(game->fightScreen.map,coordUp_Y,coordUp_X,coordDown_Y,coordDown_X,0);
             screenOn(&game->mapScreen);
-            Sleep(80);
+            Sleep(100);
         }
     }
 
@@ -163,8 +163,6 @@ void checkHole(Room * game)
 {
     if(GetAsyncKeyState(VK_ENTER) && game->player.lastCoord.value == game->objects.renderHole)
     {
-        // game->player.pX = game->player.lastCoord.tp_X;
-        // game->player.pY = game->player.lastCoord.tp_Y;
         if(game->screenModes.Map)
         {
             game->mapScreen.map[game->player.pY][game->player.pX] = game->player.lastCoord;
@@ -172,7 +170,7 @@ void checkHole(Room * game)
             game->screenModes.Map = 0;
             game->screenModes.SecondMap = 1;
             game->player.lastCoord = game->secondMapScreen.map[game->player.pY][game->player.pX];
-            
+            Sleep(100);
         }
         else if(game->screenModes.SecondMap)
         {
@@ -181,6 +179,7 @@ void checkHole(Room * game)
             game->screenModes.Map = 1;
             game->screenModes.SecondMap = 0;
             game->player.lastCoord = game->mapScreen.map[game->player.pY][game->player.pX];
+            Sleep(100);
         }
 
         
@@ -211,21 +210,14 @@ void checkEnemy(Room * game)
 }
 
 
-void checkScreenUpdate(MapData * map)
-{
-    if(GetAsyncKeyState(VK_W) || GetAsyncKeyState(VK_A) || GetAsyncKeyState(VK_S) || GetAsyncKeyState(VK_D) || GetAsyncKeyState(VK_ENTER))
-        screenOn(map);
-    else
-        screenOff(map);
-
-}
-
-
-
-
-
-
-
+//OPTIMIZE FUNCTION
+// void checkScreenUpdate(MapData * map)
+// {
+//     if(GetAsyncKeyState(VK_W) || GetAsyncKeyState(VK_A) || GetAsyncKeyState(VK_S) || GetAsyncKeyState(VK_D) || GetAsyncKeyState(VK_ENTER))
+//         screenOn(map);
+//     else
+//         screenOff(map);
+// }
 
 
 #endif

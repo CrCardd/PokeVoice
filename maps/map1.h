@@ -28,27 +28,23 @@ void mapConstruct(Map ** screen)
     buildLine(2, screen, 35, 24, 38);
     buildLine(2, screen, 50, 24, 26);
 
-    buildLine(1, screen, 20, 54, 15);
-    buildLine(1, screen, 50, 45, 28);
+    buildFullSquare(screen,54,21,55,35,STEP);
+
+    buildFullSquare(screen,45,51,46,78, STEP);
 
     //Buracos
     buildHole(screen, 7, 12);
-    buildHole(screen, 3, 30);
     buildHole(screen, 21, 1);
     buildHole(screen, 21, 27);
 
     buildHole(screen, 3, 34);
-    buildHole(screen, 21, 37);
+    buildHole(screen, 21, 35);
     buildHole(screen, 21, 50);
 
-    buildHole(screen, 7, 59);
     buildHole(screen, 21, 70);
 
     buildHole(screen, 30, 1);
-    buildHole(screen, 30, 17);
     buildHole(screen, 47, 9);
-    buildHole(screen, 47, 15);
-    buildHole(screen, 50, 12);
     buildHole(screen, 55, 1);
 
     buildHole(screen, 28, 23);
@@ -72,23 +68,27 @@ void secondMapConstruct(Map ** screen)
     //Paredes
     buildLine(2,screen, 25, 0, 4);
     buildLine(2, screen, 50, 0, 4);
-
     buildLine(1, screen, 0, 10, 78);
-
-
-    buildLine(1, screen, 0, 35, 20);
-
     buildLine(2, screen, 20, 11, 43);
-    buildLine(1, screen, 20, 32, 12);
     buildLine(2, screen, 32, 11, 43);
-    
     buildLine(2, screen, 39, 11, 51);
-    
-    buildLine(1, screen, 40, 28, 20);
-    buildLine(1, screen, 40, 48, 20);
-
     buildLine(2, screen, 60, 11, 45);
-    buildLine(1, screen, 61, 28, 17);
+
+
+
+
+
+
+    
+    
+
+
+
+    buildFullSquare(screen,35,1,36,20, STEP);
+    buildFullSquare(screen,32,21,33,32,STEP);
+    buildFullSquare(screen,28,40,29,60,STEP);
+    buildFullSquare(screen,48,40,49,60,STEP);
+    buildFullSquare(screen,28,61,29,78,STEP);
 
 
     //Buracos

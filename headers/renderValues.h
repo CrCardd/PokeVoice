@@ -10,5 +10,6 @@
 #define HOLE 13
 #define POKEBALL 14
 #define MESSAGE 15
+#define STEP 16
 
 #endif // !RENDERVALUES_H

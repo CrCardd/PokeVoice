@@ -21,8 +21,9 @@ DWORD showScreen(void *arg)
 
         
 
-        if(map->screenModes.Map)    
-            system("color 50");
+        // if(!map->screenModes.Fight)    
+        //     BACKGROUND_COLOR(162,171,200);
+        
 
         if(event->screenUpdated)
         {
@@ -30,8 +31,8 @@ DWORD showScreen(void *arg)
         }
 
         
-
-        checkScreenUpdate(event);
+        //OPTIMIZE FUNCTION
+        // checkScreenUpdate(event);
 
         
         ReleaseMutex(Mutex);
@@ -49,7 +50,7 @@ DWORD checkKeyboard(void *arg)
         WaitForSingleObject(Mutex, INFINITE);
 
 
-        if(map->screenModes.Map || map->screenModes.SecondMap)
+        if(!map->screenModes.Fight)
         {
             checkEnemy(map);
 
@@ -57,7 +58,7 @@ DWORD checkKeyboard(void *arg)
 
             checkHole(map);
         }
-        if(map->screenModes.Fight)
+        else
         {
             selectOption(map);
         }
@@ -66,5 +67,6 @@ DWORD checkKeyboard(void *arg)
         ReleaseMutex(Mutex);
     }
 }
+
 
 #endif //PRESETTHREAD_H

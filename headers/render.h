@@ -16,10 +16,9 @@ void showMap(Room *game, MapData screenData)
 {
     HIDE_CURSOR();
     MOVE_HOME();
-    // system("cls");
-    // ERASE_ALL();
-    // ERASE_LEND();
-    // printf("\e[1;1H\e[2J");
+
+
+    fflush(stdout);
 
 
     int wall = game->objects.renderWall;
@@ -61,13 +60,19 @@ void showMap(Room *game, MapData screenData)
                         printf("%c%c%c",205,202,205);
                     else if(left == wall && up == wall && right != wall && down != wall)
                         printf("%c%c ",205,188);
-                    else if((up || down) && right != wall && left != wall)
+                    else if((left || right) && up != wall && down != wall)
+                        if(left == wall && right != wall)
+                            printf("%c%c ",205,205);
+                        else if(left != wall && right == wall)
+                            printf(" %c%c",205,205);
+                        else
+                            printf("%c%c%c",205,205,205);
+                    else //if((up || down) && right != wall && left != wall)
                         printf(" %c ",186);
-                    else //if((left || right) && up != wall && down != wall)
-                        printf("%c%c%c",205,205,205);
                     
                 }
-                
+                else if (screenData.map[i][j].value == game->objects.renderStep)
+                    printf("%c%c%c",176,176,176);
                 else if (screenData.map[i][j].value == game->objects.renderPokeball)
                     printf("{o}");
                 else if(!screenData.map[i][j].value)
@@ -86,7 +91,7 @@ void showMap(Room *game, MapData screenData)
                     // printf("%d",size%3);
                     printf("%s",(char*)screenData.map[i][j].entity);
                     for(int k=0; k < (3 - (size%3)); k++)
-                        printf("X");
+                        printf(" ");
                     size = size/3 + ((size%3)/(size%3))-1;
 
                     j += size; 
@@ -106,7 +111,6 @@ void showMap(Room *game, MapData screenData)
             printf("\n");
         }
 
-    
     fflush(stdout);
 
 }

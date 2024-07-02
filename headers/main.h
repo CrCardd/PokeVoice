@@ -46,6 +46,7 @@ typedef struct
     int renderPokeball;
     int renderEnemy;
     int renderHole;
+    int renderStep;
 } Objects;
 
 
@@ -101,13 +102,14 @@ Player playerInnit(int renderValue, int y, int x)
     return player;
 }
 
-Objects objectsInnit(int renderPokeball, int renderEnemy, int wall, int hole)
+Objects objectsInnit(int renderPokeball, int renderEnemy, int wall, int hole, int step)
 {
     Objects objects;
     objects.renderPokeball = renderPokeball;
     objects.renderWall = wall;
     objects.renderEnemy = renderEnemy;
     objects.renderHole = hole;
+    objects.renderStep = step;
 
     return objects;
 }

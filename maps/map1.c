@@ -14,48 +14,34 @@ int main(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmd
 {
     configureTerminal();
     
-    Player player = playerInnit(PLAYER,5,5);
-    Objects objects = objectsInnit(POKEBALL, ENEMY, WALL,HOLE);
+    Player player = playerInnit(PLAYER,60,70);
+    Objects objects = objectsInnit(POKEBALL, ENEMY, WALL,HOLE,STEP);
     Room map = gameInnit(ROWS,COLLUMS, player, objects);
     push(&map.stackEvents, &map.mapScreen);
 
 
-
     mapConstruct(map.mapScreen.map);
-
     secondMapConstruct(map.secondMapScreen.map);
-
     fightScreenConstruct(map.fightScreen.map);
 
 
-
-
-    // map.mapScreen.map[4][30].value = POKEBALL;
-    map.mapScreen.map[6][8].value = ENEMY;
-    // map.mapScreen.map[20][8].value = HOLE;
-    // map.mapScreen.map[20][8].tp_X = 50;
-    // map.mapScreen.map[20][8].tp_Y = 10;
-
-    // map.mapScreen.map[10][50].value = HOLE;
-    // map.mapScreen.map[10][50].tp_X = 8;
-    // map.mapScreen.map[10][50].tp_Y = 20;
+    map.mapScreen.map[35][63].value = ENEMY;
 
 
 
-    // map.mapScreen.map[40][40].entity = "charmandaer used flamethrower";
-    // map.mapScreen.map[40][40].value = MESSAGE;
+    map.mapScreen.map[40][40].entity = "sampaio o broxissimo";
+    map.mapScreen.map[40][40].value = MESSAGE;
 
 
 
-    // showMap(&map, map.mapScreen);
 
     // push(&map.stackEvents,map.fightScreen);
     // map.screenModes.Fight = 1;
     // map.screenModes.Map = 0;
 
     // map.playerActions = playerInnit(0,0,0);
-
     
+
 
     // /*  
     Mutex = CreateMutex(NULL, FALSE, NULL);
@@ -65,7 +51,6 @@ int main(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmd
 
     WaitForSingleObject(showScreenThread,showScreen);
     WaitForSingleObject(checkKeyboardThread,checkKeyboard);
-
     CloseHandle(Mutex);
     // */
     return 0;

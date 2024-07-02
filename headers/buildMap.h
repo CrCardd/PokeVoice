@@ -152,4 +152,20 @@ void fightScreenConstruct(Map **screen)
 }
 
 
+
+void buildFullSquare(Map ** screen, int coordY, int coordX, int coordY_, int coordX_, int value)
+{
+    if(coordX == coordX_)
+        return;
+    for(int i=coordY; i<=coordY_; i++)
+        screen[i][coordX].value = value;
+    
+    buildFullSquare(screen, coordY, coordX+1, coordY_, coordX_,value);
+}
+
+
+
+
+
+
 #endif 
