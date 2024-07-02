@@ -7,6 +7,7 @@
 #include "bag.h"
 #include "mons.h"
 #include "team.h"
+#include "atackTable.h"
 
 void switchPoke(Team * team, int index)
 {
@@ -37,10 +38,14 @@ void BubbleSort(Pokemon* array, int size)
 
 void atack(Team *atacker, Team *atacked, int atack)
 {
+    initAtackTable();
+    int dmg = (atacker->pokes[0].atk[atack - 1].dmg) * calcDmg(atacker->pokes[0].atk->type, atacked->pokes[0].type);
+
     printf("\n%s uses %s\n", atacker->pokes[0].name, atacker->pokes[0].atk[atack - 1].name);
 
     atacker->pokes[0].atk[atack - 1].uses--;
-    atacked->pokes[0].hp -= atacker->pokes[0].atk[atack - 1].dmg;
+
+    atacked->pokes[0].hp -= dmg;
 
     if (atacked->pokes[0].hp <= 0 && atacked->pokes[1].hp <= 0)
         atacked->alive = 'd';
