@@ -9,7 +9,7 @@ data = requests.get(url).json()
 
 name = data['name']
 
-pokeTypeName = data['types']['type']['name']
+pokeTypeName = data['types'][0]['type']['name']
 
 pokeType = 0
 
@@ -56,20 +56,25 @@ match pokeTypeName:
 hp = random.randint(25, 90)
 
 with open('pokemon.txt', 'w') as file:
-    file.write(name + ', ' + str(hp) + ',' + str(pokeType))
+    file.write(name + ', ' + str(hp) + ', ' + str(pokeType))
 
 with open('moves.txt', 'w') as file:
     for move in range(4):
 
-        num = random.randint(0, 800)
+        while True:
 
-        url = "https://pokeapi.co/api/v2/move/" + str(num)
+            num = random.randint(0, 800)
 
-        data = requests.get(url).json()
+            url = "https://pokeapi.co/api/v2/move/" + str(num)
 
-        move = data['name']
+            data = requests.get(url).json()
 
-        atackTypeName = data['type']['name']
+            move = data['name']
+
+            atackTypeName = data['type']['name']
+            
+            if not '--' in move:
+                break
 
         atackType = 0
 
@@ -113,4 +118,4 @@ with open('moves.txt', 'w') as file:
             case _:
                 atackType = 1
 
-        file.write(move + ' ,' + str(random.randint(5, 40)) + ', ' + str(random.randint(5, 20)) + ',' + str(atackType) '\n')
+        file.write(move + ', ' + str(random.randint(5, 40)) + ', ' + str(random.randint(5, 20)) + ', ' + str(atackType) + '\n')
