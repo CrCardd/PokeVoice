@@ -59,6 +59,7 @@ void BubbleSort(Pokemon* array, int size)
 
 void atack(Team *atacker, Team *atacked, int atack)
 {
+    initAtackTable();
     int dmg = (atacker->pokes[0].atk[atack - 1].dmg);
     
     int mult = atack_table[atacker->pokes[0].atk->type][atacked->pokes[0].type];
@@ -79,7 +80,7 @@ void atack(Team *atacker, Team *atacked, int atack)
 
     else if (atacked->pokes[0].hp <= 0)
     {
-        BubbleSort(atacked->pokes, 4);
+        BubbleSort(atacked, 4);
     }
 
 }
@@ -164,6 +165,7 @@ void myRound(Team * you, Team * enemy, Bag * bag)
     {
     case 1:
         // Atack
+        //implement voice atack
         for (int i = 0; i < 4; i++)
             printf("%s\n", you->pokes[0].atk[i].name);
         

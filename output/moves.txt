@@ -1,4 +1,4 @@
-poison-powder, 9, 15, 3
-barrage, 11, 13, 0
-mat-block, 36, 18, 1
-trop-kick, 15, 16, 11
+sludge ,9, 12, 
+zippy-zap ,11, 19
+synthesis ,8, 18
+safeguard ,7, 10
