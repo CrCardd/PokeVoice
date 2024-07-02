@@ -11,9 +11,9 @@
 void switchPoke(Team * team, int index)
 {
     Pokemon aux;
-    team->pokes[0] = aux;
-    team->pokes[0] = team->pokes[index];
-    team->pokes[index] = team->pokes[0];
+    aux = team->pokes[0];
+    team->pokes[0] = team->pokes[index - 1];
+    team->pokes[index -1] = aux;
 }
 
 void BubbleSort(Pokemon* array, int size)
