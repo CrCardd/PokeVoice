@@ -1,4 +1,4 @@
-sludge ,9, 12, 
-zippy-zap ,11, 19
-synthesis ,8, 18
-safeguard ,7, 10
+shadow-bone ,16, 11
+fly ,34, 7
+dive ,7, 10
+sky-uppercut ,31, 19

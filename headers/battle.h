@@ -59,7 +59,6 @@ void BubbleSort(Pokemon* array, int size)
 
 void atack(Team *atacker, Team *atacked, int atack)
 {
-    initAtackTable();
     int dmg = (atacker->pokes[0].atk[atack - 1].dmg);
     
     int mult = atack_table[atacker->pokes[0].atk->type][atacked->pokes[0].type];

@@ -83,6 +83,7 @@ Pokemon squirtle()
         token = strtok(NULL, ",");
         squirtle.hp = atoi(token);
         token = strtok(NULL, ",");
+        squirtle.type = atoi(token);
     }
 
     while (fgets(line, sizeof(line), moves) != NULL) {
@@ -93,6 +94,8 @@ Pokemon squirtle()
         squirtle.atk[i].dmg = atoi(token);
         token = strtok(NULL, ",");
         squirtle.atk[i].uses = atoi(token);
+        token = strtok(NULL, ",");
+        squirtle.atk[i].type = atoi(token);
         i++;
     }
     fclose(name);
@@ -120,6 +123,7 @@ Pokemon charmander()
         token = strtok(NULL, ",");
         mander.hp = atoi(token);
         token = strtok(NULL, ",");
+        mander.type = atoi(token);
     }
 
     while (fgets(line, sizeof(line), moves) != NULL) {
@@ -130,6 +134,8 @@ Pokemon charmander()
         mander.atk[i].dmg = atoi(token);
         token = strtok(NULL, ",");
         mander.atk[i].uses = atoi(token);
+        token = strtok(NULL, ",");
+        mander.atk[i].type = atoi(token);
         i++;
     }
     fclose(name);
@@ -157,6 +163,7 @@ Pokemon bulbasaur()
         token = strtok(NULL, ",");
         bulba.hp = atoi(token);
         token = strtok(NULL, ",");
+        bulba.type = atoi(token);
     }
 
     while (fgets(line, sizeof(line), moves) != NULL) {
@@ -167,6 +174,8 @@ Pokemon bulbasaur()
         bulba.atk[i].dmg = atoi(token);
         token = strtok(NULL, ",");
         bulba.atk[i].uses = atoi(token);
+        token = strtok(NULL, ",");
+        bulba.atk[i].type = atoi(token);
         i++;
     }
     fclose(name);
