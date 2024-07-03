@@ -10,6 +10,15 @@
 
 
 
+typedef struct 
+{
+    int pX;
+    int pY;
+    int renderValue;
+    Map lastCoord;
+
+} Player;
+
 
 
 typedef struct
@@ -51,6 +60,7 @@ struct Room
     
     Objects objects;
     Player player;
+    Player actions;
     ScreenModes screenModes;
 };
 
@@ -68,6 +78,7 @@ ScreenModes screenModesInnit()
 
     return screenModes;
 }
+
 
 
 Player playerInnit(int renderValue, int y, int x)
@@ -105,6 +116,7 @@ Map** mapInnit(int rows, int collums)
 
     return map;
 }
+
 
 MapData mapDataInnit(int rows, int collums)
 {
@@ -185,7 +197,8 @@ void selectOptionFight(Room * game, int option)
     switch (option)
     {
     case 0:
-        
+
+        attackScreenConstructor(game->attackScreen.map);
         game->attackScreen.map[10][10].entity = "ataque 1";//game->player.pokedex[0].atq[0].name;
         game->attackScreen.map[10][10].value = MESSAGE;
         game->attackScreen.map[20][20].entity = "ataque 2";//game->player.pokedex[0].atq[1].name;
@@ -194,7 +207,11 @@ void selectOptionFight(Room * game, int option)
         game->attackScreen.map[30][30].value = MESSAGE;
         game->attackScreen.map[40][40].entity = "ataque 4";//game->player.pokedex[0].atq[3].name;
         game->attackScreen.map[40][40].value = MESSAGE;
-        game->attackScreen.selectOptions.actions = playerInnit(0,0,0);
+        game->actions = playerInnit(0,0,0);
+
+        push(&game->stackEvents, &game->attackScreen);
+        Sleep(100);
+        
         break;
     case 1:
         
@@ -214,6 +231,12 @@ void selectOptionFight(Room * game, int option)
     default:
         break;
     }
+}
+
+
+void selectOptionAttack(Room * game, int option)
+{
+
 }
 
 
@@ -243,7 +266,7 @@ Room gameInnit(int rows, int collums, Player player,Objects objects)
     map.attackScreen = mapDataInnit(rows, collums);
     map.attackScreen.selectOptions = selectOptionsInnit(2,2);
     map.attackScreen.selectOptions.options = menuFightInnit();
-    // map.attackScreen.func =
+    map.attackScreen.func = selectOptionAttack;
 
 
     map.stackEvents = constructor_list();

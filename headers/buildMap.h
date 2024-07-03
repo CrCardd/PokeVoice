@@ -166,13 +166,26 @@ void buildFullSquare(Map ** screen, int coordY, int coordX, int coordY_, int coo
 
 void attackScreenConstructor(Map ** screen)
 {
-    fightScreenConstruct(screen);
 
-    // buildFullSquare(screen,38,34,47,53,0);
-    // buildFullSquare(screen,38,56,47,75,0);
-    // buildFullSquare(screen,50,34,59,53,0);
-    // buildFullSquare(screen,50,56,59,75,0);
-    buildLine(2,screen,34,9,60);
+    buildLine(1,screen,0,1,30);
+    buildLine(1,screen,0,11,30);
+    buildLine(2,screen,0,0,11);
+    buildLine(2,screen,41,0,11);
+
+
+    buildLine(1,screen,0,35,79);
+    buildLine(1,screen,0,62,79);
+    buildLine(2,screen,0,36,26);
+    buildLine(2,screen,78,36,26);
+
+
+    buildLine(2,screen,2,37,24);
+    buildLine(2,screen,31,37,24);
+    buildLine(1,screen,2,37,29);
+    buildLine(1,screen,2,60,29);
+
+
+    // buildLine(2,screen,34,9,60);
 }
 
 

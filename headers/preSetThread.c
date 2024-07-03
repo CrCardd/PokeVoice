@@ -60,9 +60,7 @@ DWORD checkKeyboard(void *arg)
         }
         else
         {
-            int option = selectOption(event);
-            printf("%d",option);
-            // scanf(" %d", option);
+            int option = selectOption(map,event);
             event->func(map, option);
         }
 

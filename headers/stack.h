@@ -32,34 +32,13 @@ typedef struct
 
 
 
-typedef struct
-{
-    char * name;
-} atttttaques;
-typedef struct
-{
-    char * name;
-    atttttaques * atq;
-} pokessub;
 
 
-
-
-typedef struct 
-{
-    int pX;
-    int pY;
-    int renderValue;
-    pokessub * pokedex;
-    Map lastCoord;
-
-} Player;
 
 
 
 typedef struct
 {
-    Player actions;
     int rows;
     int collums;
     Options ** options;

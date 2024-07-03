@@ -25,6 +25,7 @@ int main(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmd
     fightScreenConstruct(map.fightScreen.map);
 
 
+
     map.mapScreen.map[35][63].value = ENEMY;
 
 
@@ -34,15 +35,14 @@ int main(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmd
     // map.mapScreen.map[40][40].value = MESSAGE;
 
 
+    // attackScreenConstructor(map.attackScreen.map);
 
-
-    // push(&map.stackEvents,&map.fightScreen);
+    // push(&map.stackEvents,&map.attackScreen);
     // map.screenModes.Fight = 1;
     // map.screenModes.Map = 0;
 
-    // map.fightScreen.selectOptions.actions = playerInnit(0,0,0);
+    // map.actions = playerInnit(0,0,0);
     
-
 
 
     // /*  

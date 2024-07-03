@@ -49,46 +49,37 @@ void checkMove(Room * game, MapData * screen)
 }
 
 
-int selectOption(MapData * mapData)
+int selectOption(Room * game, MapData * mapData)
 { 
     //COLISON
-    up    = (mapData->selectOptions.actions.pY != 0) ? 1 : 0;
-    down  = (mapData->selectOptions.actions.pY != mapData->selectOptions.rows-1) ? 1 : 0;
-    left  = (mapData->selectOptions.actions.pX != 0) ? 1 : 0;
-    right = (mapData->selectOptions.actions.pX != mapData->selectOptions.collums-1) ? 1 : 0;
+    up    = (game->actions.pY != 0) ? 1 : 0;
+    down  = (game->actions.pY != mapData->selectOptions.rows-1) ? 1 : 0;
+    left  = (game->actions.pX != 0) ? 1 : 0;
+    right = (game->actions.pX != mapData->selectOptions.collums-1) ? 1 : 0;
 
     
     //CHOOSE
-    buildSquare(mapData->map,mapData->selectOptions.options[mapData->selectOptions.actions.pY][mapData->selectOptions.actions.pX].optY,mapData->selectOptions.options[mapData->selectOptions.actions.pY][mapData->selectOptions.actions.pX].optX,mapData->selectOptions.options[mapData->selectOptions.actions.pY][mapData->selectOptions.actions.pX].optY_,mapData->selectOptions.options[mapData->selectOptions.actions.pY][mapData->selectOptions.actions.pX].optX_,0);
+    buildSquare(mapData->map,mapData->selectOptions.options[game->actions.pY][game->actions.pX].optY,mapData->selectOptions.options[game->actions.pY][game->actions.pX].optX,mapData->selectOptions.options[game->actions.pY][game->actions.pX].optY_,mapData->selectOptions.options[game->actions.pY][game->actions.pX].optX_,0);
 
     if(GetAsyncKeyState(VK_W) && up)
-        mapData->selectOptions.actions.pY--;
+        game->actions.pY--;
     else if(GetAsyncKeyState(VK_S) && down)
-        mapData->selectOptions.actions.pY++;
+        game->actions.pY++;
     else if(GetAsyncKeyState(VK_A) && left)
-        mapData->selectOptions.actions.pX--;
+        game->actions.pX--;
     else if(GetAsyncKeyState(VK_D) && right)
-        mapData->selectOptions.actions.pX++;
+        game->actions.pX++;
     else if(GetAsyncKeyState(VK_ESC))
         return -10;
     
 
 
-    buildSquare(mapData->map,mapData->selectOptions.options[mapData->selectOptions.actions.pY][mapData->selectOptions.actions.pX].optY,mapData->selectOptions.options[mapData->selectOptions.actions.pY][mapData->selectOptions.actions.pX].optX,mapData->selectOptions.options[mapData->selectOptions.actions.pY][mapData->selectOptions.actions.pX].optY_,mapData->selectOptions.options[mapData->selectOptions.actions.pY][mapData->selectOptions.actions.pX].optX_,1);
+    buildSquare(mapData->map,mapData->selectOptions.options[game->actions.pY][game->actions.pX].optY,mapData->selectOptions.options[game->actions.pY][game->actions.pX].optX,mapData->selectOptions.options[game->actions.pY][game->actions.pX].optY_,mapData->selectOptions.options[game->actions.pY][game->actions.pX].optX_,1);
     Sleep(100);
 
-    //     if((char *)mapData->selectOptions.options.map[mapData->selectOptions.playerActions.pY][mapData->selectOptions.playerActions.pX].entity == "Run")
-    //     {
-    //         pop(&mapData->selectOptions.stackEvents);
-    //         mapData->selectOptions.screenModes.Fight = 0;
-    //         mapData->selectOptions.screenModes.Map = 1;
-    //         buildSquare(mapData->selectOptions.fightScreen.map,coordUp_Y,coordUp_X,coordDown_Y,coordDown_X,0);
-    //         screenOn(&mapData->selectOptions.mapScreen);
-    //         Sleep(100);
-    //     }
-    // }
+
     if(GetAsyncKeyState(VK_ENTER))
-        return mapData->selectOptions.actions.pY * mapData->selectOptions.collums + mapData->selectOptions.actions.pX;
+        return game->actions.pY * mapData->selectOptions.collums + game->actions.pX;
     else
         return -1;
 
@@ -157,11 +148,6 @@ void checkHole(Room * game)
             game->player.lastCoord = game->mapScreen.map[game->player.pY][game->player.pX];
             Sleep(100);
         }
-
-        
-
-
-
     }
 }
 
@@ -177,7 +163,7 @@ void checkEnemy(Room * game)
 
         push(&game->stackEvents, &game->fightScreen);
 
-        game->fightScreen.selectOptions.actions = playerInnit(0,0,0);
+        game->actions = playerInnit(0,0,0);
 
         game->screenModes.Fight = 1;
         game->screenModes.Map = 0;
