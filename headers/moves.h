@@ -49,72 +49,48 @@ void checkMove(Room * game, MapData * screen)
 }
 
 
-void selectOption(Room * game)
+int selectOption(MapData * mapData)
 { 
-    
-
-
     //COLISON
-    up    = (game->playerActions.pY > 0 && game->options.map[game->playerActions.pY-1][game->playerActions.pX].value != game->objects.renderWall) ? 1 : 0;
-    down  = (game->playerActions.pY < game->options.rows-1 && game->options.map[game->playerActions.pY+1][game->playerActions.pX].value != game->objects.renderWall) ? 1 : 0;
-    left  = (game->playerActions.pX > 0 && game->options.map[game->playerActions.pY][game->playerActions.pX-1].value != game->objects.renderWall) ? 1 : 0;
-    right = (game->playerActions.pX < game->options.collums-1 && game->options.map[game->playerActions.pY][game->playerActions.pX+1].value != game->objects.renderWall) ? 1 : 0;
+    up    = (mapData->selectOptions.actions.pY != 0) ? 1 : 0;
+    down  = (mapData->selectOptions.actions.pY != mapData->selectOptions.rows-1) ? 1 : 0;
+    left  = (mapData->selectOptions.actions.pX != 0) ? 1 : 0;
+    right = (mapData->selectOptions.actions.pX != mapData->selectOptions.collums-1) ? 1 : 0;
 
     
     //CHOOSE
-    // game->options.map[game->playerActions.pY][game->playerActions.pX].value = game->playerActions.lastCoord;
-    int coordUp_Y = (game->options.map[game->playerActions.pY][game->playerActions.pX].tp_X - 1) / game->fightScreen.collums + 1;
-    int coordUp_X = (game->options.map[game->playerActions.pY][game->playerActions.pX].tp_X - 1) % game->fightScreen.collums;
-    int coordDown_Y = (game->options.map[game->playerActions.pY][game->playerActions.pX].tp_Y - 1) / game->fightScreen.collums + 1;
-    int coordDown_X = (game->options.map[game->playerActions.pY][game->playerActions.pX].tp_Y - 1) % game->fightScreen.collums;
-    buildSquare(game->fightScreen.map,coordUp_Y,coordUp_X,coordDown_Y,coordDown_X,0);
+    buildSquare(mapData->map,mapData->selectOptions.options[mapData->selectOptions.actions.pY][mapData->selectOptions.actions.pX].optY,mapData->selectOptions.options[mapData->selectOptions.actions.pY][mapData->selectOptions.actions.pX].optX,mapData->selectOptions.options[mapData->selectOptions.actions.pY][mapData->selectOptions.actions.pX].optY_,mapData->selectOptions.options[mapData->selectOptions.actions.pY][mapData->selectOptions.actions.pX].optX_,0);
 
     if(GetAsyncKeyState(VK_W) && up)
-        game->playerActions.pY--;
+        mapData->selectOptions.actions.pY--;
     else if(GetAsyncKeyState(VK_S) && down)
-        game->playerActions.pY++;
+        mapData->selectOptions.actions.pY++;
     else if(GetAsyncKeyState(VK_A) && left)
-        game->playerActions.pX--;
+        mapData->selectOptions.actions.pX--;
     else if(GetAsyncKeyState(VK_D) && right)
-        game->playerActions.pX++;
+        mapData->selectOptions.actions.pX++;
+    else if(GetAsyncKeyState(VK_ESC))
+        return -10;
+    
 
 
-    coordUp_Y = (game->options.map[game->playerActions.pY][game->playerActions.pX].tp_X - 1) / game->fightScreen.collums + 1;
-    coordUp_X = (game->options.map[game->playerActions.pY][game->playerActions.pX].tp_X - 1) % game->fightScreen.collums;
-    coordDown_Y = (game->options.map[game->playerActions.pY][game->playerActions.pX].tp_Y - 1) / game->fightScreen.collums + 1;
-    coordDown_X = (game->options.map[game->playerActions.pY][game->playerActions.pX].tp_Y - 1) % game->fightScreen.collums;
-
-    buildSquare(game->fightScreen.map,coordUp_Y,coordUp_X,coordDown_Y,coordDown_X,1);
+    buildSquare(mapData->map,mapData->selectOptions.options[mapData->selectOptions.actions.pY][mapData->selectOptions.actions.pX].optY,mapData->selectOptions.options[mapData->selectOptions.actions.pY][mapData->selectOptions.actions.pX].optX,mapData->selectOptions.options[mapData->selectOptions.actions.pY][mapData->selectOptions.actions.pX].optY_,mapData->selectOptions.options[mapData->selectOptions.actions.pY][mapData->selectOptions.actions.pX].optX_,1);
     Sleep(100);
 
+    //     if((char *)mapData->selectOptions.options.map[mapData->selectOptions.playerActions.pY][mapData->selectOptions.playerActions.pX].entity == "Run")
+    //     {
+    //         pop(&mapData->selectOptions.stackEvents);
+    //         mapData->selectOptions.screenModes.Fight = 0;
+    //         mapData->selectOptions.screenModes.Map = 1;
+    //         buildSquare(mapData->selectOptions.fightScreen.map,coordUp_Y,coordUp_X,coordDown_Y,coordDown_X,0);
+    //         screenOn(&mapData->selectOptions.mapScreen);
+    //         Sleep(100);
+    //     }
+    // }
     if(GetAsyncKeyState(VK_ENTER))
-    {
-        screenOn(&game->fightScreen);
-
-        if((char *)game->options.map[game->playerActions.pY][game->playerActions.pX].entity == "Fight")
-        {
-            
-        }
-        if((char *)game->options.map[game->playerActions.pY][game->playerActions.pX].entity == "Bag")
-        {
-
-        }
-        if((char *)game->options.map[game->playerActions.pY][game->playerActions.pX].entity == "Poke")
-        {
-
-        }
-        if((char *)game->options.map[game->playerActions.pY][game->playerActions.pX].entity == "Run")
-        {
-            pop(&game->stackEvents);
-            game->screenModes.Fight = 0;
-            game->screenModes.Map = 1;
-            buildSquare(game->fightScreen.map,coordUp_Y,coordUp_X,coordDown_Y,coordDown_X,0);
-            screenOn(&game->mapScreen);
-            Sleep(100);
-        }
-    }
-
-    
+        return mapData->selectOptions.actions.pY * mapData->selectOptions.collums + mapData->selectOptions.actions.pX;
+    else
+        return -1;
 
 }
 
@@ -201,7 +177,7 @@ void checkEnemy(Room * game)
 
         push(&game->stackEvents, &game->fightScreen);
 
-        game->playerActions = playerInnit(0,0,0);
+        game->fightScreen.selectOptions.actions = playerInnit(0,0,0);
 
         game->screenModes.Fight = 1;
         game->screenModes.Map = 0;

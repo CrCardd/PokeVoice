@@ -164,6 +164,18 @@ void buildFullSquare(Map ** screen, int coordY, int coordX, int coordY_, int coo
 }
 
 
+void attackScreenConstructor(Map ** screen)
+{
+    fightScreenConstruct(screen);
+
+    // buildFullSquare(screen,38,34,47,53,0);
+    // buildFullSquare(screen,38,56,47,75,0);
+    // buildFullSquare(screen,50,34,59,53,0);
+    // buildFullSquare(screen,50,56,59,75,0);
+    buildLine(2,screen,34,9,60);
+}
+
+
 
 
 

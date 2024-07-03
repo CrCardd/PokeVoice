@@ -6,15 +6,69 @@
 #include <stdlib.h>
 
 // #include "main.h"
+typedef struct Room Room;
+
+
+
+typedef struct 
+{
+    int optY;
+    int optX;
+    int optY_;
+    int optX_;
+    void * entity;
+} Options;
+
+
 
 typedef struct
 {
     int value;
-    int tp_X;
-    int tp_Y;
     void * entity;
 
 } Map;
+
+
+
+
+
+typedef struct
+{
+    char * name;
+} atttttaques;
+typedef struct
+{
+    char * name;
+    atttttaques * atq;
+} pokessub;
+
+
+
+
+typedef struct 
+{
+    int pX;
+    int pY;
+    int renderValue;
+    pokessub * pokedex;
+    Map lastCoord;
+
+} Player;
+
+
+
+typedef struct
+{
+    Player actions;
+    int rows;
+    int collums;
+    Options ** options;
+    char * selectName;
+} SelectOptions;
+
+
+
+typedef void (*Func)(Room *, int);
 
 
 
@@ -24,6 +78,10 @@ typedef struct MapData
     int rows;
     int collums;
     int screenUpdated;
+    SelectOptions selectOptions;
+    Func func;
+
+
 } MapData;
 
 

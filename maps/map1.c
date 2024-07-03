@@ -29,18 +29,20 @@ int main(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmd
 
 
 
-    map.mapScreen.map[40][40].entity = "sampaio o broxissimo";
-    map.mapScreen.map[40][40].value = MESSAGE;
+
+    // map.mapScreen.map[40][40].entity = "sampaio o broxissimo";
+    // map.mapScreen.map[40][40].value = MESSAGE;
 
 
 
 
-    // push(&map.stackEvents,map.fightScreen);
+    // push(&map.stackEvents,&map.fightScreen);
     // map.screenModes.Fight = 1;
     // map.screenModes.Map = 0;
 
-    // map.playerActions = playerInnit(0,0,0);
+    // map.fightScreen.selectOptions.actions = playerInnit(0,0,0);
     
+
 
 
     // /*  

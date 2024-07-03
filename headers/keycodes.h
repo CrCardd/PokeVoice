@@ -37,3 +37,4 @@
 #define VK_Z 0x5A
 
 #define VK_ENTER 0x0D
+#define VK_ESC 0x1B

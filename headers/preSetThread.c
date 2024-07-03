@@ -25,10 +25,10 @@ DWORD showScreen(void *arg)
         //     BACKGROUND_COLOR(162,171,200);
         
 
-        if(event->screenUpdated)
-        {
+        // if(event->screenUpdated)
+        // {
             showMap(map,*event);
-        }
+        // }
 
         
         //OPTIMIZE FUNCTION
@@ -60,7 +60,10 @@ DWORD checkKeyboard(void *arg)
         }
         else
         {
-            selectOption(map);
+            int option = selectOption(event);
+            printf("%d",option);
+            // scanf(" %d", option);
+            event->func(map, option);
         }
 
 

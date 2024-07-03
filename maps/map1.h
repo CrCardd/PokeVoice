@@ -30,7 +30,7 @@ void mapConstruct(Map ** screen)
 
     buildFullSquare(screen,54,21,55,35,STEP);
 
-    buildFullSquare(screen,45,51,46,78, STEP);
+    // buildFullSquare(screen,45,51,46,78, STEP);
 
     //Buracos
     buildHole(screen, 7, 12);
