@@ -1,0 +1,4 @@
+meditate ,21, 17,13
+ice-fang ,20, 18,14
+hyper-voice ,22, 16,0
+arm-thrust ,20, 17,1

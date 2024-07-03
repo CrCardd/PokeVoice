@@ -3,7 +3,11 @@
         {
             "type": "cppbuild",
             "label": "C/C++: gcc.exe build active file",
+<<<<<<< HEAD
             "command": "C:\\msys64\\mingw64\\bin\\gcc.exe",
+=======
+            "command": "C:\\msys64\\ucrt64\\bin\\gcc.exe",
+>>>>>>> origin/sampaio
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
