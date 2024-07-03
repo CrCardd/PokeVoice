@@ -1,4 +1,4 @@
-sludge ,9, 12
-zippy-zap ,11, 19
-synthesis ,8, 18
-safeguard ,7, 10
+stomp ,8, 8
+leaf-tornado ,26, 20
+mat-block ,7, 16
+veevee-volley ,8, 18
