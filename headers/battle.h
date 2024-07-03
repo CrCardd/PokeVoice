@@ -71,6 +71,11 @@ int atack(Team *atacker, Team *atacked, int atack)
     dmg *= mult;
 
     printf("\n%s uses %s\n", atacker->pokes[0].name, atacker->pokes[0].atk[atack - 1].name);
+    
+    if(mult == 2)
+        printf("its supereffective!");
+
+    dmg *= mult;
 
     atacker->pokes[0].atk[atack - 1].uses--;    // Reduz a carga do ataque
 
