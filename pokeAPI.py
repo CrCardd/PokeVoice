@@ -61,13 +61,17 @@ with open('pokemon.txt', 'w') as file:
 with open('moves.txt', 'w') as file:
     for move in range(4):
 
-        num = random.randint(0, 800)    # Número aleatório para os ataques
+        while 1:
+            num = random.randint(0, 800)    # Número aleatório para os ataques
 
-        url = "https://pokeapi.co/api/v2/move/" + str(num)
+            url = "https://pokeapi.co/api/v2/move/" + str(num)
 
-        data = requests.get(url).json()
+            data = requests.get(url).json()
 
-        move = data['name']
+            move = data['name']
+
+            if not '--' in move:
+                break
 
         atackTypeName = data['type']['name']    # Tipo do Ataque como String
 
@@ -114,4 +118,4 @@ with open('moves.txt', 'w') as file:
                 atackType = 1
 
         # Nome  -  Dano  -  Cargas  -  Tipo , Salvos em um Arquivo txt 
-        file.write(move + ' ,' + str(random.randint(5, 40)) + ', ' + str(random.randint(5, 20)) + ',' + str(atackType) + '\n')
+        file.write(move + ' ,' + str(random.randint(5, 40)) + ', ' + str(random.randint(5, 20)) + ', ' + str(atackType) + '\n')

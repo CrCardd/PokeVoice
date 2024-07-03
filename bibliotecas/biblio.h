@@ -1,5 +1,5 @@
-#ifndef HEADERS_H
-#define HEADERS_H
+#ifndef BIBLIO_H
+#define BIBLIO_H
 
 #include "bag.h"
 #include "battle.h"

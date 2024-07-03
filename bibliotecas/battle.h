@@ -86,7 +86,7 @@ int atack(Team *atacker, Team *atacked, int atack)
 
     else if (atacked->pokes[0].hp <= 0) // Organiza com base na vida dos Pokémon quando um inimigo é derrubado
     {
-        BubbleSort(atacked, 4);
+        BubbleSort(atacked->pokes, 4);
     }
 
     return 1;
@@ -116,8 +116,6 @@ int voiceAtack(Team *atacker, Team *atacked)
     }
     
     printf("%s\n", buffer);
-
-    fflush(buffer);
 
     return 0;
 }
@@ -160,6 +158,8 @@ int item(Pokemon *poke, Bag * bag, int index)
     default:
         break;
     }
+
+    return 0;
 }
 
 // Inimigo realiza um ataque aleatório
@@ -238,8 +238,6 @@ void battle(Team * you, Team * enemy, Bag * bag)
 {
     srand(time(NULL));
     int round = 0;
-
-    printf("me %c , enemy %c\n", you->alive, enemy->alive);
 
     while (you->alive == 'a' && enemy->alive == 'a')
     {

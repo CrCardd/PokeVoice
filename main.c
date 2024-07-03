@@ -1,4 +1,4 @@
-#include "headers/headers.h"
+#include "bibliotecas/biblio.h"
 
 int main()
 {
@@ -7,6 +7,6 @@ int main()
     Team me = myTeamConstructor();
 
     Team enemy = teamConstructor();
-    
+
     battle(&me, &enemy, bag);
 }

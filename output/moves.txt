@@ -1,4 +1,4 @@
-meditate ,21, 17,13
-ice-fang ,20, 18,14
-hyper-voice ,22, 16,0
-arm-thrust ,20, 17,1
+zing-zap ,19, 10, 1
+rest ,22, 12, 13
+steel-beam ,23, 16, 8
+double-hit ,34, 18, 0
