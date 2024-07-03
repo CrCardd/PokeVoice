@@ -1,4 +1,4 @@
-stomp ,8, 8
-leaf-tornado ,26, 20
-mat-block ,7, 16
-veevee-volley ,8, 18
+meditate ,21, 17,13
+ice-fang ,20, 18,14
+hyper-voice ,22, 16,0
+arm-thrust ,20, 17,1

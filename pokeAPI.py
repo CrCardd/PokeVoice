@@ -9,7 +9,7 @@ data = requests.get(url).json()
 
 name = data['name']
 
-pokeTypeName = data['types']['type']['name'] # Recebe o Tipo do Pokémon como String
+pokeTypeName = data['types'][0]['type']['name'] # Recebe o Tipo do Pokémon como String
 
 pokeType = 0
 
