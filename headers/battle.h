@@ -132,7 +132,11 @@ int item(Pokemon *poke, Bag * bag, int index)
     case 1: // Tipo 1 recupera Vida
         if(poke->hp > 0)
         {
+            if (poke->hp + 40 > poke->maxhp)
+                poke->hp = poke->maxhp;
+            else
             poke->hp += 40;
+            
             return 1;
         }
         else
@@ -141,7 +145,10 @@ int item(Pokemon *poke, Bag * bag, int index)
 
     case 2: // Tipo 2 Recupera as cargas de todos os ataques
         for (int i = 0; i < 4; i++)
-            poke->atk[i].uses += 10;
+            if(poke->atk[i].uses + 10 > poke->atk[i].maxuses)
+                poke->atk[i].uses = poke->atk[i].maxuses;
+            else
+                poke->atk[i].uses += 10;
         return 1;
         break;
 

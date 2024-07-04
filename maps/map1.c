@@ -30,7 +30,6 @@ int main(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmd
 
 
 
-
     // map.mapScreen.map[40][40].entity = "sampaio o broxissimo";
     // map.mapScreen.map[40][40].value = MESSAGE;
 
