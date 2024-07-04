@@ -314,7 +314,57 @@ void fightScreenConstruct(Map **screen)
             screen[23][55].value = MESSAGE;
             screen[24][55].value = MESSAGE;
 
-            screen
+            screen[10][5].entity = "                 `.     `.  ,";
+            screen[11][5].entity = "              .--'  .._,''-' `.";
+            screen[12][5].entity = "               `  '--.   ,-''";
+            screen[13][5].entity = "                `'`   |  \\";
+            screen[14][5].entity = "                   -. \\, |";
+            screen[15][5].entity = "                    `--Y.'      __.";
+            screen[16][5].entity = "                         \\     L._, \\";
+            screen[17][5].entity = "               _.,        `.   <  <\\                ";
+            screen[18][5].entity = "             ,' '           `, `.   | \\            (;";
+            screen[19][5].entity = "          ../, `.            `  |    .\\`.           \\ \\_";
+            screen[20][5].entity = "         ,' ,..  .           _.,'    ||\\l            )  ''.";
+            screen[21][5].entity = "        , ,'   \\           ,'.-.`-._,'  |           .  _._`";
+            screen[22][5].entity = "      ,' /      \\        `' ' `--/   | \\          / /   ..\\";
+            screen[23][5].entity = "    .'  /        \\ .         |\\__ - _ ,'` `        / /     `.`";
+            screen[24][5].entity = "    |  '          ..         `-...-'  |  `-'      / /        . `.";
+            screen[25][5].entity = "    | /           |L__           |    |          / /          `. `.";
+            screen[26][5].entity = "   , /            .   .          |    |         / /             ` `";
+            screen[27][5].entity = " / /          ,. ,`._ `-_       |    |  _   ,-' /               ` \\";
+            screen[28][5].entity = ".  '         .-f    ,'   `    '.       \\__.---'     _   .'   '     \\ \\";
+            screen[29][5].entity = "' /          `.'    l     .' /          \\..      ,_|/   `.  ,'`     L\\";
+            screen[30][5].entity = "||    ,'      `. `.   '       _,...._        `  |    `/ '  |   '     .|";
+            screen[31][5].entity = "||  ,'          `. ;.,.---' ,'       `.   `.. `-'  .-' /_ .'    ;_   ||";
+            screen[32][5].entity = "|| '              V      / /           `   | `   ,'   ,' '.    !  `. ||";
+            screen[33][5].entity = "||/            _,-------7 '              . |  `-'    l         /    `||";
+            screen[34][5].entity = " `'        ,'    `'.'    |               |    `.        '. -.'       `'";
+            
+            screen[33][5].value = MESSAGE;
+            screen[34][5].value = MESSAGE;
+            screen[32][5].value = MESSAGE;
+            screen[31][5].value = MESSAGE;
+            screen[30][5].value = MESSAGE;
+            screen[29][5].value = MESSAGE;
+            screen[28][5].value = MESSAGE;
+            screen[27][5].value = MESSAGE;
+            screen[26][5].value = MESSAGE;
+            screen[25][5].value = MESSAGE;
+            screen[24][5].value = MESSAGE;
+            screen[23][5].value = MESSAGE;
+            screen[22][5].value = MESSAGE;
+            screen[21][5].value = MESSAGE;
+            screen[20][5].value = MESSAGE;
+            screen[19][5].value = MESSAGE;
+            screen[17][5].value = MESSAGE;
+            screen[18][5].value = MESSAGE;
+            screen[15][5].value = MESSAGE;
+            screen[16][5].value = MESSAGE;
+            screen[14][5].value = MESSAGE;
+            screen[13][5].value = MESSAGE;
+            screen[12][5].value = MESSAGE;
+            screen[11][5].value = MESSAGE;
+            screen[10][5].value = MESSAGE;
 
 }
 
