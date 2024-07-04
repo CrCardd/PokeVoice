@@ -23,4 +23,9 @@
 #include "main.h"
 #include "preSetThread.c"
 
+#include "bag.h"
+#include "mons.h"
+#include "battle.h"
+#include "team.h"
+
 #endif

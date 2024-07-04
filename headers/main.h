@@ -5,7 +5,21 @@
 #include "stack.h"
 #include <stdlib.h>
 #include "renderValues.h"
+
+#include <string.h>
 #include "team.h"
+#include "battle.h"
+
+
+
+
+typedef struct
+{
+    int renderValue;
+    int eY;
+    int eX;
+    Team team;
+} Enemy;
 
 
 
@@ -17,15 +31,9 @@ typedef struct
     int renderValue;
     Map lastCoord;
     Team team;
+    void * currentEntity;
 
 } Player;
-
-
-
-typedef struct
-{
-
-} Enemy;
 
 
 typedef struct 
@@ -90,8 +98,33 @@ Player playerInnit(int renderValue, int y, int x)
     player.renderValue = renderValue;
     player.lastCoord.value = 0;
     player.team = myTeamConstructor();
+
+
+    //  strcpy(player.team.pokes->atk[0].name, "atk1");
+    //  strcpy(player.team.pokes->atk[1].name, "atk2");
+    //  strcpy(player.team.pokes->atk[2].name, "atk3");
+    //  strcpy(player.team.pokes->atk[3].name, "atk4");
+
+
     return player;
 }
+
+
+
+
+void spawnEnemy(Map** map, int renderValue, int y, int x)
+{
+    Enemy * enemy = malloc(sizeof(Enemy));
+    enemy->renderValue = renderValue;
+    enemy->eY = y;
+    enemy->eX = x;
+    enemy->team = teamConstructor();
+
+    map[y][x].value = renderValue;
+    map[y][x].entity = enemy;
+    
+}
+
 
 Objects objectsInnit(int renderPokeball, int renderEnemy, int wall, int hole, int step)
 {
@@ -200,16 +233,21 @@ void selectOptionFight(Room * game, int option)
     {
     case 0:
 
+        // game->attackScreen.map[4][8].entity = (void*)game->player.currentEnemy->team.pokes[0].name;
+        // game->attackScreen.map[30][50].entity = (void*)game->player.team.pokes[0].name;
+
         attackScreenConstructor(game->attackScreen.map);
-        game->attackScreen.map[42][42].entity = "ataque 1";//game->player.team.pokes[0].atk[0]      ->namegame->player.pokedex[0].atq[0].name;
+        game->attackScreen.map[42][42].entity = (void*)game->player.team.pokes[0].atk[0].name;     
         game->attackScreen.map[42][42].value = MESSAGE;
-        game->attackScreen.map[42][64].entity = "ataque 2";//game->player.pokedex[0].atq[1].name;
+        game->attackScreen.map[42][64].entity = (void*)game->player.team.pokes[0].atk[1].name;
         game->attackScreen.map[42][64].value = MESSAGE;
-        game->attackScreen.map[54][42].entity = "ataque 3";//game->player.pokedex[0].atq[2].name;
+        game->attackScreen.map[54][42].entity = (void*)game->player.team.pokes[0].atk[2].name;
         game->attackScreen.map[54][42].value = MESSAGE;
-        game->attackScreen.map[54][64].entity = "ataque 4";//game->player.pokedex[0].atq[3].name;
+        game->attackScreen.map[54][64].entity = (void*)game->player.team.pokes[0].atk[3].name;
         game->attackScreen.map[54][64].value = MESSAGE;
         game->actions = playerInnit(0,0,0);
+
+        resetScreen(&game->fightScreen);
 
         push(&game->stackEvents, &game->attackScreen);
         Sleep(100);
@@ -238,7 +276,14 @@ void selectOptionFight(Room * game, int option)
 
 void selectOptionAttack(Room * game, int option)
 {
-
+    if(GetAsyncKeyState(VK_ESC))
+    {
+        resetScreen(&game->attackScreen);
+        fightScreenConstruct(game->fightScreen.map);
+        pop(&game->stackEvents);
+    }
+    if(option != -1)
+        atack(&game->player.team, &((Enemy*)game->player.currentEntity)->team, option);
 }
 
 

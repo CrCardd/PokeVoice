@@ -1,0 +1,4 @@
+hyper-beam ,12, 12, 0
+shadow-force ,15, 10, 7
+catastropika ,26, 14, 1
+twister ,32, 10, 15

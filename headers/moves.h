@@ -69,8 +69,6 @@ int selectOption(Room * game, MapData * mapData)
         game->actions.pX--;
     else if(GetAsyncKeyState(VK_D) && right)
         game->actions.pX++;
-    else if(GetAsyncKeyState(VK_ESC))
-        return -10;
     
 
 
@@ -100,24 +98,28 @@ int checkInteract(Room * game, MapData * screen, int entity, int put)
     {
         if(up == entity)  //IF ITEM UP
         {
+            game->player.currentEntity = screen->map[game->player.pY-1][game->player.pX].entity;
             screen->map[game->player.pY-1][game->player.pX].value = put;
             interact = 1;
         }
 
         if(down == entity) //IF ITEM DOWN
-        {
+        {   
+            game->player.currentEntity = screen->map[game->player.pY+1][game->player.pX].entity;
             screen->map[game->player.pY+1][game->player.pX].value = put;
             interact = 1;
         }
 
         if(right == entity) //IF ITEM RIGHT
-        {
+        {   
+            game->player.currentEntity = screen->map[game->player.pY][game->player.pX+1].entity;
             screen->map[game->player.pY][game->player.pX+1].value = put;
             interact = 1;
         }
 
         if(left == entity) //IF ITEM LEFT
         {
+            game->player.currentEntity = screen->map[game->player.pY][game->player.pX-1].entity;
             screen->map[game->player.pY][game->player.pX-1].value = put;
             interact = 1;
         }
@@ -160,11 +162,10 @@ void checkEnemy(Room * game)
     if(GetAsyncKeyState(VK_ENTER) && interact)
     {
 
+        fightScreenConstruct(game->fightScreen.map);
 
         push(&game->stackEvents, &game->fightScreen);
-
         game->actions = playerInnit(0,0,0);
-
         game->screenModes.Fight = 1;
         game->screenModes.Map = 0;
     }   

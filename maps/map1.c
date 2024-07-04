@@ -22,11 +22,10 @@ int main(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmd
 
     mapConstruct(map.mapScreen.map);
     secondMapConstruct(map.secondMapScreen.map);
-    fightScreenConstruct(map.fightScreen.map);
 
 
 
-    map.mapScreen.map[35][63].value = ENEMY;
+    spawnEnemy(map.mapScreen.map, ENEMY, 35,63);
 
 
 
@@ -43,6 +42,11 @@ int main(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmd
 
     // map.actions = playerInnit(0,0,0);
     
+    // printf("%s\n",map.player.team.pokes[0].atk[0].name);
+    // printf("%s\n",map.player.team.pokes[0].atk[1].name);
+    // printf("%s\n",map.player.team.pokes[0].atk[2].name);
+    // printf("%s\n",map.player.team.pokes[0].atk[3].name);
+
 
 
     // /*  
