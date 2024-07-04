@@ -52,7 +52,6 @@ void buildHole(Map** map, int coordUpY, int coordUpX)
         map[coordUpY+i][coordUpX].value = HOLE;
         map[coordUpY+i][coordUpX+ (lenght-2)].value = HOLE;
         map[coordUpY+i][coordUpX+ (lenght-1)].value = HOLE;
-
     }
 
 }
@@ -72,13 +71,19 @@ void resetScreen(MapData * mapData)
 void fightScreenConstruct(Map **screen)
 {
 
-
+    //first message box 
     buildLine(1,screen,0,1,30);
-    buildLine(1,screen,0,11,33);
-    buildLine(2,screen,0,1,10);
-    buildLine(2,screen,30,1,11);
+    buildLine(1,screen,0,9,33);
+    buildLine(2,screen,0,1,8);
+    buildLine(2,screen,30,1,9);
 
+    // second message box
+    buildLine(1, screen, 48, 25, 30);
+    buildLine(1, screen, 45, 33, 33);
+    buildLine(2, screen, 48, 25, 8);
+    buildLine(2, screen, 78, 25, 9);
 
+    //big rectangle below
     buildLine(1,screen,0,35,79);
     buildLine(1,screen,0,62,79);
     buildLine(2,screen,0,36,26);
@@ -253,6 +258,63 @@ void fightScreenConstruct(Map **screen)
             buildLine(2,screen, 50, 51, 7);
             buildLine(1,screen, 50, 58, 3);
 
+
+
+            // screen[10][10].entity = "MENSAGEM PRO MATIAS BROXA";
+            // screen[10][10].value = MESSAGE;
+            screen[0][55].entity = "                    _,.------....___,.' ',-.";
+            screen[1][55].entity = "                   ,-'          _,.--'        |";
+            screen[2][55].entity = "               .   /     /                     ``.";
+            screen[3][55].entity = "                |  |     .                       /.\\";
+            screen[4][55].entity = "____      |___._  |       __               / `     \\";
+            screen[5][55].entity = ".'    `---""       ``'-.--''`  /               .     |";
+            screen[6][55].entity = ".  ,            __               `              |   |";
+            screen[7][55].entity = "`,'         ,-''  .               /             |     L";
+            screen[8][55].entity = ",'          '    _.'                -._          /    |";
+            screen[9][55].entity = ",`-.    ,'.   `--'                      >.      ,'     |";
+            screen[10][55].entity = ". .'/'   `-'        __  ,  ,-.         /  `.__.-     ,'";
+            screen[11][55].entity = " ||:, .           ,'  ;  /  / | `        `.    .      ./";
+            screen[12][55].entity = " j|: -            `--'  ' ,'_  . .         `.__, |    /";
+            screen[13][55].entity = "/  :_  |                 .  '' :_;                `.'.'";
+            screen[14][55].entity = ".    ''                  '''''''                    V";
+            screen[15][55].entity = "`.                                 .    `.   _,..  `";
+            screen[16][55].entity = "`,_   .    .                _,-'/    .. `,'   __ `";
+            screen[17][55].entity = ") |`._        ___....----""'  ,'   .'  | |   '  |  .";
+            screen[18][55].entity = "/   `. '`-.--''         _,' ,'     `---' |    `./  |";
+            screen[19][55].entity = ".   _  `""'--.._____..--'   ,             '         ";
+            screen[20][55].entity = "| .' `. `-.                /-.           /          ,";
+            screen[21][55].entity = "| `._.'    `,_            ;  /         ,'          .";
+            screen[22][55].entity = " .'          /| `-.        . ,'         ,           ,";
+            screen[23][55].entity = "'-.__ __ _,','    '`-..___;-...__   ,.' ____.___.'";
+            screen[24][55].entity = "`'^--'..'   '-`-^-''--    `-^-'`.""""""`.,^.`.--'";
+
+            screen[0][55].value = MESSAGE;
+            screen[1][55].value = MESSAGE;
+            screen[2][55].value = MESSAGE;
+            screen[3][55].value = MESSAGE;
+            screen[4][55].value = MESSAGE;
+            screen[5][55].value = MESSAGE;
+            screen[6][55].value = MESSAGE;
+            screen[7][55].value = MESSAGE;
+            screen[8][55].value = MESSAGE;
+            screen[9][55].value = MESSAGE;
+            screen[10][55].value = MESSAGE;
+            screen[11][55].value = MESSAGE;
+            screen[12][55].value = MESSAGE;
+            screen[13][55].value = MESSAGE;
+            screen[14][55].value = MESSAGE;
+            screen[15][55].value = MESSAGE;
+            screen[16][55].value = MESSAGE;
+            screen[17][55].value = MESSAGE;
+            screen[18][55].value = MESSAGE;
+            screen[19][55].value = MESSAGE;
+            screen[20][55].value = MESSAGE;
+            screen[21][55].value = MESSAGE;
+            screen[22][55].value = MESSAGE;
+            screen[23][55].value = MESSAGE;
+            screen[24][55].value = MESSAGE;
+
+            screen
 
 }
 

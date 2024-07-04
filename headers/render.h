@@ -84,7 +84,7 @@ void showMap(Room *game, MapData screenData)
                     // printf("%d",size%3);
                     printf("%s",(char*)screenData.map[i][j].entity);
                     for(int k=0; k < (3 - (size%3)); k++)
-                        printf("X");
+                        printf(" ");
                     size = size/3 + ((size%3)/(size%3))-1;
 
                     j += size; 

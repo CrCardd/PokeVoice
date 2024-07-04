@@ -24,7 +24,7 @@ int main(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmd
 
 
     // map.mapScreen.map[40][40].entity = "mensagem para a tela HAHA";
-    // map.mapScreen.map[40][40].value = MESSAGE;
+    // map.mapScreen.map[40][40].value = MESSAGE;   
 
     showMap(&map,map.fightScreen);
 
