@@ -5,7 +5,7 @@
 #include "stack.h"
 #include <stdlib.h>
 #include "renderValues.h"
-
+#include "team.h"
 
 
 
@@ -16,6 +16,7 @@ typedef struct
     int pY;
     int renderValue;
     Map lastCoord;
+    Team team;
 
 } Player;
 
@@ -88,6 +89,7 @@ Player playerInnit(int renderValue, int y, int x)
     player.pY = y;
     player.renderValue = renderValue;
     player.lastCoord.value = 0;
+    player.team = myTeamConstructor();
     return player;
 }
 
@@ -168,14 +170,14 @@ Options ** menuFightInnit()
     options[0][1].optX_ = 76;
     options[0][1].entity = "Bag";
 
-    int arr2[] = {49,33,60,54};
+    // int arr2[] = {49,33,60,54};
     options[1][0].optY = 49;
     options[1][0].optX = 33;
     options[1][0].optY_ = 60;
     options[1][0].optX_ = 54;
     options[1][0].entity = "Poke";
 
-    int arr3[] = {49,55,60,76};
+    // int arr3[] = {49,55,60,76};
     options[1][1].optY = 49;
     options[1][1].optX = 55;
     options[1][1].optY_ = 60;
@@ -199,14 +201,14 @@ void selectOptionFight(Room * game, int option)
     case 0:
 
         attackScreenConstructor(game->attackScreen.map);
-        game->attackScreen.map[10][10].entity = "ataque 1";//game->player.pokedex[0].atq[0].name;
-        game->attackScreen.map[10][10].value = MESSAGE;
-        game->attackScreen.map[20][20].entity = "ataque 2";//game->player.pokedex[0].atq[1].name;
-        game->attackScreen.map[20][20].value = MESSAGE;
-        game->attackScreen.map[30][30].entity = "ataque 3";//game->player.pokedex[0].atq[2].name;
-        game->attackScreen.map[30][30].value = MESSAGE;
-        game->attackScreen.map[40][40].entity = "ataque 4";//game->player.pokedex[0].atq[3].name;
-        game->attackScreen.map[40][40].value = MESSAGE;
+        game->attackScreen.map[42][42].entity = "ataque 1";//game->player.team.pokes[0].atk[0]      ->namegame->player.pokedex[0].atq[0].name;
+        game->attackScreen.map[42][42].value = MESSAGE;
+        game->attackScreen.map[42][64].entity = "ataque 2";//game->player.pokedex[0].atq[1].name;
+        game->attackScreen.map[42][64].value = MESSAGE;
+        game->attackScreen.map[54][42].entity = "ataque 3";//game->player.pokedex[0].atq[2].name;
+        game->attackScreen.map[54][42].value = MESSAGE;
+        game->attackScreen.map[54][64].entity = "ataque 4";//game->player.pokedex[0].atq[3].name;
+        game->attackScreen.map[54][64].value = MESSAGE;
         game->actions = playerInnit(0,0,0);
 
         push(&game->stackEvents, &game->attackScreen);
