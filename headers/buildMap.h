@@ -74,9 +74,9 @@ void fightScreenConstruct(Map **screen)
 
 
     buildLine(1,screen,0,1,30);
-    buildLine(1,screen,0,11,30);
-    buildLine(2,screen,0,0,11);
-    buildLine(2,screen,41,0,11);
+    buildLine(1,screen,0,11,33);
+    buildLine(2,screen,0,1,10);
+    buildLine(2,screen,30,1,11);
 
 
     buildLine(1,screen,0,35,79);
@@ -236,7 +236,7 @@ void fightScreenConstruct(Map **screen)
 
     //BALL
 
-            buildLine(2,screen, 36, 52, 6);
+            buildLine(2,screen, 36 , 52, 6);
             buildLine(2,screen, 39, 52, 6);
             buildLine(1,screen, 36, 58, 3);
             buildLine(1,screen, 36, 51, 3);

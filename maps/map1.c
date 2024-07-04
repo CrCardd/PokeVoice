@@ -23,17 +23,11 @@ int main(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmd
     fightScreenConstruct(map.fightScreen.map);
 
 
-
-
-
     // map.mapScreen.map[40][40].entity = "mensagem para a tela HAHA";
     // map.mapScreen.map[40][40].value = MESSAGE;
 
     showMap(&map,map.fightScreen);
 
-    
-
-    
 
     /*  
     Mutex = CreateMutex(NULL, FALSE, NULL);
