@@ -62,5 +62,6 @@
     "render.h": "c",
     "pthread.h": "c",
     "stdlib.h": "c"
-  }
+  },
+  "files.autoSave": "afterDelay"
 }
