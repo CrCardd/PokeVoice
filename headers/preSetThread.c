@@ -19,20 +19,8 @@ DWORD showScreen(void *arg)
         MapData * event = peek(&map->stackEvents);
         WaitForSingleObject(Mutex, INFINITE);
 
-        
-
-        // if(!map->screenModes.Fight)    
-        //     BACKGROUND_COLOR(162,171,200);
-        
-
-        // if(event->screenUpdated)
-        // {
+    
             showMap(map,*event);
-        // }
-
-        
-        //OPTIMIZE FUNCTION
-        // checkScreenUpdate(event);
 
         
         ReleaseMutex(Mutex);
@@ -63,6 +51,14 @@ DWORD checkKeyboard(void *arg)
             int option = selectOption(map,event);
             event->func(map, option);
         }
+
+        if((int)map->player.checkAttack)
+        {
+
+            enemyRound(&map->player.team, (Enemy*)map->player.currentEntity);
+            //RETORNA O ATAQUE
+        }
+
 
 
         ReleaseMutex(Mutex);

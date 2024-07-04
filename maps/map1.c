@@ -14,7 +14,10 @@ int main(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmd
 {
     configureTerminal();
     
-    Player player = playerInnit(PLAYER,60,70);
+    // Player player = playerInnit(PLAYER,60,70);
+    Player player = playerInnit(PLAYER,35,64);
+
+    player.team = myTeamConstructor();
     Objects objects = objectsInnit(POKEBALL, ENEMY, WALL,HOLE,STEP);
     Room map = gameInnit(ROWS,COLLUMS, player, objects);
     push(&map.stackEvents, &map.mapScreen);
@@ -28,20 +31,6 @@ int main(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmd
     spawnEnemy(map.mapScreen.map, ENEMY, 35,63);
 
 
-
-
-    // map.mapScreen.map[40][40].entity = "sampaio o broxissimo";
-    // map.mapScreen.map[40][40].value = MESSAGE;
-
-
-    // attackScreenConstructor(map.attackScreen.map);
-
-    // push(&map.stackEvents,&map.attackScreen);
-    // map.screenModes.Fight = 1;
-    // map.screenModes.Map = 0;
-
-    // map.actions = playerInnit(0,0,0);
-    
     // printf("%s\n",map.player.team.pokes[0].atk[0].name);
     // printf("%s\n",map.player.team.pokes[0].atk[1].name);
     // printf("%s\n",map.player.team.pokes[0].atk[2].name);

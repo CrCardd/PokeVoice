@@ -1,0 +1,4 @@
+tackle, 15, 30, 0
+razor leaf, 30, 5, 11
+solar beam, 45, 2, 11
+toxic , 20, 10, 3

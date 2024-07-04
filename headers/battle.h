@@ -36,8 +36,8 @@ void switchPoke(Team * team, int index)
 {
     Pokemon aux;
     aux = team->pokes[0];
-    team->pokes[0] = team->pokes[index - 1];
-    team->pokes[index -1] = aux;
+    team->pokes[0] = team->pokes[index];
+    team->pokes[index] = aux;
 }
 
 //Bubble Sort utilizado para reorganizar os Pokémons decrescentemente com base na vida
@@ -61,35 +61,33 @@ void BubbleSort(Pokemon* array, int size)
 
 int atack(Team *atacker, Team *atacked, int atack)
 {
-    if(atacker->pokes[0].atk[atack -1].uses <= 0)   // Verifica se o Pokémon possui cargas para aquele ataque
+    if(atacker->pokes[0].atk[atack].uses <= 0)   // Verifica se o Pokémon possui cargas para aquele ataque
         return 0;
     
-    int dmg = (atacker->pokes[0].atk[atack - 1].dmg); // Dano base do ataque
+    int dmg = (atacker->pokes[0].atk[atack].dmg); // Dano base do ataque
 
     int mult = atack_table[atacker->pokes[0].atk->type][atacked->pokes[0].type]; // Multiplicador de dano
 
     dmg *= mult;
 
-    printf("\n%s uses %s\n", atacker->pokes[0].name, atacker->pokes[0].atk[atack - 1].name);
+    printf("\n%s uses %s\n", atacker->pokes[0].name, atacker->pokes[0].atk[atack].name);
     
-    if(mult == 2)
-        printf("its supereffective!");
-
-    dmg *= mult;
-
-    atacker->pokes[0].atk[atack - 1].uses--;    // Reduz a carga do ataque
+    atacker->pokes[0].atk[atack].uses--;    // Reduz a carga do ataque
 
     atacked->pokes[0].hp -= dmg; 
 
     if (atacked->pokes[0].hp <= 0 && atacked->pokes[1].hp <= 0) // Verifica se há algum Pokémon de pé na sequência
         atacked->alive = 'd';
-
     else if (atacked->pokes[0].hp <= 0) // Organiza com base na vida dos Pokémon quando um inimigo é derrubado
     {
         BubbleSort(atacked->pokes, 4);
     }
 
-    return 1;
+
+    return mult+1;                                              // LEMBRA DISSO CUZAO
+    // 3 super
+    // 1.5 pouco
+     // 1 nulo
 }
 
 int voiceAtack(Team *atacker, Team *atacked)
@@ -109,7 +107,7 @@ int voiceAtack(Team *atacker, Team *atacked)
     {
         if(strcmp(atacker->pokes[0].atk[i].name, buffer) == 0)  // Compara com todos os ataques
         {
-            indexAtack = i + 1;
+            indexAtack = i;
             atack(atacker, atacked, indexAtack);    // Função atack() como index do ataque encontrado
             return 1;
         }
@@ -161,17 +159,20 @@ int item(Pokemon *poke, Bag * bag, int index)
 }
 
 // Inimigo realiza um ataque aleatório
-void enemyRound(Team * you, Team * enemy)
+////////////////////////////////////// CRISTIAN
+char * enemyRound(Team * you, Team * enemy)
 {   
     srand(time(NULL));
-    int indexAtack = 1 + rand()%3;
     int valid;
-
+    int indexAtack;
     do{
+        indexAtack = 1 + rand()%3;
         valid = atack(enemy, you, indexAtack);
     } while (!valid);
-    
+
+    return enemy->pokes[0].atk[indexAtack].name;
 }
+//////////////////////////////////// CRISTIAN
 
 
 void myRound(Team * you, Team * enemy, Bag * bag)
@@ -191,12 +192,12 @@ void myRound(Team * you, Team * enemy, Bag * bag)
         
         if(!voiceAtack(you, enemy)) // Tenta utilizar o ataque com voz
         {
-            printf("atack: ");
-            scanf(" %d", &indexAction); // Caso voz falhe efetua um ataque com um input convencional
             int valid;
 
             do{
-                valid = atack(you, enemy, indexAction);  // validação para caso faltem cargas
+                printf("atack: ");
+                scanf(" %d", &indexAction); // Caso voz falhe efetua um ataque com um input convencional
+                valid = atack(you, enemy, indexAction);  // validação para caso faltem cargas                                  // ATACOU IGUAL SAPORRA
             } while (!valid);
         }
         break;

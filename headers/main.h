@@ -7,6 +7,8 @@
 #include "renderValues.h"
 
 #include <string.h>
+
+#include "keycodes.h"
 #include "team.h"
 #include "battle.h"
 
@@ -32,6 +34,7 @@ typedef struct
     Map lastCoord;
     Team team;
     void * currentEntity;
+    float checkAttack;
 
 } Player;
 
@@ -97,13 +100,7 @@ Player playerInnit(int renderValue, int y, int x)
     player.pY = y;
     player.renderValue = renderValue;
     player.lastCoord.value = 0;
-    player.team = myTeamConstructor();
-
-
-    //  strcpy(player.team.pokes->atk[0].name, "atk1");
-    //  strcpy(player.team.pokes->atk[1].name, "atk2");
-    //  strcpy(player.team.pokes->atk[2].name, "atk3");
-    //  strcpy(player.team.pokes->atk[3].name, "atk4");
+    player.checkAttack = 0;
 
 
     return player;
@@ -237,13 +234,17 @@ void selectOptionFight(Room * game, int option)
         // game->attackScreen.map[30][50].entity = (void*)game->player.team.pokes[0].name;
 
         attackScreenConstructor(game->attackScreen.map);
-        game->attackScreen.map[42][42].entity = (void*)game->player.team.pokes[0].atk[0].name;     
+
+        printf("%s",game->player.team.pokes[0].atk[0].name);
+        printf("\nSAMPAIO FILHA DA PUTA");
+
+        game->attackScreen.map[42][42].entity = game->player.team.pokes[0].atk[0].name;     
         game->attackScreen.map[42][42].value = MESSAGE;
-        game->attackScreen.map[42][64].entity = (void*)game->player.team.pokes[0].atk[1].name;
+        game->attackScreen.map[42][64].entity = game->player.team.pokes[0].atk[1].name;
         game->attackScreen.map[42][64].value = MESSAGE;
-        game->attackScreen.map[54][42].entity = (void*)game->player.team.pokes[0].atk[2].name;
+        game->attackScreen.map[54][42].entity = game->player.team.pokes[0].atk[2].name;
         game->attackScreen.map[54][42].value = MESSAGE;
-        game->attackScreen.map[54][64].entity = (void*)game->player.team.pokes[0].atk[3].name;
+        game->attackScreen.map[54][64].entity = game->player.team.pokes[0].atk[3].name;
         game->attackScreen.map[54][64].value = MESSAGE;
         game->actions = playerInnit(0,0,0);
 
@@ -282,8 +283,18 @@ void selectOptionAttack(Room * game, int option)
         fightScreenConstruct(game->fightScreen.map);
         pop(&game->stackEvents);
     }
+
     if(option != -1)
-        atack(&game->player.team, &((Enemy*)game->player.currentEntity)->team, option);
+    {
+        game->player.checkAttack = (&game->player.team, &((Enemy*)game->player.currentEntity)->team, option);
+    
+        // if(game->player.checkAttack == 1.5)
+        //     // NAO EFETIVO
+        // else if(game->player.checkAttack == 3)
+        //     // MUITO EFETIVO
+        // else if(game->player.checkAttack == 1)
+        //     // NORMAL
+    }
 }
 
 

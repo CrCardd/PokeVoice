@@ -7,7 +7,7 @@
 #include "terminal.c"
 #include "main.h"
 #include <windows.h>
-#include <conio.h>
+#include <math.h>
 
 
 
@@ -88,15 +88,16 @@ void showMap(Room *game, MapData screenData)
                 else if(screenData.map[i][j].value == MESSAGE)
                 {   
                     int size = strlen((char*)screenData.map[i][j].entity);
-                    // printf("%d",size%3);
                     printf("%s",(char*)screenData.map[i][j].entity);
                     for(int k=0; k < (3 - (size%3)); k++)
                         printf(" ");
-                    size = size/3 + ((size%3)/(size%3))-1;
+                    size = size/3 + (pow(size%3,0))-1;
 
                     j += size; 
                 }
             
+
+
 
 
 

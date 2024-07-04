@@ -113,6 +113,15 @@ Item removeBag(Bag * list, int index)
     return aux->value;
 }
 
+
+
+
+
+
+
+
+
+//////////////////////////////////// CRISTIAN
 Item getBag(Bag * list, int index)
 {
     if(index > list->size)
@@ -127,6 +136,14 @@ Item getBag(Bag * list, int index)
 
     return iterator->value;
 }
+//////////////////////////////////// CRISTIAN
+
+
+
+
+
+
+
 
 Item useItem(Bag * list, int index)
 {
@@ -160,6 +177,7 @@ void getItem(Bag * list, int index)
     iterator->value.qtd ++;
 
 }
+
 
 void showBag(Bag * list)
 {
