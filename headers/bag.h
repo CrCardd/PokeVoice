@@ -24,6 +24,7 @@ typedef struct Bag
     NodeList *head;
     NodeList *tail;
     int size;
+    int selected;
 }Bag;
 
 
@@ -125,24 +126,20 @@ Item removeBag(Bag * list, int index)
 
 
 
-
-
-//////////////////////////////////// CRISTIAN
-Item getBag(Bag * list, int index)
+Item * getBag(Bag * list, int index)
 {
     if(index > list->size)
         return;
     
     NodeList * iterator = list->head;
 
-    for (int i = 1; i < index; i++)
+    for (int i = 1; i <= index; i++)
     {
         iterator = iterator->next;
     }
 
-    return iterator->value;
+    return &iterator->value;
 }
-//////////////////////////////////// CRISTIAN
 
 
 

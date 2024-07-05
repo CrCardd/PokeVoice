@@ -1,1 +1,1 @@
-nidorino, 80,3
+squirtle, 54,10

@@ -41,6 +41,7 @@ DWORD checkKeyboard(void *arg)
             checkEnemy(map);       // confere se está em contato com um oponente
             checkMove(map,event);  // confere se está em movimento
             checkHole(map);        // confere se esta em contato com um buraco
+            checkInteract(map,event,map->objects.renderPokeball,0);    // semi interação com pokebolas
         }
         else                        // verifica se estamos em batalha
         {
@@ -51,7 +52,7 @@ DWORD checkKeyboard(void *arg)
         ReleaseMutex(Mutex);
 
         if(map->player.checkAct) // caso o player tenha feito uma ação o seu oponente poderá inflingir seu ataque
-            enemyRound(map, &map->player.team, (Enemy*)map->player.currentEntity); 
+            enemyRound(map, &map->player.team); 
         
     }
 }

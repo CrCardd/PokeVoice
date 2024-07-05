@@ -35,6 +35,7 @@ typedef struct
     Team team;
     void * currentEntity;
     int checkAct;
+    Bag * bag;
 
 } Player;
 
@@ -201,8 +202,6 @@ Options ** menuInnit()
 
 
 
-
-
 // Função para gerar um oponente no mapa
 void spawnEnemy(Map** map, int renderValue, int y, int x)
 {
@@ -298,6 +297,78 @@ void PokeConstructor(Room * game)
     game->PokeScreen.map[54][64].value = MESSAGE;
 }
 
+
+void bagScreenConstructor(Room * game)
+{
+    fightScreenConstruct(game->bagScreen.map, game->player.team.pokes[0], ((Enemy*)game->player.currentEntity)->team.pokes[0]);
+    
+     //1/4
+        buildFullSquare(game->bagScreen.map,38,34,47,53,0);
+    //2/4
+        buildFullSquare(game->bagScreen.map,38,56,47,77,0);
+    //3/4
+        buildFullSquare(game->bagScreen.map,50,34,59,53,0);
+    //4/4
+        buildFullSquare(game->bagScreen.map,50,56,59,75,0);
+
+
+
+    game->bagScreen.map[42][42].entity = ((Item*)getBag(game->player.bag, 0))->name;     
+    game->bagScreen.map[42][42].value = MESSAGE;
+    game->bagScreen.map[46][52].entity = intToStr(((Item*)getBag(game->player.bag, 0))->qtd);
+    game->bagScreen.map[46][52].value = MESSAGE;
+
+
+    game->bagScreen.map[42][64].entity = ((Item*)getBag(game->player.bag, 1))->name;
+    game->bagScreen.map[42][64].value = MESSAGE;
+    game->bagScreen.map[46][74].entity = intToStr(((Item*)getBag(game->player.bag, 1))->qtd);
+    game->bagScreen.map[46][74].value = MESSAGE;
+
+
+    game->bagScreen.map[54][42].entity = ((Item*)getBag(game->player.bag, 2))->name;
+    game->bagScreen.map[54][42].value = MESSAGE;
+    game->bagScreen.map[58][52].entity = intToStr(((Item*)getBag(game->player.bag, 2))->qtd);
+    game->bagScreen.map[58][52].value = MESSAGE;
+
+
+    game->bagScreen.map[54][64].entity = ((Item*)getBag(game->player.bag, 3))->name;
+    game->bagScreen.map[54][64].value = MESSAGE;
+    game->bagScreen.map[58][74].entity = intToStr(((Item*)getBag(game->player.bag, 3))->qtd);
+    game->bagScreen.map[58][74].value = MESSAGE;
+}
+
+
+void bagUseScreenConstructor(Room * game)
+{
+    fightScreenConstruct(game->bagUseScreen.map, game->player.team.pokes[0], ((Enemy*)game->player.currentEntity)->team.pokes[0]);
+    
+     //1/4
+        buildFullSquare(game->bagUseScreen.map,38,34,47,53,0);
+    //2/4
+        buildFullSquare(game->bagUseScreen.map,38,56,47,77,0);
+    //3/4
+        buildFullSquare(game->bagUseScreen.map,50,34,59,53,0);
+    //4/4
+        buildFullSquare(game->bagUseScreen.map,50,56,59,75,0);
+
+
+
+    game->bagUseScreen.map[42][42].entity = game->player.team.pokes[0].name;     
+    game->bagUseScreen.map[42][42].value = MESSAGE;
+
+    game->bagUseScreen.map[42][64].entity = game->player.team.pokes[1].name;
+    game->bagUseScreen.map[42][64].value = MESSAGE;
+
+    game->bagUseScreen.map[54][42].entity = game->player.team.pokes[2].name;
+    game->bagUseScreen.map[54][42].value = MESSAGE;
+
+    game->bagUseScreen.map[54][64].entity = game->player.team.pokes[3].name;
+    game->bagUseScreen.map[54][64].value = MESSAGE;
+}
+
+
+
+
 // função para executar o resultado de uma caixa de seleção
 void selectOptionFight(Room * game, int option)
 {   
@@ -312,10 +383,7 @@ void selectOptionFight(Room * game, int option)
     switch (option)
     {
     case 0:
-
-        
         game->actions = playerInnit(0,0,0);
-
         resetScreen(&game->fightScreen);
         attackScreenConstructor(game);
         push(&game->stackEvents, &game->attackScreen);
@@ -323,7 +391,11 @@ void selectOptionFight(Room * game, int option)
         
         break;
     case 1:
-        
+        game->actions = playerInnit(0,0,0);
+        resetScreen(&game->fightScreen);
+        bagScreenConstructor(game);
+        push(&game->stackEvents, &game->bagScreen);
+        Sleep(100);
         break;
     case 2:
         game->actions = playerInnit(0,0,0);
@@ -338,7 +410,7 @@ void selectOptionFight(Room * game, int option)
         pop(&game->stackEvents);
         game->screenModes.Fight = 0;
         game->screenModes.Map = 1;
-        
+        game->objects.renderWallColorSecond = 0;
         Sleep(100);
         break;
     
@@ -408,7 +480,6 @@ void selectOptionAttack(Room * game, int option)
     }
 }
 
-
 // Nossa batalha leva em consideração o primeiro Pokémon do Array de Pokémons
 // Essa função altera o Pokémon 'Ativo'
 void switchPoke(Room * game, int index)
@@ -421,7 +492,7 @@ void switchPoke(Room * game, int index)
     }
     Pokemon aux;
 
-    if(index != -1 && game->player.team.pokes[index].hp > 0 && GetAsyncKeyState(VK_ENTER))
+    if(index != -1 && game->player.team.pokes[index].hp > 0)
     {
         aux = game->player.team.pokes[0];
         game->player.team.pokes[0] = game->player.team.pokes[index];
@@ -430,12 +501,13 @@ void switchPoke(Room * game, int index)
         resetScreen(&game->PokeScreen);
         pop(&game->stackEvents);
         fightScreenConstruct(game->fightScreen.map, game->player.team.pokes[0], ((Enemy*)game->player.currentEntity)->team.pokes[0]);
+        Sleep(100);
     }
 
 }
 
-
-void enemyRound(Room * game, Team * you, Team * enemy)
+// funcao que aleatoriza o ataque inimigo
+void enemyRound(Room * game, Team * you)
 {   
 
     Sleep(4000);    
@@ -445,16 +517,15 @@ void enemyRound(Room * game, Team * you, Team * enemy)
     resetScreen(&game->fightScreen);
     fightScreenConstruct(game->fightScreen.map, game->player.team.pokes[0], ((Enemy*)game->player.currentEntity)->team.pokes[0]);
 
-    srand(time(NULL));
     int mult;
     int indexAtack;
 
     do{
         indexAtack =  rand()%4;
-        mult = atack(enemy, you, indexAtack);
-    } while (!enemy->pokes[0].atk[indexAtack].uses);
+        mult = atack(&((Enemy*)game->player.currentEntity)->team, you, indexAtack);
+    } while (!((Enemy*)game->player.currentEntity)->team.pokes[0].atk[indexAtack].uses);
 
-    game->fightScreen.map[46][6].entity = enemy->pokes[0].name;
+    game->fightScreen.map[46][6].entity = ((Enemy*)game->player.currentEntity)->team.pokes[0].name;
     game->fightScreen.map[46][6].value = MESSAGE;
     game->fightScreen.map[46][13].entity = "used";
     game->fightScreen.map[46][13].value = MESSAGE;
@@ -482,14 +553,65 @@ void enemyRound(Room * game, Team * you, Team * enemy)
         game->fightScreen.map[50][9].entity = "it's a normal attack";
         game->fightScreen.map[50][9].value = MESSAGE;
     }
+    
+    
+    fightScreenConstruct(game->fightScreen.map, game->player.team.pokes[0], ((Enemy*)game->player.currentEntity)->team.pokes[0]);
+
 
     game->player.checkAct = 0;
 
     Sleep(4000);
 }
 
+// funcao para selecionar o pokemon que o item da bag será utilizado
+void UseItemFromBag(Room * game, int option)
+{
+    if(GetAsyncKeyState(VK_ESC))
+    {
+        resetScreen(&game->bagUseScreen);
+        bagScreenConstructor(game);
+        pop(&game->stackEvents);
+    }
 
+    if(option != -1)
+    {
+        item(&game->player.team.pokes[0], game->player.bag, game->player.bag->selected);
+        pop(&game->stackEvents);
+        pop(&game->stackEvents);
 
+        buildFullSquare(game->fightScreen.map, 37,2, 60, 20, 0);
+        fightScreenConstruct(game->fightScreen.map, game->player.team.pokes[0], ((Enemy*)game->player.currentEntity)->team.pokes[0]);
+
+        game->fightScreen.map[46][6].entity = game->player.team.pokes[option].name;
+        game->fightScreen.map[46][6].value = MESSAGE;
+        game->fightScreen.map[46][13].entity = "used";
+        game->fightScreen.map[46][13].value = MESSAGE;
+        game->fightScreen.map[46][16].entity = ((Item*)getBag(game->player.bag, game->player.bag->selected))->name;
+        game->fightScreen.map[46][16].value = MESSAGE;
+        resetScreen(&game->bagUseScreen);
+        game->player.checkAct = 1;
+    }
+}
+
+// funcao para selecionar o item da bag
+void selectItemFromBag(Room * game, int option)
+{
+    if(GetAsyncKeyState(VK_ESC))
+    {
+        resetScreen(&game->bagScreen);
+        fightScreenConstruct(game->fightScreen.map, game->player.team.pokes[0], ((Enemy*)game->player.currentEntity)->team.pokes[0]);
+        pop(&game->stackEvents);
+    }
+
+    if(option != -1)
+    {
+        resetScreen(&game->bagScreen);
+        game->player.bag->selected = option;
+        bagUseScreenConstructor(game);
+        push(&game->stackEvents, &game->bagUseScreen);
+        Sleep(100);
+    }
+}
 
 
 
@@ -524,6 +646,18 @@ Room gameInnit(int rows, int collums, Player player,Objects objects)
     map.PokeScreen.selectOptions = selectOptionsInnit(2,2);
     map.PokeScreen.selectOptions.options = menuInnit();
     map.PokeScreen.func = switchPoke;
+
+
+    map.bagScreen = mapDataInnit(rows,collums);
+    map.bagScreen.selectOptions = selectOptionsInnit(2,2);
+    map.bagScreen.selectOptions.options = menuInnit();
+    map.bagScreen.func = selectItemFromBag;
+
+    
+    map.bagUseScreen = mapDataInnit(rows,collums);
+    map.bagUseScreen.selectOptions = selectOptionsInnit(2,2);
+    map.bagUseScreen.selectOptions.options = menuInnit();
+    map.bagUseScreen.func = UseItemFromBag;
 
 
     map.stackEvents = constructor_list();

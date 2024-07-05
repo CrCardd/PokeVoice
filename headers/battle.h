@@ -93,7 +93,6 @@ int voiceAtack(Team *atacker, Team *atacked)
         }
     }
     
-    printf("%s\n", buffer);
 
     return 0;
 }
@@ -103,14 +102,14 @@ int item(Pokemon *poke, Bag * bag, int index)
 {
     Item usedItem = useItem(bag, index); // Instancia o item já reduzindo a sua quantidade da Bag
 
-    printf("Nome: %s\nQuantidade: %d\nTipo: %d",usedItem.name, usedItem.qtd, usedItem.type); // Info do Item
+     // Info do Item
 
     switch (usedItem.type)  // O Efeito do Item depende de seu 'type'
     {
     case 1: // Tipo 1 recupera Vida
         if(poke->hp > 0)
         {
-            poke->hp += 40;
+            poke->hp = (poke->hp + 40 > poke->maxhp) ? poke->maxhp : poke->hp + 40;
             return 1;
         }
         else
@@ -119,14 +118,14 @@ int item(Pokemon *poke, Bag * bag, int index)
 
     case 2: // Tipo 2 Recupera as cargas de todos os ataques
         for (int i = 0; i < 4; i++)
-            poke->atk[i].uses += 10;
+            poke->atk[i].uses = poke->atk[i].maxuses;
         return 1;
         break;
 
     case 3: // Tipo 3 Revive um Pokémon Caído
-        if (poke->hp <= 0)
+        if (poke->hp == 0)
         {
-            poke->hp = 30;
+            poke->hp += poke->maxhp;
             return 2;   // Retorno '2' para reorganizar os pokémons
         }
         else

@@ -144,8 +144,8 @@ void whatWillDo(Map ** screen)
 
 void fightScreenConstruct(Map ** screen, Pokemon pokePlayer, Pokemon pokeEnemy)
 {
-    screen[3][4].entity = pokeEnemy.name;
-    screen[3][4].value = MESSAGE;
+    screen[3][5].entity = pokeEnemy.name;
+    screen[3][5].value = MESSAGE;
     screen[7][26].entity = intToStrAux(pokeEnemy.hp);
     screen[7][26].value = MESSAGE;
     screen[7][28].entity = "/";
@@ -153,8 +153,8 @@ void fightScreenConstruct(Map ** screen, Pokemon pokePlayer, Pokemon pokeEnemy)
     screen[7][30].entity = intToStrAux(pokeEnemy.maxhp);
     screen[7][30].value = MESSAGE;
 
-    screen[27][48].entity = pokePlayer.name;
-    screen[27][48].value = MESSAGE;
+    screen[27][49].entity = pokePlayer.name;
+    screen[27][49].value = MESSAGE;
     screen[31][70].entity = intToStrAux(pokePlayer.hp);
     screen[31][70].value = MESSAGE;
     screen[31][72].entity = "/";

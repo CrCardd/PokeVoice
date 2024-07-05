@@ -54,6 +54,16 @@ void mapConstruct(Map ** screen)
     buildHole(screen, 57, 42);
 
     buildHole(screen, 40, 56);
+
+
+    screen[11][3].value = POKEBALL;
+    screen[50][40].value = POKEBALL;
+    screen[23][6].value = POKEBALL;
+    screen[32][60].value = POKEBALL;
+    screen[1][40].value = POKEBALL;
+    screen[42][10].value = POKEBALL;
+    screen[5][57].value = POKEBALL;
+    screen[33][30].value = POKEBALL;
 }
 
 
@@ -111,6 +121,21 @@ void secondMapConstruct(Map ** screen)
 
 
     buildHole(screen, 40, 40);
+
+
+
+
+    screen[3][4].value = POKEBALL;
+    screen[42][4].value = POKEBALL;
+    screen[20][17].value = POKEBALL;
+    screen[23][6].value = POKEBALL;
+    screen[61][4].value = POKEBALL;
+    screen[51][69].value = POKEBALL;
+    screen[43][41].value = POKEBALL;
+    screen[14][54].value = POKEBALL;
+    screen[52][61].value = POKEBALL;
+    screen[4][72].value = POKEBALL;
+    screen[21][70].value = POKEBALL;
 }
 
 

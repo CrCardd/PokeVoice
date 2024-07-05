@@ -14,12 +14,18 @@ int main(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmd
 {
     configureTerminal();
     
-    Player player = playerInnit(PLAYER,60,70);
+    // Player player = playerInnit(PLAYER,60,70);
+    Player player = playerInnit(PLAYER,36,64);
     player.team = myTeamConstructor();
+    player.bag = bagConstructor();
     Objects objects = objectsInnit(POKEBALL, ENEMY, WALL,HOLE,STEP);
     Room map = gameInnit(ROWS,COLLUMS, player, objects);
     push(&map.stackEvents, &map.mapScreen);
     spawnEnemy(map.mapScreen.map, ENEMY, 35,63);
+
+
+
+
 
     mapConstruct(map.mapScreen.map);
     secondMapConstruct(map.secondMapScreen.map);
