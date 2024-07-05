@@ -14,27 +14,15 @@ int main(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmd
 {
     configureTerminal();
     
-    // Player player = playerInnit(PLAYER,60,70);
-    Player player = playerInnit(PLAYER,35,64);
-
+    Player player = playerInnit(PLAYER,60,70);
     player.team = myTeamConstructor();
     Objects objects = objectsInnit(POKEBALL, ENEMY, WALL,HOLE,STEP);
     Room map = gameInnit(ROWS,COLLUMS, player, objects);
     push(&map.stackEvents, &map.mapScreen);
-
+    spawnEnemy(map.mapScreen.map, ENEMY, 35,63);
 
     mapConstruct(map.mapScreen.map);
     secondMapConstruct(map.secondMapScreen.map);
-
-
-
-    spawnEnemy(map.mapScreen.map, ENEMY, 35,63);
-
-
-    // printf("%s\n",map.player.team.pokes[0].atk[0].name);
-    // printf("%s\n",map.player.team.pokes[0].atk[1].name);
-    // printf("%s\n",map.player.team.pokes[0].atk[2].name);
-    // printf("%s\n",map.player.team.pokes[0].atk[3].name);
 
 
 

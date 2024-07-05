@@ -1,3 +1,7 @@
+/*
+Created by akdag on 10/29/2023.
+*/
+
 #include "terminal.h"
 
 char terminal_buffer[8192];

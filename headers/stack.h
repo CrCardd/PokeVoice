@@ -8,8 +8,12 @@
 
 typedef struct Room Room;
 
+typedef struct Node Node;
+
+typedef void (*Func)(Room *, int);
 
 
+// estrutura para para matriz de seleção que será usado para caixas de seleção
 typedef struct 
 {
     int optY;
@@ -19,8 +23,7 @@ typedef struct
     void * entity;
 } Options;
 
-
-
+// mapa que será usado para exibição e gerenciamento de valores
 typedef struct
 {
     int value;
@@ -28,15 +31,7 @@ typedef struct
 
 } Map;
 
-
-
-
-
-
-
-
-
-
+// struct para gerenciar os dados de 'Options'
 typedef struct
 {
     int rows;
@@ -45,12 +40,7 @@ typedef struct
     char * selectName;
 } SelectOptions;
 
-
-
-typedef void (*Func)(Room *, int);
-
-
-
+// struct para gerenciar os dados de 'Map'
 typedef struct MapData
 {
     Map** map;
@@ -63,9 +53,7 @@ typedef struct MapData
 
 } MapData;
 
-
-typedef struct Node Node;
-
+// nó para lista encadeada de eventos
 typedef struct Node
 {
     MapData * mapData;
@@ -73,7 +61,16 @@ typedef struct Node
     Node *prev;
 }Node;
 
+// Pilha que será utilizada para os eventos do jogo, cada vez que um novo evento ocorrer será colocado no topo da pilha e ganhará prioridade
+typedef struct 
+{
+    Node *head;
+    Node *tail;
+    int size;
+}Stack;
 
+
+// construtor de um nó
 Node* constructor_node(MapData * value)
 {
     Node* new_ = (Node*) malloc(sizeof(Node));
@@ -84,15 +81,7 @@ Node* constructor_node(MapData * value)
     return new_;
 }
 
-
-typedef struct 
-{
-    Node *head;
-    Node *tail;
-    int size;
-}Stack;
-
-
+// construtor da lista encadeada
 Stack constructor_list()
 {
     Stack new_;
@@ -103,7 +92,7 @@ Stack constructor_list()
     return new_;
 }
 
-
+// método para adicionar ao topo da pilha
 void push(Stack *linkedList, MapData * event)
 {
     Node *node = constructor_node(event);
@@ -121,7 +110,7 @@ void push(Stack *linkedList, MapData * event)
     linkedList->size++;
 }
 
-
+// método para retirar da pilha o ultimo elemento
 void pop(Stack *linkedList)
 {
     if(linkedList->head == NULL)
@@ -132,7 +121,7 @@ void pop(Stack *linkedList)
     linkedList->tail->next = NULL;
 }
 
-
+// método para ter acesso ao último elemento da pilha
 MapData * peek(Stack *LinkedList)
 {
     if (LinkedList->size == 0)

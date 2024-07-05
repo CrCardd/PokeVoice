@@ -7,7 +7,6 @@
 #include "bag.h"
 #include "mons.h"
 #include "team.h"
-
 // Multiplicadores de dano com base nos tipos
 float atack_table[18][18] = {
     {1, 1, 1, 1, 1, 0.5, 1, 0, 0.5, 1, 1, 1, 1, 1, 1, 1, 1, 1},
@@ -30,19 +29,6 @@ float atack_table[18][18] = {
     {1, 2, 1, 0.5, 1, 1, 1, 1, 0.5, 0.5, 1, 1, 1, 1, 1, 2, 2, 1}
 };
 
-// Nossa batalha leva em consideração o primeiro Pokémon do Array de Pokémons
-// Essa função altera o Pokémon 'Ativo'
-void switchPoke(Team * team, int index)
-{
-    Pokemon aux;
-
-    if(team->pokes[index].hp)
-    {
-    aux = team->pokes[0];
-    team->pokes[0] = team->pokes[index];
-    team->pokes[index] = aux;
-    }
-}
 
 //Bubble Sort utilizado para reorganizar os Pokémons decrescentemente com base na vida
 void BubbleSort(Pokemon* array, int size)
@@ -70,13 +56,11 @@ int atack(Team *atacker, Team *atacked, int atack)
 
     int mult = atack_table[atacker->pokes[0].atk->type][atacked->pokes[0].type]; // Multiplicador de dano
 
-    dmg *= mult;
-
-    
-    
     atacker->pokes[0].atk[atack].uses--;    // Reduz a carga do ataque
 
-    atacked->pokes[0].hp -= dmg;
+    dmg *= mult;
+
+    atacked->pokes[0].hp = (atacked->pokes[0].hp - dmg <= 0) ? 0 : atacked->pokes[0].hp - dmg;
 
     if (atacked->pokes[0].hp <= 0 && atacked->pokes[1].hp <= 0) // Verifica se há algum Pokémon de pé na sequência
         atacked->alive = 'd';
@@ -157,62 +141,62 @@ int item(Pokemon *poke, Bag * bag, int index)
 // Inimigo realiza um ataque aleatório
 
 
-void myRound(Team * you, Team * enemy, Bag * bag)
-{
-    int action;
-    int indexAction;
-    int indexPoke;
-    printf("your round:");
-    scanf(" %d", &action);  // Input do Usuário
+// void myRound(Team * you, Team * enemy, Bag * bag)
+// {
+//     int action;
+//     int indexAction;
+//     int indexPoke;
+//     printf("your round:");
+//     scanf(" %d", &action);  // Input do Usuário
 
-    switch (action)
-    {
-    case 1:
-        // Atack
-        for (int i = 0; i < 4; i++)
-            printf("%s\n", you->pokes[0].atk[i].name);
+//     switch (action)
+//     {
+//     case 1:
+//         // Atack
+//         for (int i = 0; i < 4; i++)
+//             printf("%s\n", you->pokes[0].atk[i].name);
         
-        if(!voiceAtack(you, enemy)) // Tenta utilizar o ataque com voz
-        {
-            int valid;
+//         if(!voiceAtack(you, enemy)) // Tenta utilizar o ataque com voz
+//         {
+//             int valid;
 
-            do{
-                printf("atack: ");
-                scanf(" %d", &indexAction); // Caso voz falhe efetua um ataque com um input convencional
-                valid = atack(you, enemy, indexAction);  // validação para caso faltem cargas                                  // ATACOU IGUAL SAPORRA
-            } while (!valid);
-        }
-        break;
+//             do{
+//                 printf("atack: ");
+//                 scanf(" %d", &indexAction); // Caso voz falhe efetua um ataque com um input convencional
+//                 valid = atack(you, enemy, indexAction);  // validação para caso faltem cargas                                  // ATACOU IGUAL SAPORRA
+//             } while (!valid);
+//         }
+//         break;
 
-    case 2:
-        // Item
-        showBag(bag);   // mostra os itens da bag
+//     case 2:
+//         // Item
+//         showBag(bag);   // mostra os itens da bag
 
-        printf("item: ");
-        scanf(" %d", &indexAction); // input do item selecionado
-        Sleep(10);
-        printf("\nPokemon: ");
-        scanf(" %d", &indexPoke);   // input do pokemon para receber o item
+//         printf("item: ");
+//         scanf(" %d", &indexAction); // input do item selecionado
+//         Sleep(10);
+//         printf("\nPokemon: ");
+//         scanf(" %d", &indexPoke);   // input do pokemon para receber o item
 
-        item(&(you->pokes[indexPoke - 1]), bag, indexAction);   // Usa o Item no Pokémon
-        break;
+//         item(&(you->pokes[indexPoke - 1]), bag, indexAction);   // Usa o Item no Pokémon
+//         break;
 
-    case 3:
-        // Switch
-        printf("poke: ");
-        scanf(" %d", &indexAction); // Index do Pokémon a tomar a posição principal
-        switchPoke(you, indexAction);
-        break;
+//     case 3:
+//         // Switch
+//         printf("poke: ");
+//         scanf(" %d", &indexAction); // Index do Pokémon a tomar a posição principal
+//         switchPoke(you, indexAction);
+//         break;
 
-    case 4:
-        // Run
-        break;
+//     case 4:
+//         // Run
+//         break;
     
-    default:
-        break;
-    }
+//     default:
+//         break;
+//     }
     
-}
+// }
 
 
 // void battle(Team * you, Team * enemy, Bag * bag)

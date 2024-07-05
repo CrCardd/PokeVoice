@@ -12,4 +12,8 @@
 #define MESSAGE 15
 #define STEP 16
 
+
+// contantes de valores para renderização
+
+
 #endif // !RENDERVALUES_H
