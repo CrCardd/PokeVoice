@@ -429,10 +429,18 @@ void selectOptionAttack(Room * game, int option)
         pop(&game->stackEvents);
     }
 
+    float dmg;
+
     if(option != -1 && game->player.team.pokes[0].atk[option].uses)
     {
-        int dmg = atack(&game->player.team, &((Enemy*)game->player.currentEntity)->team, option);
 
+        dmg = voiceAtack(&game->player.team, &((Enemy*)game->player.currentEntity)->team);
+        
+        
+        if(dmg)
+            dmg = (dmg/2-1);
+        else
+            dmg = atack(&game->player.team, &((Enemy*)game->player.currentEntity)->team, option);
 
         buildFullSquare(game->fightScreen.map, 37,2, 60, 20, 0);
         

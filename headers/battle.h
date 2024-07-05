@@ -88,8 +88,7 @@ int voiceAtack(Team *atacker, Team *atacked)
         if(strcmp(atacker->pokes[0].atk[i].name, buffer) == 0)  // Compara com todos os ataques
         {
             indexAtack = i;
-            atack(atacker, atacked, indexAtack);    // Função atack() como index do ataque encontrado
-            return 1;
+            return (atack(atacker, atacked, indexAtack) + 1) * 2;    // Função atack() como index do ataque encontrado
         }
     }
     

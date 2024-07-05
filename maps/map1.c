@@ -14,7 +14,8 @@ int main(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmd
 {
     configureTerminal();
     
-    Player player = playerInnit(PLAYER,60,70);
+    // Player player = playerInnit(PLAYER,60,70);
+    Player player = playerInnit(PLAYER,36,63);
     player.team = myTeamConstructor();
     player.bag = bagConstructor();
     Objects objects = objectsInnit(POKEBALL, ENEMY, WALL,HOLE,STEP);
