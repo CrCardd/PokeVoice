@@ -50,7 +50,11 @@ void checkMove(Room * game, MapData * screen)
 
 
 int selectOption(Room * game, MapData * mapData)
-{ 
+{   
+
+    
+
+
     //COLISON
     up    = (game->actions.pY != 0) ? 1 : 0;
     down  = (game->actions.pY != mapData->selectOptions.rows-1) ? 1 : 0;
@@ -162,7 +166,7 @@ void checkEnemy(Room * game)
     if(GetAsyncKeyState(VK_ENTER) && interact)
     {
 
-        fightScreenConstruct(game->fightScreen.map);
+        fightScreenConstruct(game->fightScreen.map, game->player.team.pokes[0], ((Enemy*)game->player.currentEntity)->team.pokes[0]);
 
         push(&game->stackEvents, &game->fightScreen);
         game->actions = playerInnit(0,0,0);

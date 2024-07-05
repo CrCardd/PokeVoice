@@ -35,9 +35,13 @@ float atack_table[18][18] = {
 void switchPoke(Team * team, int index)
 {
     Pokemon aux;
+
+    if(team->pokes[index].hp)
+    {
     aux = team->pokes[0];
     team->pokes[0] = team->pokes[index];
     team->pokes[index] = aux;
+    }
 }
 
 //Bubble Sort utilizado para reorganizar os Pokémons decrescentemente com base na vida
@@ -61,33 +65,25 @@ void BubbleSort(Pokemon* array, int size)
 
 int atack(Team *atacker, Team *atacked, int atack)
 {
-    if(atacker->pokes[0].atk[atack].uses <= 0)   // Verifica se o Pokémon possui cargas para aquele ataque
-        return 0;
-    
+
     int dmg = (atacker->pokes[0].atk[atack].dmg); // Dano base do ataque
 
     int mult = atack_table[atacker->pokes[0].atk->type][atacked->pokes[0].type]; // Multiplicador de dano
 
     dmg *= mult;
 
-    printf("\n%s uses %s\n", atacker->pokes[0].name, atacker->pokes[0].atk[atack].name);
+    
     
     atacker->pokes[0].atk[atack].uses--;    // Reduz a carga do ataque
 
-    atacked->pokes[0].hp -= dmg; 
+    atacked->pokes[0].hp -= dmg;
 
     if (atacked->pokes[0].hp <= 0 && atacked->pokes[1].hp <= 0) // Verifica se há algum Pokémon de pé na sequência
         atacked->alive = 'd';
     else if (atacked->pokes[0].hp <= 0) // Organiza com base na vida dos Pokémon quando um inimigo é derrubado
-    {
         BubbleSort(atacked->pokes, 4);
-    }
 
-
-    return mult+1;                                              // LEMBRA DISSO CUZAO
-    // 3 super
-    // 1.5 pouco
-     // 1 nulo
+    return mult;
 }
 
 int voiceAtack(Team *atacker, Team *atacked)
@@ -159,20 +155,6 @@ int item(Pokemon *poke, Bag * bag, int index)
 }
 
 // Inimigo realiza um ataque aleatório
-////////////////////////////////////// CRISTIAN
-char * enemyRound(Team * you, Team * enemy)
-{   
-    srand(time(NULL));
-    int valid;
-    int indexAtack;
-    do{
-        indexAtack = 1 + rand()%3;
-        valid = atack(enemy, you, indexAtack);
-    } while (!valid);
-
-    return enemy->pokes[0].atk[indexAtack].name;
-}
-//////////////////////////////////// CRISTIAN
 
 
 void myRound(Team * you, Team * enemy, Bag * bag)
@@ -233,34 +215,34 @@ void myRound(Team * you, Team * enemy, Bag * bag)
 }
 
 
-void battle(Team * you, Team * enemy, Bag * bag)
-{
-    srand(time(NULL));
-    int round = 0;
+// void battle(Team * you, Team * enemy, Bag * bag)
+// {
+//     srand(time(NULL));
+//     int round = 0;
 
-    printf("me %c , enemy %c\n", you->alive, enemy->alive);
+//     printf("me %c , enemy %c\n", you->alive, enemy->alive);
 
-    while (you->alive == 'a' && enemy->alive == 'a')
-    {
-        printf("\nMy team:\n");
-        for (int i = 0; i < 4; i++)
-        {
-            printf("Pokemon:%s \nLife: %d\n", you->pokes[i].name, you->pokes[i].hp);
-        }
-        printf("\nEnemy team: \n");
-        for (int i = 0; i < 4; i++)
-        {
-            printf("Pokemon:%s \nLife: %d\n", enemy->pokes[i].name, enemy->pokes[i].hp);
-        }
+//     while (you->alive == 'a' && enemy->alive == 'a')
+//     {
+//         printf("\nMy team:\n");
+//         for (int i = 0; i < 4; i++)
+//         {
+//             printf("Pokemon:%s \nLife: %d\n", you->pokes[i].name, you->pokes[i].hp);
+//         }
+//         printf("\nEnemy team: \n");
+//         for (int i = 0; i < 4; i++)
+//         {
+//             printf("Pokemon:%s \nLife: %d\n", enemy->pokes[i].name, enemy->pokes[i].hp);
+//         }
         
-        if (round % 2 == 0)
-            myRound(you, enemy, bag);
-        else
-            enemyRound(you, enemy);
-        round++;
-    }
+//         if (round % 2 == 0)
+//             myRound(you, enemy, bag);
+//         else
+//             enemyRound(you, enemy);
+//         round++;
+//     }
 
-    printf("cabou\n");
-}
+//     printf("cabou\n");
+// }
 
 #endif

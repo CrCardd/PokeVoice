@@ -10,14 +10,14 @@ typedef struct Atack
 {
     char name[50];
     int dmg;
-    int uses;
+    int maxuses, uses;
     int type;
 } Atack;
 
 typedef struct Pokemon
 {
     char name[12];
-    int hp;
+    int maxhp, hp; 
     struct Atack atk[4];
     int type;
 } Pokemon;
@@ -41,6 +41,7 @@ Pokemon initPokemon()
         token = strtok(line, ",");
         strcpy(new_poke.name, token);
         token = strtok(NULL, ",");
+        new_poke.maxhp = atoi(token);
         new_poke.hp = atoi(token);
         token = strtok(NULL, ",");
         new_poke.type = atoi(token);
@@ -52,6 +53,7 @@ Pokemon initPokemon()
         token = strtok(NULL, ",");
         new_poke.atk[i].dmg = atoi(token);
         token = strtok(NULL, ",");
+        new_poke.atk[i].maxuses = atoi(token);
         new_poke.atk[i].uses = atoi(token);
         token = strtok(NULL, ",");
         new_poke.atk[i].type = atoi(token);
@@ -75,13 +77,14 @@ Pokemon squirtle()
     char *token;
     int i = 0;
 
-    name = fopen("../starters/squirtle/pokemon.txt", "r");
-    moves = fopen("../starters/squirtle/moves.txt", "r");
+    name = fopen("starters/squirtle/pokemon.txt", "r");
+    moves = fopen("starters/squirtle/moves.txt", "r");
 
     while (fgets(line, sizeof(line), name) != NULL) {
         token = strtok(line, ",");
         strcpy(squirtle.name, token);
         token = strtok(NULL, ",");
+        squirtle.maxhp = atoi(token);
         squirtle.hp = atoi(token);
         token = strtok(NULL, ",");
         squirtle.type = atoi(token);
@@ -94,6 +97,7 @@ Pokemon squirtle()
         token = strtok(NULL, ",");
         squirtle.atk[i].dmg = atoi(token);
         token = strtok(NULL, ",");
+        squirtle.atk[i].maxuses = atoi(token);
         squirtle.atk[i].uses = atoi(token);
         token = strtok(NULL, ",");
         squirtle.atk[i].type = atoi(token);
@@ -115,13 +119,14 @@ Pokemon charmander()
     char *token;
     int i = 0;
 
-    name = fopen("../starters/charmander/pokemon.txt", "r");
-    moves = fopen("../starters/charmander/moves.txt", "r");
+    name = fopen("starters/charmander/pokemon.txt", "r");
+    moves = fopen("starters/charmander/moves.txt", "r");
 
     while (fgets(line, sizeof(line), name) != NULL) {
         token = strtok(line, ",");
         strcpy(mander.name, token);
         token = strtok(NULL, ",");
+        mander.maxhp = atoi(token);
         mander.hp = atoi(token);
         token = strtok(NULL, ",");
         mander.type = atoi(token);
@@ -134,6 +139,7 @@ Pokemon charmander()
         token = strtok(NULL, ",");
         mander.atk[i].dmg = atoi(token);
         token = strtok(NULL, ",");
+        mander.atk[i].maxuses = atoi(token);
         mander.atk[i].uses = atoi(token);
         token = strtok(NULL, ",");
         mander.atk[i].type = atoi(token);
@@ -155,13 +161,14 @@ Pokemon bulbasaur()
     char *token;
     int i = 0;
 
-    name = fopen("../starters/bulbasaur/pokemon.txt", "r");
-    moves = fopen("../starters/bulbasaur/moves.txt", "r");
+    name = fopen("starters/bulbasaur/pokemon.txt", "r");
+    moves = fopen("starters/bulbasaur/moves.txt", "r");
 
     while (fgets(line, sizeof(line), name) != NULL) {
         token = strtok(line, ",");
         strcpy(bulba.name, token);
         token = strtok(NULL, ",");
+        bulba.maxhp = atoi(token);
         bulba.hp = atoi(token);
         token = strtok(NULL, ",");
         bulba.type = atoi(token);
@@ -174,6 +181,7 @@ Pokemon bulbasaur()
         token = strtok(NULL, ",");
         bulba.atk[i].dmg = atoi(token);
         token = strtok(NULL, ",");
+        bulba.atk[i].maxuses = atoi(token);
         bulba.atk[i].uses = atoi(token);
         token = strtok(NULL, ",");
         bulba.atk[i].type = atoi(token);

@@ -52,16 +52,15 @@ DWORD checkKeyboard(void *arg)
             event->func(map, option);
         }
 
-        if((int)map->player.checkAttack)
-        {
+        ReleaseMutex(Mutex);
 
-            enemyRound(&map->player.team, (Enemy*)map->player.currentEntity);
-            //RETORNA O ATAQUE
+        if(map->player.checkAct)
+        {
+            enemyRound(map, &map->player.team, (Enemy*)map->player.currentEntity);
         }
 
 
 
-        ReleaseMutex(Mutex);
     }
 }
 

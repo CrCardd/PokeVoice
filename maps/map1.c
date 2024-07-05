@@ -1,5 +1,5 @@
 /*
-gcc maps/map1.c -o maps/map1.exe -l gdi32 -l msimg32
+gcc maps/map1.c -o Poke.exe -l gdi32 -l msimg32
 */
 
 #include "../headers/headers.h"
