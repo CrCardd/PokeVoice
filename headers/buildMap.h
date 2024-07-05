@@ -239,23 +239,27 @@ void fightScreenConstruct(Map **screen)
             buildLine(2,screen, 72, 44, 2);
             buildLine(1,screen, 71, 43, 2);
 
-    //BALL
+    //POKE
 
-            buildLine(2,screen, 36 , 52, 6);
-            buildLine(2,screen, 39, 52, 6);
-            buildLine(1,screen, 36, 58, 3);
-            buildLine(1,screen, 36, 51, 3);
-            buildLine(1,screen, 38, 55, 1);
+            buildLine(2,screen, 35 , 52, 6);
+            buildLine(2,screen, 38, 51, 3);
+            buildLine(1,screen, 35, 54, 4);
+            buildLine(1,screen, 35, 51, 3);
 
-            buildLine(2,screen, 41, 51, 7);
-            buildLine(1,screen, 41, 51, 3);
-            buildLine(2,screen, 44, 51, 7);
-            buildLine(1,screen, 41, 54, 3);
+            buildLine(2,screen, 40, 51, 7);
+            buildLine(1,screen, 40, 51, 3);
+            buildLine(2,screen, 43, 51, 7);
+            buildLine(1,screen, 40, 58, 4);
 
-            buildLine(2,screen, 46, 51, 7);
-            buildLine(1,screen, 46, 58, 3);
+            buildLine(2,screen, 45, 52, 7);
+            buildLine(1,screen, 45, 56, 4);
+            buildLine(2,screen, 47, 52, 4);
+            buildLine(2,screen, 48, 56, 3);
+
 
             buildLine(2,screen, 50, 51, 7);
+            buildLine(1,screen, 50, 51, 3);
+            buildLine(1,screen, 50, 55, 3);
             buildLine(1,screen, 50, 58, 3);
 
 
