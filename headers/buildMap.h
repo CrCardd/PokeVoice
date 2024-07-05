@@ -83,61 +83,77 @@ void whatWillDo(Map ** screen)
 {
 
     //WHAT
-            buildLine(2,screen, 2, 39, 8);
-            buildLine(1,screen, 2, 46, 2);
-            buildLine(2,screen, 4, 43, 4);
-            buildLine(1,screen, 4, 46, 2);
-            buildLine(2,screen, 6, 39, 8);
+            screen[39][5].entity ="__        ___           _  ";
+            screen[40][5].entity ="\\ \\      / / |__   __ _| |_";
+            screen[41][5].entity =" \\ \\ /\\ / /| '_ \\ / _` | __|";
+            screen[42][5].entity ="  \\ V  V / | | | | (_| | |";
+            screen[43][5].entity ="   \\_/\\_/  |_| |_|\\__,_|\\__|";
+            screen[39][5].value = MESSAGE;
+            screen[40][5].value = MESSAGE;
+            screen[41][5].value = MESSAGE;
+            screen[42][5].value = MESSAGE;
+            screen[43][5].value = MESSAGE;
 
-            buildLine(2,screen, 8, 39, 8);
-            buildLine(1,screen, 8, 42, 2);
-            buildLine(2,screen, 10, 39, 8);
+            screen[39][23].entity ="__        ___ _ _";
+            screen[40][23].entity ="\\ \\      / (_) | |";
+            screen[41][23].entity =" \\ \\ /\\ / /| | | |";
+            screen[42][23].entity ="  \\ V  V / | | | |";
+            screen[43][23].entity ="   \\_/\\_/  |_|_|_|";
+            screen[39][23].value = MESSAGE;
+            screen[40][23].value = MESSAGE;
+            screen[41][23].value = MESSAGE;
+            screen[42][23].value = MESSAGE;
+            screen[43][23].value = MESSAGE;
 
-            buildLine(2,screen, 12, 39, 8);
-            buildLine(1,screen, 12, 39, 2);
-            buildLine(2,screen, 14, 39, 8);
-            buildLine(1,screen, 12, 42, 2);
-            
-            buildLine(1,screen, 16, 39, 3);
-            buildLine(2,screen, 17, 39, 8);
+            screen[50][21].entity = "     _         ___ ";
+            screen[51][21].entity = "  __| | ___   |__ \\";
+            screen[52][21].entity = " / _` |/ _ \\    / /";
+            screen[53][21].entity = "| (_| | (_) |  |_| ";
+            screen[54][21].entity = " \\__,_|\\___/   (_)";
+    
+            screen[50][21].value = MESSAGE;
+            screen[51][21].value = MESSAGE;
+            screen[52][21].value = MESSAGE;
+            screen[53][21].value = MESSAGE;
+            screen[54][21].value = MESSAGE;
 
     //WILL
-            buildLine(2,screen, 20, 39, 8);
-            buildLine(1,screen, 20, 46, 2);
-            buildLine(2,screen, 22, 43, 4);
-            buildLine(1,screen, 22, 46, 2);
-            buildLine(2,screen, 24, 39, 8);
+            // buildLine(2,screen, 20, 39, 8);
+            // buildLine(1,screen, 20, 46, 2);
+            // buildLine(2,screen, 22, 43, 4);
+            // buildLine(1,screen, 22, 46, 2);
+            // buildLine(2,screen, 24, 39, 8);
             
-            buildLine(2,screen, 26, 40, 7);
+            // buildLine(2,screen, 26, 40, 7);
 
-            buildLine(2,screen, 28, 39, 8);
-            buildLine(1,screen, 28, 46, 2);
+            // buildLine(2,screen, 28, 39, 8);
+            // buildLine(1,screen, 28, 46, 2);
             
-            buildLine(2,screen, 31, 39, 8);
-            buildLine(1,screen, 31, 46, 2);
+            // buildLine(2,screen, 31, 39, 8);
+            // buildLine(1,screen, 31, 46, 2);
             
     //DO
-            buildLine(2,screen, 20, 52, 7);
-            buildLine(1,screen, 20, 51, 2);
-            buildLine(2,screen, 22, 51, 1);
-            buildLine(1,screen, 22, 52, 1);
-            buildLine(2,screen, 23, 52, 7);
-            buildLine(1,screen, 22, 58, 1);
-            buildLine(2,screen, 22, 59, 1);
-            buildLine(1,screen, 20, 59, 2);
+            // buildLine(2,screen, 20, 52, 7);
+            // buildLine(1,screen, 20, 51, 2);
+            // buildLine(2,screen, 22, 51, 1);
+            // buildLine(1,screen, 22, 52, 1);
+            // buildLine(2,screen, 23, 52, 7);
+            // buildLine(1,screen, 22, 58, 1);
+            // buildLine(2,screen, 22, 59, 1);
+            // buildLine(1,screen, 20, 59, 2);
 
-            buildLine(2,screen, 27, 51, 8);
-            buildLine(2,screen, 25, 51, 8);
-            buildLine(1,screen, 25, 59, 3);
-            buildLine(1,screen, 25, 51, 2);
+            // buildLine(2,screen, 27, 51, 8);
+            // buildLine(2,screen, 25, 51, 8);
+            // buildLine(1,screen, 25, 59, 3);
+            // buildLine(1,screen, 25, 51, 2);
 
             
-            buildLine(2,screen, 29, 50, 3);
-            buildLine(1,screen, 29, 50, 2);
-            buildLine(2,screen, 31, 50, 5);
-            buildLine(1,screen, 29, 54, 2);
-            buildLine(2,screen, 29, 54, 4);
-            buildLine(2,screen, 29, 60, 1);
+            // buildLine(2,screen, 29, 50, 3);
+            // buildLine(1,screen, 29, 50, 2);
+            // buildLine(2,screen, 31, 50, 5);
+            // buildLine(1,screen, 29, 54, 2);
+            // buildLine(2,screen, 29, 54, 4);
+            // buildLine(2,screen, 29, 60, 1);
 
 }
 
@@ -180,6 +196,11 @@ void fightScreenConstruct(Map ** screen, Pokemon pokePlayer, Pokemon pokeEnemy)
     buildLine(2,screen,0,36,26);
     buildLine(2,screen,78,36,26);
 
+
+    buildLine(1, screen, 2, 37, 29);
+    buildLine(1, screen, 2, 60, 29);
+    buildLine(2, screen, 31, 37, 24);
+    buildLine(2, screen, 2, 37, 24);
 
 
 
