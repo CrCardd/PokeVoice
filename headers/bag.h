@@ -11,11 +11,13 @@ typedef struct  Item
     int type;
 } Item;
 
+
 typedef struct NodeList
 {
     Item value;
     NodeList *next;
 }NodeList;
+
 
 typedef struct Bag
 {
@@ -23,6 +25,10 @@ typedef struct Bag
     NodeList *tail;
     int size;
 }Bag;
+
+
+
+
 
 void addBag(Bag *list, Item *value)
 {
