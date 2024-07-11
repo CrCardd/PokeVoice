@@ -1,0 +1,4 @@
+baneful-bunker ,30, 14, 3
+bullet-punch ,15, 9, 8
+mirror-move ,35, 18, 2
+spark ,19, 18, 1
