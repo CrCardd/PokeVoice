@@ -1,29 +1,41 @@
-At first:
+Projeto de conclusão da matéria de lógica de programação - SENAI
 
-git config --global core.compression 0
+    Jogo inspirado em uma área específica do jogo "Pokémon Emerald".
+    Junto de um puzzle para encontrar o objetivo final do jogo, sendo ele enfrentar um treinador pokémon, trouxemos a proposta de 
+um sistema de batalha utilizando da voz para selecionar os ataques, assim como o uso de uma API para coletar pokémons aleatórios que
+o treinador enfretado terá. Para a coleta da voz e uso da API utilizamos da linguagem Python que comunica os dados coletados para a
+linguagem C.
 
-then, clone just a part of your repo:
+    
+No projeto com 8 dias de duração nos foi exigido a implementação de todo o conteúdo visto na matéria, como por exemplo:
+- Algoritmos de ordenação
+- Estruturas de dados (linkedlist, arraylist)
+- Manipulação de arquivos de texto
+- Utilização de headers
+- Structs
+- Ponteiros
 
-git clone --depth 1 <repo_URI>
+Conteúdo além do que nos foi ensinado:
+- Uso de Threads e sua sincronização
+- Void *
+- Ponteiro para função
+- Uso de API
+    
 
-$ git config --global --unset http.sslVerify
+Bibliotecas utilizadas:
+- windows.h
+- stdlib.h
+- stdio.h
+- string.h
+- math.h
+- terminal.h (akda007)
+- keycodes.h (OsvaldoComCH)
 
 
-==========================================
-a partir daq n entendi
+Colaboradores:
+@Dudous
+@matiaszo
+@CrCardd
 
-and now "the rest"
+    
 
-git fetch --unshallow
-
-but here is the trick.: When you have a big repo sometimes you must perform that step multiple times. So... again,
-
-git fetch --unshallow
-
-and so on.
-
-Try multiple times. Probably you will see, that each time you perform 'unshallow' you get more and more objects before the error.
-
-And at the end, just to be sure.
-
-git pull --all
