@@ -49,12 +49,12 @@ void BubbleSort(Pokemon* array, int size)
     
 }
 
-int atack(Team *atacker, Team *atacked, int atack)
+float atack(Team *atacker, Team *atacked, int atack)
 {
 
-    int dmg = (atacker->pokes[0].atk[atack].dmg); // Dano base do ataque
+    float dmg = (atacker->pokes[0].atk[atack].dmg); // Dano base do ataque
 
-    int mult = atack_table[atacker->pokes[0].atk->type][atacked->pokes[0].type]; // Multiplicador de dano
+    float mult = atack_table[atacker->pokes[0].atk->type][atacked->pokes[0].type]; // Multiplicador de dano
 
     atacker->pokes[0].atk[atack].uses--;    // Reduz a carga do ataque
 
